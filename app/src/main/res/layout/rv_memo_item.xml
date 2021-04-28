@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_memo_item_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:background="@color/none"
+    android:minHeight="40dp">
+
+    <!-->注意rl一定要wrap_content因为这个大小根据 组件大小称出来的<-->
+
+    <ImageView
+        android:id="@+id/iv_memo_item_dot"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/iv_memo_item_dot"/>
+
+    <ImageView
+        android:id="@+id/iv_memo_item_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/iv_memo_item_delete"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_memo_item_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@id/iv_memo_item_delete"
+        android:layout_toRightOf="@id/iv_memo_item_dot"
+        android:textColor="@color/color_black"
+        android:gravity="center_vertical"
+        android:textSize="16sp"/>
+
+</RelativeLayout>

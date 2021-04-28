@@ -1,0 +1,41 @@
+<resources>
+    <string name="element_text">Element</string>
+    <string name="app_name">OurDiary</string>
+    <string name="grid_layout_manager">Grid Layout Manager</string>
+    <string name="linear_layout_manager">Linear Layout Manager</string>
+
+    <!--Contacts-->
+    <string name="dialog_button_delete">删除</string>
+    <string name="dialog_button_ok">确定</string>
+    <string name="dialog_button_cancel">取消</string>
+    <string name="contacts_detail_edt_name">Name</string>
+    <string name="contacts_detail_edt_phone_number">Phone</string>
+    <string name="dialog_button_call">Call</string>
+    <string name="contacts_call_phone_permission_title">Permisssion</string>
+    <string name="contacts_call_phone_permission_content">Need permission to call phone</string>
+    <string name="contacts_call_phone_no_call_function">Your device can\'t call phone</string>
+
+
+    <!--Memo-->
+    <string name="memo_item_add">Add</string>
+    <string name="toast_memo_empty">Memo is empty!</string>
+
+    <!--diary_photo_page-->
+    <string name="image_description">Image</string>
+    <string name="title_activity_setting">SettingActivity</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="hint_word">Word...</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Word not saved because it is empty.</string>
+
+
+</resources>

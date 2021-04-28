@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_fg_diary_write"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This is write fragment!"
+            android:textSize="26sp"
+            android:paddingLeft="10dp"/>
+
+        <!-->start 测试用
+        <TextView
+            android:id="@+id/tv_fg_diary_write_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_fg_diary_write_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        end 测试用<-->
+
+        <!--Room的rv-->
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_diary_write_view"
+                tools:listitem="@layout/room_recyclerview_diary_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp">
+
+            <!-->删除all<-->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_diary_delete_all"
+                android:backgroundTint="@color/light_red"
+                android:layout_marginTop="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/iv_delete_nall"
+                android:tint="@color/color_black"
+                android:layout_marginBottom="10dp"/>
+
+            <!-->删除一个<-->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_diary_delete_one"
+                android:backgroundTint="@color/light_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/iv_delete_one"
+                android:layout_marginBottom="10dp"/>
+
+            <!-->修改<-->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:backgroundTint="@color/light_green"
+                android:id="@+id/fab_diary_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/iv_update"/>
+
+            <!-->查询 有bug<-->
+            <!-->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:backgroundTint="@color/light_yellow"
+                android:id="@+id/fab_diary_find_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/iv_find_out"/>
+            <-->
+
+            <!-->增加<-->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:backgroundTint="@color/light_blue"
+                android:id="@+id/fab_diary_write"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="add"
+                android:layout_marginBottom="2dp"
+                android:tint="@color/color_White"
+                android:src="@drawable/iv_memo_item_add_icon"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

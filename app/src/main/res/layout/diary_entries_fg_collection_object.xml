@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_diary_entries_object"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_blue">
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/tv_diary_entries_obj_day"
+            android:text="十月"
+            android:layout_marginRight="18dp"/>
+
+        <TextView
+            android:id="@+id/tv_diary_entries_obj_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:textSize="60sp"
+            android:text="5"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_diary_entries_obj_day"
+            android:text="星期三"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="8dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/iv_weather"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_diary_entries_obj_day"
+            android:layout_marginLeft="2dp"/>
+
+        <TextView
+            android:id="@+id/tv_diary_entries_obj_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_diary_entries_obj_day"
+            android:text="下雨"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="18dp"/>
+
+        <TextView
+            android:id="@+id/tv_diary_entries_obj_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_diary_entries_obj_weather"
+            android:text="Tokyo"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="26dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/iv_location"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6dp"
+            android:layout_toRightOf="@+id/tv_diary_entries_obj_weather"
+            app:tint="@color/color_gray" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_diary_entries_obj_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="东京生活"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:id="@+id/tv_diary_entries_object"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nu"
+                android:textStyle="bold"
+                android:textSize="26sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tv_diary_entries_obj_title"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv_diary_entries_object"
+                android:src="@drawable/iv_heart"/>
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  There are many coffee shops in Tokyo!"
+            android:textSize="16sp"
+            android:layout_centerHorizontal="true"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_diary_entries_obj"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/iv_diary_entries_pic1"
+            android:scaleType="centerCrop"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,176 @@
+store some useless code,
+
+//start学习Room
+
+    //Room
+    private WordViewModel mWordViewModel;
+    public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+
+        /*
+        RecyclerView recyclerView = findViewById(R.id.rv_room);
+        final WordListAdapter adapter = new WordListAdapter(new WordListAdapter.WordDiff());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mWordViewModel = new ViewModelProvider(this).get(WordViewModel.class);//用ViewModelProvider将ViewModel与MainActivity联系起来
+        //同样在onCreate()中，为getAlphabetizedWords()返回的LiveData添加一个观察者。onChanged()方法会在观察到的数据发生变化并且activity在前台时触发
+        mWordViewModel.getAllWords().observe(this, words -> {
+
+            adapter.submitList(words);//更新适配器中的缓存副本
+        });
+
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener( view -> {
+            Intent intent = new Intent(MainActivity.this, NewWordActivity.class);
+            startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+        });
+        */
+
+
+        /**
+         *如果activity返回RESULT_OK，通过调用WordViewModel的insert()方法
+         * 将返回的单词插入到数据库中
+         *@author home
+         *@time 2021/4/10 10:53
+        */
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+
+            //如果activity返回RESULT_OK，通过调用WordViewModel的insert()方法将返回的单词插入到数据库中
+            if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+                Word word = new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY));//获取输入了什么
+                mWordViewModel.insert(word);
+            } else {
+                Toast.makeText(
+                        getApplicationContext(),
+                        R.string.empty_not_saved,
+                        Toast.LENGTH_LONG).show();
+            }
+        }
+//end学习Room
+
+用SQLite操作数据库
+    .java
+        /**
+         *生成DB文件
+         *@author home
+         *@time 2021/3/26 22:54
+        */
+        public void createDB (View view) {
+            SQLiteOpenHelper helper = MySqliteOpenHelper.getInstance(this);
+
+            //（getReadableDatabase() /getWritableDatabase() ）databases 文件夹的创建，靠下面这句话
+            SQLiteDatabase readableDatabase = helper.getWritableDatabase();
+        }
+
+        /**
+         *查询DB语句
+         *@author home
+         *@time 2021/3/27 10:06
+        */
+        public void query(View view) {
+            SQLiteOpenHelper helper = MySqliteOpenHelper.getInstance(this);
+            SQLiteDatabase db = helper.getReadableDatabase();//读操作
+
+            if(db.isOpen()) { //数据库打开成功 返回true 进入if
+                Cursor cursor = db.rawQuery("select * from memo_entry",null);//返回游标
+
+                while (cursor.moveToNext()) { //迭代游标 往下面移动来遍历数据
+                    //int _id  = cursor.getInt(0);//偷懒并且不规范的写法
+
+                    //规范的写法
+                    int _id = cursor.getInt(cursor.getColumnIndex("_id"));
+                    String memo_content = cursor.getString(cursor.getColumnIndex("memo_content"));
+
+                    Log.d(TAG,"query: _id: " + _id + ", memo_content: " + memo_content);
+                }
+
+                cursor.close();//一定要记得关闭游标，否则耗费性能
+                db.close();//数据库也要关闭，规范写法
+            }
+        }
+
+        /**
+         *插入db数据 插入语句是不需要游标的 不是查询
+         *@author home
+         *@time 2021/3/27 10:17
+        */
+        public void insert (View view) {
+            SQLiteOpenHelper helper = MySqliteOpenHelper.getInstance(this);
+            SQLiteDatabase db = helper.getWritableDatabase();//注意这里要用写操作
+
+            if(db.isOpen()) { //确保数据库打开成功，才能放心操作 规范
+                String sql = "insert into memo_entry(memo_content) values('这是我的第一条memo！')";//插入语句
+
+                db.execSQL(sql);
+            }
+
+            db.close();//规范：必须关闭 数据库
+        }
+
+        /**
+         *修改db数据 修改第二条数据
+         *@author home
+         *@time 2021/3/27 10:30
+        */
+        public void update(View view) {
+            SQLiteOpenHelper helper = MySqliteOpenHelper.getInstance(this);
+            SQLiteDatabase db = helper.getWritableDatabase();
+
+            if (db.isOpen()) {
+                String sql = "update memo_entry set memo_content =? where _id =?";
+                db.execSQL(sql, new Object[]{"这是我的修改memo！",2});
+            }
+
+            db.close();
+        }
+
+        /**
+         *删除db数据
+         *@author home
+         *@time 2021/3/27 10:45
+        */
+        public void delete(View view) {
+            SQLiteOpenHelper helper = MySqliteOpenHelper.getInstance(this);
+            SQLiteDatabase db = helper.getWritableDatabase();
+
+            if (db.isOpen()) {
+                String sql = "delete from memo_entry where _id =?";
+                db.execSQL(sql, new Object[]{2});
+            }
+
+            db.close();
+        }
+
+    .xml
+        <!-->
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="生成DB"
+                android:onClick="createDB" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="查询"
+                android:onClick="query" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="插入"
+                android:onClick="insert"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="更新"
+                android:onClick="update"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="删除"
+                android:onClick="delete"/>
+        <-->

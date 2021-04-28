@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Main-->
+    <color name="topic_divider">#CACACA</color>
+    <color name="color_White">#ffffff</color>
+    <color name="color_gray">#646464</color>
+    <color name="color_black">#000</color>
+
+    <!--diary_button-->
+    <color name="yellow">#ECD300</color>
+    <color name="light_yellow">#ECDE6C</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#05FF00</color>
+    <color name="light_green">#6AE468</color>
+    <color name="azure_blue">#03A9F4</color>
+    <color name="light_blue">#88D6FA</color>
+    <color name="Purple">#8F51FF</color>
+    <color name="touming">#11512124</color>
+    <color name="none">#00000000</color>
+    <color name="buttonLabel">#FFFFFF</color>
+    <color name="light_pink">#EA8CAB</color>
+    <color name="light_red">#F66E64</color>
+    <color name="heavy_red">#C12418</color>
+    <color name="orange">#FF5722</color>
+    <color name="edittext_hint">#C5C1C1</color>
+
+</resources>

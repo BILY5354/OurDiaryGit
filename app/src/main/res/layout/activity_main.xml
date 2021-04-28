@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+
+    <ViewAnimator
+        android:id="@+id/va_top"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Welcome to OurDiary, enjoy!"
+                    android:textAllCaps="false"
+                    android:textColor="@color/color_black"
+                    android:textSize="16sp"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_main_topic_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/iv_boy"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"/>
+
+                <TextView
+                    android:id="@+id/tv_main_input_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="click then tell me your name"
+                    android:textSize="18sp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/iv_girl"
+                    android:layout_alignParentRight="true"
+
+                    android:layout_marginRight="20dp"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ViewAnimator>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/color_gray" />
+
+
+    <FrameLayout
+        android:id="@+id/sample_content_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="10"
+        android:background="@color/light_blue">
+    </FrameLayout>
+
+    <!--Room的rv-->
+    <!--LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="6"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_room"
+            tools:listitem="@layout/room_recyclerview_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout-->
+
+
+    <ViewAnimator
+        android:id="@+id/va_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_main_search"
+                android:src="@drawable/iv_main_search"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                app:tint="@color/color_black" />
+
+            <EditText
+                android:id="@+id/et_main_search"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/IV_main_setting"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/bg_edittext"
+                android:layout_toRightOf="@+id/iv_main_search"
+                />
+
+            <ImageView
+                android:id="@+id/IV_main_setting"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/iv_main_setting"
+                app:tint="@color/color_black" />
+
+        </RelativeLayout>
+    </ViewAnimator>
+</LinearLayout>

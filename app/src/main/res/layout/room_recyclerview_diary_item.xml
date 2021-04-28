@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_marginBottom="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+
+       <RelativeLayout
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:background="@color/yellow">
+
+           <TextView
+               android:id="@+id/tv_diary_write_view_nu"
+               android:layout_centerVertical="true"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textStyle="italic"
+               android:text="nu"
+               android:textSize="30sp"/>
+       </RelativeLayout>
+
+       <RelativeLayout
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:background="@color/orange">
+
+           <ImageView
+               android:id="@+id/iv_diary_write_like"
+               android:layout_centerVertical="true"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_centerHorizontal="true"
+               android:src="@drawable/iv_not_like"/>
+       </RelativeLayout>
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="80dp"
+           android:background="@color/light_blue"
+           android:layout_toLeftOf="@+id/iv_diary_write_like">
+
+           <TextView
+               android:layout_centerVertical="true"
+               android:layout_centerHorizontal="true"
+               android:id="@+id/tv_diary_write_view_title"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textSize="50sp"
+               android:text="test"
+               android:textColor="@color/color_black"/>
+
+       </RelativeLayout>
+
+
+
+   </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_diary_write_view_content"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/azure_blue"
+        android:text="test"
+        android:textColor="@color/color_black"
+        android:textSize="40sp"/>
+
+</LinearLayout>

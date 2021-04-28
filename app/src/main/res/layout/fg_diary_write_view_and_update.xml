@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_diary_write_view_and_update_nu"
+            android:text="修改页面"
+            android:textSize="26sp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="420dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:background="@color/light_blue">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/et_diary_write_view_and_update_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_black"
+                    android:textSize="30sp"
+                    android:text="Title"/>
+            </ScrollView>
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/azure_blue">
+
+            <EditText
+                android:id="@+id/et_diary_write_view_and_update_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_black"
+                android:textSize="20sp"
+                android:text="content"/>
+
+        </ScrollView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:backgroundTint="@color/light_blue"
+            android:id="@+id/fab_fg_diary_write_and_update_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/tv_fg_write_view_and_update_center"
+            android:layout_marginRight="60dp"
+            android:tint="@color/color_black"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/iv_back"/>
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/tv_fg_write_view_and_update_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_toRightOf="@+id/tv_fg_write_view_and_update_center"
+            android:layout_marginLeft="60dp"
+            android:backgroundTint="@color/light_green"
+            android:id="@+id/fab_fg_diary_write_and_update_find_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/iv_update"/>
+
+    </RelativeLayout>
+</LinearLayout>
