@@ -49,8 +49,8 @@ public class DWUpdDiaFragment extends DialogFragment {
                 get_nu = result.getInt("bundle_specific_nu");
                 get_title = result.getString("bundle_specific_title");
                 get_content = result.getString("bundle_specific_content");
-                Log.d("test",get_title + get_content);
-                tv_view_nu.setText("日记" + get_nu + "修改页面");
+                Log.d("test","DWUfragment" + get_nu);
+                tv_view_nu.setText("Diary " + get_nu + " Edit Page");
                 et_view_title.setText(get_title);
                 et_view_content.setText(get_content);
             }
@@ -58,9 +58,10 @@ public class DWUpdDiaFragment extends DialogFragment {
 
         fab_update.setOnClickListener(update -> {
             Bundle result = new Bundle();
+            result.putInt("bundle_update_nu", get_nu);
             result.putString("bundle_update_title", String.valueOf(et_view_title.getText()));
             result.putString("bundle_update_content", String.valueOf(et_view_content.getText()));
-            Log.d("test","\nready been sent" + et_view_title.getText() + et_view_content.getText());
+            Log.d("test","\nready been sent:" + get_nu + et_view_title.getText() + et_view_content.getText());
             getParentFragmentManager().setFragmentResult("updateSpecificDiary", result);
             Toast.makeText(getContext(), "保存成功^-^", Toast.LENGTH_SHORT).show();
             dismiss();

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -22,9 +23,6 @@ import com.example.ourdiary.db.room.diary_database.DiaryViewModel;
 import com.example.ourdiary.entries.DiaryActivity;
 import com.example.ourdiary.entries.write_page.dialog_fragment.DWDelAllDiaFragment;
 import com.example.ourdiary.entries.write_page.dialog_fragment.DWDelDialogFragment;
-import com.example.ourdiary.entries.write_page.dialog_fragment.DWFindDiaFragment;
-import com.example.ourdiary.entries.write_page.dialog_fragment.DWUpdDiaFragment;
-import com.example.ourdiary.entries.write_page.dialog_fragment.DWViewDiaFragment;
 import com.example.ourdiary.entries.write_page.dialog_fragment.DiaryWriteInputFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -39,7 +37,6 @@ import static java.lang.Character.getType;
 */
 public class DiaryWriteFragment extends Fragment {
 
-    //测试用    TextView tv_nu,tv_title,tv_content;
     private DiaryActivity activity;
 
     /***UI**/
@@ -47,10 +44,12 @@ public class DiaryWriteFragment extends Fragment {
 
     /**各Bundle的标识符，用于获取不同数据库操作的返回值**/
     String result_title,result_content,result_delete_one;
-    int result_sign_del,result_specific_diary_nu,Position=0;//Position是日记的序号，用于更新的
+    int result_sign_del,result_specific_diary_nu;//Position是日记的序号，用于更新的
 
     //Room
     private DiaryViewModel mDiaryViewModel;
+
+    //测试用    TextView tv_nu,tv_title,tv_content;
 
     public DiaryWriteFragment(DiaryActivity activity) {
         this.activity = activity;
@@ -78,11 +77,12 @@ public class DiaryWriteFragment extends Fragment {
         getParentFragmentManager().setFragmentResultListener("updateSpecificDiary", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
+                result_specific_diary_nu = bundle.getInt("bundle_update_nu");
                 result_title = bundle.getString("bundle_update_title");
                 result_content = bundle.getString("bundle_update_content");
-                Log.d("test","\nupdate return:" + Position +  result_specific_diary_nu+ result_title+result_content);
+                Log.d("test","\nupdate return:" + result_specific_diary_nu + result_title +result_content);
                 Diary diary = new Diary(result_title,result_content);
-                diary.setId(Position);
+                diary.setId(result_specific_diary_nu);
                 mDiaryViewModel.updateDiaries(diary);
             }
         });
@@ -127,7 +127,7 @@ public class DiaryWriteFragment extends Fragment {
 //        tv_title = view.findViewById(R.id.tv_fg_diary_write_title);
 //        tv_content = view.findViewById(R.id.tv_fg_diary_write_content);
         fab_diary_write = view.findViewById(R.id.fab_diary_write);
-//bug        fab_diary_find_out = view.findViewById(R.id.fab_diary_find_out);
+//        fab_diary_find_out = view.findViewById(R.id.fab_diary_find_out);
         fab_update = view.findViewById(R.id.fab_diary_update);
         fab_delete_one = view.findViewById(R.id.fab_diary_delete_one);
         fab_delete_all = view.findViewById(R.id.fab_diary_delete_all);
@@ -139,11 +139,11 @@ public class DiaryWriteFragment extends Fragment {
         });
 
         //查询特定日记
-        /**BUG HERE!!!!!!!!!!!!!
+        /***BUG HERE!!!!!!!!!!!!!
         fab_diary_find_out.setOnClickListener(view_find_out -> {
             //DWFindDiaFragment dwFindDiaFragment = new DWFindDiaFragment(activity);
             //dwFindDiaFragment.show(activity.getSupportFragmentManager(),"dwFindDiaFragment");
-        });***/
+        });*/
 
         //修改 先再变成长按修改了
         fab_update.setOnClickListener(view_update -> {

@@ -91,7 +91,7 @@
                 android:src="@drawable/iv_update"/>
 
             <!-->查询 有bug<-->
-            <!-->
+
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:backgroundTint="@color/light_yellow"
                 android:id="@+id/fab_diary_find_out"
@@ -99,7 +99,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:src="@drawable/iv_find_out"/>
-            <-->
 
             <!-->增加<-->
             <com.google.android.material.floatingactionbutton.FloatingActionButton

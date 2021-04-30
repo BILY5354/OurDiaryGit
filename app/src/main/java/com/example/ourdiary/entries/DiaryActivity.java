@@ -21,7 +21,7 @@ import com.example.ourdiary.entries.write_page.DiaryWriteFragment;
 
 public class DiaryActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private boolean test;
+    private byte hello;
     private Button btn_diary_entries,btn_diary_photo_page,btn_diary_write;
     private FrameLayout fl_diary_fg;
     private RelativeLayout rl_entries_page;
