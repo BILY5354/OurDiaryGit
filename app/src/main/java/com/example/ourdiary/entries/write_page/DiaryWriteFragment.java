@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -25,8 +24,6 @@ import com.example.ourdiary.entries.write_page.dialog_fragment.DWDelAllDiaFragme
 import com.example.ourdiary.entries.write_page.dialog_fragment.DWDelDialogFragment;
 import com.example.ourdiary.entries.write_page.dialog_fragment.DiaryWriteInputFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.concurrent.atomic.AtomicReference;
 
 import static java.lang.Character.getType;
 
@@ -166,38 +163,7 @@ public class DiaryWriteFragment extends Fragment {
 
         //Room
         RecyclerView rv_diary = view.findViewById(R.id.rv_diary_write_view);
-        final DiaryListAdapter adapter_diary = new DiaryListAdapter(new DiaryListAdapter.DiaryDiff(), new DiaryListAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(int pos) {//一开始以为直接找iv的控件就行，但实际上点赞按钮是在rv里面的，
-                mDiaryViewModel = new ViewModelProvider(activity).get(DiaryViewModel.class);
-                mDiaryViewModel.getSpecificDiary(pos+1).observe(activity, diary -> {
-                    Bundle result = new Bundle();
-                    result.putInt("bundle_specific_nu", pos+1);
-                    result.putString("bundle_specific_title", String.valueOf(diary.getDiary_Title()));
-                    result.putString("bundle_specific_content", String.valueOf(diary.getDiary_Content()));
-                    getParentFragmentManager().setFragmentResult("requestSpecificDiary",result);
-                });
-                DWViewDiaFragment dwViewDiaFragment = new DWViewDiaFragment();
-                dwViewDiaFragment.show(activity.getSupportFragmentManager(),"dwViewDiaFragment");
-            }
-        }, new DiaryListAdapter.OnItemLongClickListener() {
-            @Override
-            public void onLongClick(int pos) {/**实现长按修改的功能*/
-                Position = pos+1;
-                mDiaryViewModel = new ViewModelProvider(activity).get(DiaryViewModel.class);
-                /**设置观察者，观察数据 重要！！*/
-                mDiaryViewModel.getSpecificDiary(pos+1).observe(activity, diary -> {/**注意,要pos+1，因为recyclerview是从0开始计数的*/
-                    Log.d("test", "这是标题：" + diary.getDiary_Title() + "\n" + "这是内容：" +diary.getDiary_Content() );
-                    Bundle result = new Bundle();
-                    result.putInt("bundle_specific_nu", pos+1);
-                    result.putString("bundle_specific_title", String.valueOf(diary.getDiary_Title()));
-                    result.putString("bundle_specific_content", String.valueOf(diary.getDiary_Content()));
-                    getParentFragmentManager().setFragmentResult("requestSpecificDiary",result);
-                });
-                DWUpdDiaFragment dwUpdDiaFragment = new DWUpdDiaFragment();
-                dwUpdDiaFragment.show(activity.getSupportFragmentManager(),"dwUpdDiaFragment");
-            }
-        });
+        final  EntriesAdapter adapter_diary = new EntriesAdapter(new EntriesAdapter.DiaryDiff(), activity,this);
         rv_diary.setAdapter(adapter_diary);
         rv_diary.setLayoutManager(new LinearLayoutManager(activity));
         mDiaryViewModel = new ViewModelProvider(activity).get(DiaryViewModel.class);
