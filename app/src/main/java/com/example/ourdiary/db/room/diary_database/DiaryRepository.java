@@ -19,6 +19,7 @@ class DiaryRepository {
     }
 
 
+
     void insetDiaries(Diary... diaries) {
         new InsertAsyncTask(diaryDao).execute(diaries);
     }
