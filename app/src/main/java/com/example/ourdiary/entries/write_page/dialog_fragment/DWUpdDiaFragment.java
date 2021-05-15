@@ -22,7 +22,7 @@ public class DWUpdDiaFragment extends DialogFragment {
     /**UI*/
     TextView tv_view_nu;
     EditText et_view_title,et_view_content;
-    FloatingActionButton fab_update,fab_back;
+    FloatingActionButton fab_update,fab_delete_one,fab_back;
 
     /**用于Bundle的数据*/
     String get_title,get_content;
@@ -39,6 +39,7 @@ public class DWUpdDiaFragment extends DialogFragment {
         et_view_title = view.findViewById(R.id.et_diary_write_view_and_update_title);
         et_view_content = view.findViewById(R.id.et_diary_write_view_and_update_content);
         fab_back = view.findViewById(R.id.fab_fg_diary_write_and_update_back);
+        fab_delete_one = view.findViewById(R.id.fab_fg_diary_write_and_update_delete_one);
         fab_update = view.findViewById(R.id.fab_fg_diary_write_and_update_find_out);
 
         /**获取DiaryWriteFragment的值*/
@@ -67,6 +68,15 @@ public class DWUpdDiaFragment extends DialogFragment {
             dismiss();
         });
 
+        //删除一个
+        fab_delete_one.setOnClickListener(view_delete_one -> {
+            Bundle result = new Bundle();
+            result.putInt("delete_nu", get_nu);
+            getParentFragmentManager().setFragmentResult("deleteOne", result);
+            dismiss();
+        });
+
+        //返回
         fab_back.setOnClickListener(back -> {
             dismiss();
         });
