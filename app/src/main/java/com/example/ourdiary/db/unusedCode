@@ -1,11 +1,3 @@
-package com.example.ourdiary.db;
-
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-
-import androidx.annotation.Nullable;
-
 /**
  *MqSqliteOpenHelper 工具类 单例模式（1.构造函数私有化 2.对外提供函数）
  * 用此函数式不能new的，只能通过getInstance方法使用它

@@ -10,27 +10,24 @@ import java.util.List;
 
 public class ContactViewModel extends AndroidViewModel {
 
-    private ContactRepository mRepository;
+    private ContactRepository contactRepository;
 
-    private final LiveData<List<Contact>> mAllContacts;
-    private final LiveData<List<Contact>> mSpecificTopicIdContact;
-
-    public ContactViewModel(@NonNull Application application,int ref_topic_id) {
+    public ContactViewModel(@NonNull Application application) {
         super(application);
-        mRepository = new ContactRepository(application, ref_topic_id);
-        mAllContacts = mRepository.getAllContacts();
-        mSpecificTopicIdContact = mRepository.getSpecificTopicIdContact(ref_topic_id);
+        contactRepository = new ContactRepository(application);
     }
 
-    public LiveData<List<Contact>> getAllContacts() { return  mAllContacts; }
+    public LiveData<List<Contact>> getAllContacts() {
+        return  contactRepository.getAllContacts(); }
 
-    public LiveData<List<Contact>> getSpecificContacts() { return  mSpecificTopicIdContact; }
+    public LiveData<List<Contact>> getSpecificContacts(int ref_topic_id) {
+        return  contactRepository.getSpecificTopicIdContact(ref_topic_id); }
 
-    public void insert(Contact contact) { mRepository.insert(contact); }
+    public void insert(Contact contact) { contactRepository.insert(contact); }
 
-    public void deleteOne(Contact contact) { mRepository.deleteOne(contact); }
+    public void deleteOne(Contact contact) { contactRepository.deleteOne(contact); }
 
-    public void deleteAll(Contact contact) { mRepository.deleteAll(); }
+    public void deleteAll(Contact contact) { contactRepository.deleteAll(); }
 
-    public void Update(Contact contact) { mRepository.update(contact); }
+    public void update(Contact contact) { contactRepository.update(contact); }
 }

@@ -24,7 +24,9 @@ public abstract class ContactRoomDatabase extends RoomDatabase {
     static synchronized ContactRoomDatabase getContactDatabase(Context context) {
         if(INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(), ContactRoomDatabase.class,
-                    "contact_database").build();
+                    "contact_database")
+                    .addCallback(sRoomDatabaseCallback)//add initial data for testing
+                    .build();
         }
         return INSTANCE;
     }

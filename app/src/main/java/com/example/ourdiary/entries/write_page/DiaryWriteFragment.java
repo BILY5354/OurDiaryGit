@@ -21,11 +21,9 @@ import com.example.ourdiary.db.room.diary_database.Diary;
 import com.example.ourdiary.db.room.diary_database.DiaryViewModel;
 import com.example.ourdiary.entries.DiaryActivity;
 import com.example.ourdiary.entries.write_page.dialog_fragment.DWDelAllDiaFragment;
-import com.example.ourdiary.entries.write_page.dialog_fragment.DWDelDialogFragment;
 import com.example.ourdiary.entries.write_page.dialog_fragment.DiaryWriteInputFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import static java.lang.Character.getType;
 
 /**
  *不能查询特定的日记DWFindDiaFragment 这个运行会闪退 不知道是不是和DWViewDiaFragment有关联
@@ -37,16 +35,14 @@ public class DiaryWriteFragment extends Fragment {
     private DiaryActivity activity;
 
     /***UI**/
-    FloatingActionButton fab_diary_write,fab_update,fab_delete_one,fab_delete_all,fab_diary_find_out;
+    FloatingActionButton fab_diary_write,fab_delete_all,fab_diary_find_out;
 
     /**各Bundle的标识符，用于获取不同数据库操作的返回值**/
-    String result_title,result_content,result_delete_one;
-    int result_sign_del,result_specific_diary_nu;//Position是日记的序号，用于更新的
+    String result_title,result_content;
+    int result_sign_del,result_specific_diary_nu,result_delete_one;//Position是日记的序号，用于更新的
 
     //Room
     private DiaryViewModel mDiaryViewModel;
-
-    //测试用    TextView tv_nu,tv_title,tv_content;
 
     public DiaryWriteFragment(DiaryActivity activity) {
         this.activity = activity;
@@ -88,9 +84,9 @@ public class DiaryWriteFragment extends Fragment {
         getParentFragmentManager().setFragmentResultListener("deleteOne", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                result_delete_one = bundle.getString("delete_nu");
+                result_delete_one = bundle.getInt("delete_nu");
                 Diary diary = new Diary("delete title","delete content");
-                diary.setId(Integer.parseInt(result_delete_one));
+                diary.setId(result_delete_one);
                 mDiaryViewModel.deleteDiary(diary);
             }
         });
@@ -121,12 +117,8 @@ public class DiaryWriteFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        tv_title = view.findViewById(R.id.tv_fg_diary_write_title);
-//        tv_content = view.findViewById(R.id.tv_fg_diary_write_content);
+
         fab_diary_write = view.findViewById(R.id.fab_diary_write);
-//        fab_diary_find_out = view.findViewById(R.id.fab_diary_find_out);
-        fab_update = view.findViewById(R.id.fab_diary_update);
-        fab_delete_one = view.findViewById(R.id.fab_diary_delete_one);
         fab_delete_all = view.findViewById(R.id.fab_diary_delete_all);
 
         //新增
@@ -136,24 +128,7 @@ public class DiaryWriteFragment extends Fragment {
         });
 
         //查询特定日记
-        /***BUG HERE!!!!!!!!!!!!!
-        fab_diary_find_out.setOnClickListener(view_find_out -> {
-            //DWFindDiaFragment dwFindDiaFragment = new DWFindDiaFragment(activity);
-            //dwFindDiaFragment.show(activity.getSupportFragmentManager(),"dwFindDiaFragment");
-        });*/
 
-        //修改 先再变成长按修改了
-        fab_update.setOnClickListener(view_update -> {
-            Diary diary = new Diary("update title","update content!");
-            diary.setId(2);
-            mDiaryViewModel.updateDiaries(diary);
-        });
-
-        //删除一个
-        fab_delete_one.setOnClickListener(view_delete_one -> {
-            DWDelDialogFragment dwDelDialogFragment = new DWDelDialogFragment();
-            dwDelDialogFragment.show(activity.getSupportFragmentManager(),"dwDelDialogFragment");
-        });
 
         //删除全部
         fab_delete_all.setOnClickListener(view_delete_all -> {
@@ -161,7 +136,7 @@ public class DiaryWriteFragment extends Fragment {
             dwDelAllDiaFragment.show(activity.getSupportFragmentManager(),"dwDelAllDiaFragment");
         });
 
-        //Room
+        //Room 当新日记 或修改了日记 此fragment会更新
         RecyclerView rv_diary = view.findViewById(R.id.rv_diary_write_view);
         final  EntriesAdapter adapter_diary = new EntriesAdapter(new EntriesAdapter.DiaryDiff(), activity,this);
         rv_diary.setAdapter(adapter_diary);

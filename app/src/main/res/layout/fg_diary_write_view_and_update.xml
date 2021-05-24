@@ -72,29 +72,29 @@
             android:id="@+id/fab_fg_diary_write_and_update_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/tv_fg_write_view_and_update_center"
+            android:layout_toLeftOf="@+id/fab_fg_diary_write_and_update_find_out"
             android:layout_marginRight="60dp"
             android:tint="@color/color_black"
             android:layout_marginBottom="5dp"
             android:src="@drawable/iv_back"/>
 
-        <TextView
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:id="@+id/tv_fg_write_view_and_update_center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_toRightOf="@+id/tv_fg_write_view_and_update_center"
-            android:layout_marginLeft="60dp"
+            android:layout_centerHorizontal="true"
             android:backgroundTint="@color/light_green"
             android:id="@+id/fab_fg_diary_write_and_update_find_out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:src="@drawable/iv_update"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_fg_diary_write_and_update_delete_one"
+            android:layout_toRightOf="@+id/fab_fg_diary_write_and_update_find_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:backgroundTint="@color/light_red"
+            android:src="@drawable/iv_delete_one"/>
 
     </RelativeLayout>
 </LinearLayout>

@@ -15,7 +15,6 @@ import com.example.ourdiary.R;
 import com.example.ourdiary.contacts.ContactsActivity;
 import com.example.ourdiary.entries.DiaryActivity;
 import com.example.ourdiary.main.MainActivity;
-import com.example.ourdiary.memo.MemoActivity;
 
 public class MainPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -112,11 +111,11 @@ public class MainPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 Intent goDiaryPageIntent = new Intent(activity, DiaryActivity.class);
                 activity.startActivity(goDiaryPageIntent);
                 break;
-            case TYPE_MEMO:
-                Intent goMemoPageIntent = new Intent(activity, MemoActivity.class);
-                goMemoPageIntent.putExtra("topicId", pos);//判断时第几个按下
-                activity.startActivity(goMemoPageIntent);
-                break;
+//            case TYPE_MEMO:
+//                Intent goMemoPageIntent = new Intent(activity, MemoActivity.class);
+//                goMemoPageIntent.putExtra("topicId", pos);//判断时第几个按下
+//                activity.startActivity(goMemoPageIntent);
+//                break;
         }
     }
 

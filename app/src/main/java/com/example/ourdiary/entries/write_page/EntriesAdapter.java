@@ -1,7 +1,6 @@
 package com.example.ourdiary.entries.write_page;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ourdiary.R;
 import com.example.ourdiary.db.room.diary_database.Diary;
 import com.example.ourdiary.entries.DiaryActivity;
-import com.example.ourdiary.entries.EntriesEntity;
 import com.example.ourdiary.entries.write_page.dialog_fragment.DWUpdDiaFragment;
 import com.example.ourdiary.entries.write_page.dialog_fragment.DWViewDiaFragment;
 import com.example.ourdiary.shared.EditMode;
-
-import java.util.List;
 
 /**
  *这个Adapter将会替换就得DiaryListAdapter，将Adapter与ViewHolder结合在一起使用
@@ -50,7 +46,7 @@ public class EntriesAdapter extends ListAdapter<Diary,EntriesAdapter.EntriesView
     @Override
     public void onBindViewHolder(@NonNull EntriesAdapter.EntriesViewHolder holder, int position) {
         Diary diary  = getItem(position);
-        holder.getNu(diary.getStrId());//日记序号
+        holder.getNu(String.valueOf(position + 1));//显示在recyclerview的日记序号，不是真正的日记序号
         holder.getTitle(diary.getDiary_Title());//标题
         holder.getContent(diary.getDiary_Content());//内容
     }
