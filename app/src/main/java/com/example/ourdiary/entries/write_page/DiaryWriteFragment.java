@@ -21,11 +21,9 @@ import com.example.ourdiary.db.room.diary_database.Diary;
 import com.example.ourdiary.db.room.diary_database.DiaryViewModel;
 import com.example.ourdiary.entries.DiaryActivity;
 import com.example.ourdiary.entries.write_page.dialog_fragment.DWDelAllDiaFragment;
-import com.example.ourdiary.entries.write_page.dialog_fragment.DWDelDialogFragment;
 import com.example.ourdiary.entries.write_page.dialog_fragment.DiaryWriteInputFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import static java.lang.Character.getType;
 
 /**
  *不能查询特定的日记DWFindDiaFragment 这个运行会闪退 不知道是不是和DWViewDiaFragment有关联
@@ -130,11 +128,7 @@ public class DiaryWriteFragment extends Fragment {
         });
 
         //查询特定日记
-        /***BUG HERE!!!!!!!!!!!!!
-        fab_diary_find_out.setOnClickListener(view_find_out -> {
-            //DWFindDiaFragment dwFindDiaFragment = new DWFindDiaFragment(activity);
-            //dwFindDiaFragment.show(activity.getSupportFragmentManager(),"dwFindDiaFragment");
-        });*/
+
 
         //删除全部
         fab_delete_all.setOnClickListener(view_delete_all -> {

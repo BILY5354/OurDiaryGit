@@ -2,7 +2,9 @@ package com.example.ourdiary.contacts;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +16,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.ourdiary.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  *获取activity的topicid是本类中构造函数ContactsDetailDialogFragment（在ContactsActivity获取）用intent获取
@@ -25,53 +29,39 @@ import com.example.ourdiary.R;
  * @author home
  *@time 2021/4/24 13:44
 */
-public class ContactsDetailDialogFragment extends DialogFragment implements View.OnClickListener {
+public class ContactsDetailDialogFragment extends DialogFragment {
 
-
-    public interface ContactsDetailCallback {
-        void addContacts();
-
-        void updateContacts();
-
-        void deleteContacts();
-    }
 
     /**
      * UI
      */
-    private LinearLayout LL_contacts_detail_top_content;
-    private EditText EDT_contacts_detail_name, EDT_contacts_detail_phone_number;
-    private Button But_contacts_detail_delete, But_contacts_detail_cancel, But_contacts_detail_ok;
-
-    /**
-     * CallBack
-     */
-    private ContactsDetailCallback callback;
+    private LinearLayout ll_contacts_detail_top_content;
+    private EditText et_contacts_detail_name, et_contacts_detail_phone_number;
+    FloatingActionButton fab_update,fab_delete_one,fab_back;
 
     /**
      * Contacts Info
      */
-    private long contactsId;
+    private int contactsId, topicId;
     private String contactsName, contactsPhoneNumber;
-    private long topicId;
 
     /**
      * Edit or add contacts
      */
     private boolean isEditMode = false;
-    public static final long ADD_NEW_CONTACTS = -1;
 
     /**
      *注意此方法中的 fragment.setArguments(args)语句
+     * newInstance is used in ContactsActivity and ContactsAdapter
      *@author home
      *@time 2021/4/24 11:36
     */
     public static ContactsDetailDialogFragment newInstance(
-            long contactsId, String contactsName, String contactsPhoneNumber, long topicId) {
+            boolean edit_state,int contactsId, String contactsName, String contactsPhoneNumber, int topicId) {
         Bundle args = new Bundle();
         ContactsDetailDialogFragment fragment = new ContactsDetailDialogFragment();
-        //contactsId = -1 is edit
-        args.putLong("contactsId", contactsId);
+        args.putBoolean("edit_state", edit_state);
+        args.putInt("contactsId", contactsId);
         args.putString("contactsName", contactsName);
         args.putString("contactsPhoneNumber", contactsPhoneNumber);
         args.putLong("topicId", topicId);
@@ -79,89 +69,103 @@ public class ContactsDetailDialogFragment extends DialogFragment implements View
         return fragment;
     }
 
+    /** what is use?*/
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        try {
-            callback = (ContactsDetailCallback) context;
-        } catch (ClassCastException e) {}
-    }
 
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        Dialog dialog  = super.onCreateDialog(savedInstanceState);
-        // 请求除了顶部topbar的页面更新
-        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        return dialog;
     }
 
     /**
-     *创建fg视图部分
+     *create fragment
      *@author home
-     *@time 2021/4/24 11:48
+     *@time 2021/5/23 16:11
     */
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        this.getDialog().setCanceledOnTouchOutside(false);
-        View rootview = inflater.inflate(R.layout.dialog_fragment_contacts_detail, container);
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        LL_contacts_detail_top_content = rootview.findViewById(R.id.ll_contacts_detail_top_content);
-        //项目这里是设置背景
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_fragment_contacts_detail, null);
+        builder.setView(view);
 
-        EDT_contacts_detail_name = rootview.findViewById(R.id.et_contacts_detail_name);
-        EDT_contacts_detail_phone_number = rootview.findViewById(R.id.et_contacts_detail_phone_number);
+        ll_contacts_detail_top_content = view.findViewById(R.id.ll_contacts_detail_top_content);
 
-        But_contacts_detail_ok = rootview.findViewById(R.id.btn_contacts_detail_ok);
-        But_contacts_detail_ok.setOnClickListener(this);
+        et_contacts_detail_name = view.findViewById(R.id.et_contacts_detail_name);
+        et_contacts_detail_phone_number = view.findViewById(R.id.et_contacts_detail_phone_number);
 
-        But_contacts_detail_cancel = rootview.findViewById(R.id.btn_contacts_detail_cancel);
-        But_contacts_detail_cancel.setOnClickListener(this);
+        fab_update = view.findViewById(R.id.fab_fg_contact_detail_update);
+        fab_back = view.findViewById(R.id.fab_fg_contact_detail_back);
+        fab_delete_one = view.findViewById(R.id.fab_fg_contact_detail_delete_one);
 
-        But_contacts_detail_delete = rootview.findViewById(R.id.btn_contacts_detail_delete);
-        //
-        return rootview;
-    }
 
-    /**
-     *DetailDialogFragment是新增与长按通讯录编辑功能公用的界面，如果在编辑模式下是不会显示删除按键的
-     *@author home
-     *@time 2021/4/24 11:55
-     */
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        contactsId = getArguments().getLong("contactsId", -1);
-        if (contactsId == ADD_NEW_CONTACTS) {
-            isEditMode = false;
-            But_contacts_detail_delete.setVisibility(View.GONE);
+        /**get contacts name and photo number from INSTANCE, and set them*/
+        isEditMode = getArguments().getBoolean("edit_state",false);
+        contactsId = getArguments().getInt("contactsId", 1);
+        contactsName = getArguments().getString("contactsName", "");
+        contactsPhoneNumber = getArguments().getString("contactsPhoneNumber", "");
+        et_contacts_detail_name.setText(contactsName);
+        et_contacts_detail_phone_number.setText(contactsPhoneNumber);
 
-            topicId = getArguments().getLong("topicId", -1);
+        /**if is added button clicked, the ContactsDetailDialog will not show the delete fab*/
+        if (isEditMode) {
+            fab_delete_one.setVisibility(view.VISIBLE);
+
         } else {
-            isEditMode = true;
-            But_contacts_detail_delete.setVisibility(View.VISIBLE);
-            But_contacts_detail_delete.setOnClickListener(this);
-
-            //从哪儿get？从CallDialogFragment中get！
-            contactsName = getArguments().getString("contactsName", "");
-            contactsPhoneNumber = getArguments().getString("contactsPhoneNumber", "");
-            EDT_contacts_detail_name.setText(contactsName);
-            EDT_contacts_detail_phone_number.setText(contactsPhoneNumber);
+            fab_delete_one.setVisibility(view.GONE);
         }
+
+        /**below are three FAB button for update back delete one function*/
+        fab_update.setOnClickListener(update -> {
+            Bundle result = new Bundle();
+            if (isEditMode) //if is edit mode, update it,  else, add the new one
+            {
+
+                result.putInt("contacts_detail_fg_update_id", contactsId);
+                result.putString("contacts_detail_fg_update_name", et_contacts_detail_name.getText().toString());
+                result.putString("contacts_detail_fg_update_phone_number",et_contacts_detail_phone_number.getText().toString());
+                getParentFragmentManager().setFragmentResult("contacts_detail_fg_update", result);
+                Toast.makeText(getContext(), "更新成功^-^", Toast.LENGTH_SHORT).show();
+            } else {
+
+                result.putString("contacts_detail_fg_add_name", et_contacts_detail_name.getText().toString());
+                result.putString("contacts_detail_fg_add_phone_number",et_contacts_detail_phone_number.getText().toString());
+                getParentFragmentManager().setFragmentResult("contacts_detail_fg_add", result);
+                Toast.makeText(getContext(), "添加成功^-^", Toast.LENGTH_SHORT).show();
+            }
+            dismiss();
+        });
+
+        fab_back.setOnClickListener(back -> {
+            dismiss();
+        });
+
+        fab_delete_one.setOnClickListener(delete_one -> {
+            Bundle result = new Bundle();
+            result.putInt("contacts_detail_fg_delete_one_id", contactsId);
+            getParentFragmentManager().setFragmentResult("contacts_detail_fg_delete_one", result);
+            dismiss();
+        });
+
+        return  builder.create();
     }
 
-    /**
-     *数据库编辑到啦啦
-     *@author home
-     *@time 2021/4/24 11:59
-    */
+
+//    @NonNull
+//    @Override
+//    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+//        Dialog dialog  = super.onCreateDialog(savedInstanceState);
+//        // 请求除了顶部topbar的页面更新
+//        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+//        return dialog;
+//    }
+
 
     /** 用于判断是否是新增还是编辑情况显示本ContactsDetailDialogFragment
      * 如果是编辑模式，更新数据库，如果是新增，则插入数据库**/
     private void buttonOkEvent() {
-        if (EDT_contacts_detail_name.getText().toString().length() > 0 &&
-            EDT_contacts_detail_phone_number.getText().toString().length() > 0) {
+        if (et_contacts_detail_name.getText().toString().length() > 0 &&
+            et_contacts_detail_phone_number.getText().toString().length() > 0) {
             if (isEditMode) {
                 /**数据库更新**/
 
@@ -174,21 +178,5 @@ public class ContactsDetailDialogFragment extends DialogFragment implements View
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_contacts_detail_delete:
-                //deleteContacts();
-                callback.deleteContacts();
-                dismiss();
-                break;
-            case R.id.btn_contacts_detail_cancel:
-                dismiss();
-                break;
-            case R.id.btn_contacts_detail_ok:
-                buttonOkEvent();
-                break;
-        }
-    }
 
 }

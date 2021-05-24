@@ -26,8 +26,7 @@
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/iv_contacts"
-            app:tint="@color/color_gray" />
+            android:src="@drawable/iv_boy" />
 
         <EditText
             android:id="@+id/et_contacts_detail_name"
@@ -66,40 +65,42 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
 
 
-        <Button
-            android:id="@+id/btn_contacts_detail_delete"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:backgroundTint="@color/light_blue"
+            android:id="@+id/fab_fg_contact_detail_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="5dp"
-            android:gravity="center"
-            android:text="@string/dialog_button_delete"
-            android:textAllCaps="false" />
+            android:layout_toLeftOf="@+id/fab_fg_contact_detail_update"
+            android:layout_marginRight="60dp"
+            android:tint="@color/color_black"
+            android:src="@drawable/iv_back"
+            android:layout_centerVertical="true" />
 
-        <Button
-            android:id="@+id/btn_contacts_detail_ok"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/light_green"
+            android:id="@+id/fab_fg_contact_detail_update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="5dp"
-            android:gravity="center"
-            android:text="@string/dialog_button_ok"
-            android:textAllCaps="false" />
+            android:src="@drawable/iv_update"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"/>
 
-        <Button
-            android:id="@+id/btn_contacts_detail_cancel"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_fg_contact_detail_delete_one"
+            android:layout_toRightOf="@+id/fab_fg_contact_detail_update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@id/btn_contacts_detail_ok"
-            android:gravity="center"
-            android:text="@string/dialog_button_cancel"
-            android:textAllCaps="false" />
+            android:layout_marginLeft="60dp"
+            android:backgroundTint="@color/light_red"
+            android:src="@drawable/iv_delete_one"
+            android:layout_centerVertical="true"/>
+
     </RelativeLayout>
+
 
 </LinearLayout>

@@ -10,21 +10,19 @@ public class ContactRepository {
 
     private ContactDao mContactDao;
     private LiveData<List<Contact>> mAllContacts;
-    private LiveData<List<Contact>> mSpecificTopicIdContact;
 
-    ContactRepository(Application application, int ref_topic_id) {
+    ContactRepository(Application application) {
         ContactRoomDatabase db = ContactRoomDatabase.getContactDatabase(application);
         mContactDao = db.contactDao();
         mAllContacts = mContactDao.getAllContactsLive();
-        mSpecificTopicIdContact = mContactDao.getSpecificTopicIdContact(ref_topic_id);
     }
 
-    LiveData<List<Contact>> getAllContacts() {
+    public LiveData<List<Contact>> getAllContacts() {
         return mAllContacts;
     }
 
-    LiveData<List<Contact>> getSpecificTopicIdContact(int ref_topic_id) {
-        return mSpecificTopicIdContact;
+    public LiveData<List<Contact>> getSpecificTopicIdContact(int ref_topic_id) {
+        return mContactDao.getSpecificTopicIdContact(ref_topic_id);
     }
 
     void insert (Contact contact) {
