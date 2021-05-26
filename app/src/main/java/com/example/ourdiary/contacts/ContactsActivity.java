@@ -136,7 +136,8 @@ public class ContactsActivity extends AppCompatActivity implements
     */
     private void initTopicAdapter() {
         recyclerView_contacts = findViewById(R.id.rv_contacts);
-        final ContactsAdapter contactsAdapter = new ContactsAdapter(new ContactsAdapter.ContactDiff(), this, topicId);
+        final ContactsAdapter contactsAdapter = new ContactsAdapter(
+                new ContactsAdapter.ContactDiff(), this, topicId);
         recyclerView_contacts.setAdapter(contactsAdapter);
         recyclerView_contacts.setLayoutManager(new LinearLayoutManager(this));
         recyclerView_contacts.setHasFixedSize(true);
