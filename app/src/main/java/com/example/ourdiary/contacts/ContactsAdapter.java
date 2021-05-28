@@ -27,8 +27,6 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
 
     private FragmentActivity mActivity;//这有什么用
 
-    //是否需要？
-    //private ContactsDetailDialogFragment.ContactsDetailCallback callback;
     private int topicId;
 
     private List<ContactsEntity> contactsNamesList;
