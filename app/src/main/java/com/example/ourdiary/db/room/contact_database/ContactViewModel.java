@@ -23,6 +23,10 @@ public class ContactViewModel extends AndroidViewModel {
     public LiveData<List<Contact>> getSpecificContacts(int ref_topic_id) {
         return  contactRepository.getSpecificTopicIdContact(ref_topic_id); }
 
+    /**获取对应topic id通讯录的数量*/
+    public LiveData<Integer> getSpecificTopicIdContactCount(int ref_topic_id) {
+        return contactRepository.getSpecificTopicIdContactCount(ref_topic_id); }
+
     public void insert(Contact contact) { contactRepository.insert(contact); }
 
     public void deleteOne(Contact contact) { contactRepository.deleteOne(contact); }
