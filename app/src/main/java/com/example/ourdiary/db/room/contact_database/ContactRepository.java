@@ -21,8 +21,14 @@ public class ContactRepository {
         return mAllContacts;
     }
 
+    /**获取对应topic id的通讯录*/
     public LiveData<List<Contact>> getSpecificTopicIdContact(int ref_topic_id) {
         return mContactDao.getSpecificTopicIdContact(ref_topic_id);
+    }
+
+    /**获取对应topic id通讯录的数量*/
+    public LiveData<Integer> getSpecificTopicIdContactCount(int ref_topic_id) {
+        return  mContactDao.getSpecificTopicIdContactCount(ref_topic_id);
     }
 
     void insert (Contact contact) {
