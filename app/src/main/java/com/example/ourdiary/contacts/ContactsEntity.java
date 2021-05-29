@@ -1,21 +1,26 @@
 package com.example.ourdiary.contacts;
 
+/**
+ *将long的contacts_ Id改成了int的
+ *@author home
+ *@time 2021/5/28 19:12
+*/
 public class ContactsEntity {
 
-    private long contactsId;
+    private int contactsId;
     private String name;
     private String phoneNumber;
     private String photo;
     private String sortLetters;
 
-    public ContactsEntity(long contactsId, String name, String phoneNumber, String photo) {
+    public ContactsEntity(int contactsId, String name, String phoneNumber, String photo) {
         this.contactsId = contactsId;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.photo = photo;
     }
 
-    public long getContactsId() {
+    public int getContactsId() {
         return contactsId;
     }
 

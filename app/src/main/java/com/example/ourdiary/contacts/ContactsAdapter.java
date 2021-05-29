@@ -31,10 +31,13 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
     //private ContactsDetailDialogFragment.ContactsDetailCallback callback;
     private int topicId;
 
+    private List<ContactsEntity> contactsNamesList;
+
     public ContactsAdapter(@NonNull DiffUtil.ItemCallback<Contact> diffContactCallback,
-                           FragmentActivity activity, int topicId) {
+                           FragmentActivity activity, List<ContactsEntity> contactsNamesList, int topicId) {
         super(diffContactCallback);
         this.mActivity = activity;
+        this.contactsNamesList = contactsNamesList;
         this.topicId = topicId;
     }
 
@@ -47,18 +50,22 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
     }
 
 
+    /**猜想需要载入所有通讯录再进行排序 不然弄不了*/
     @Override
     public void onBindViewHolder(@NonNull ContactsAdapter.TopicViewHolder holder, int position) {
         Contact contact = getItem(position);
 
         if (showHeader(position)) {
             holder.getHeader().setVisibility(View.VISIBLE);
-            holder.getHeader().setText(contact.getContacts_name().charAt(0));
+            holder.getHeader().setText(contactsNamesList.get(position).getSortLetters());
         } else {
             holder.getHeader().setVisibility(View.GONE);
         }
-        holder.getTVName().setText(contact.getContacts_name());//setText方法看跳转
-        holder.getTVPhoneNumber().setText(contact.getContacts_phone_number());
+        /**之前set text是设置没有排序的通讯录 所以顺序是不对的 现在需要用list进行设置*/
+//        holder.getTVName().setText(contact.getContacts_name());//setText方法看跳转
+//        holder.getTVPhoneNumber().setText(contact.getContacts_phone_number());
+        holder.getTVName().setText(contactsNamesList.get(position).getName());
+        holder.getTVPhoneNumber().setText(contactsNamesList.get(position).getPhoneNumber());
         holder.setItemPosition(position);
     }
 
@@ -67,15 +74,13 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
      * 判断的方法是检查每个Contact的getContacts_name首字母是否相同
      *@author home
      *@time 2021/5/26 11:37
-    */
+     */
     private boolean showHeader(final int position) {
         if (position == 0) {
             return true;
         } else { //如果不是位于rv的0号位置，那么是可以去得到position-1的，不会为空
-            Contact contact_first = getItem(position);
-            Contact contact_second = getItem(position - 1);
-            if (contact_first.getContacts_name().charAt(0)
-                    != contact_second.getContacts_name().charAt(0)) {
+            if (!contactsNamesList.get(position - 1).getSortLetters().equals(
+                    contactsNamesList.get(position).getSortLetters())) {
                 return true;
             } else {
                 return false;
@@ -159,19 +164,26 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
 
         @Override
         public void onClick(View view) {
-            Contact contact = getItem(getAdapterPosition());//get specific contact in RecyclerView
-            CallDialogFragment callDialogFragment =
-                    CallDialogFragment.newInstance(contact.getContacts_name(),
-                            contact.getContacts_phone_number());
+            /**之前set text是设置没有排序的通讯录 所以顺序是不对的 现在需要用list进行设置*/
+//            Contact contact = getItem(getAdapterPosition());//get specific contact in RecyclerView
+//            CallDialogFragment callDialogFragment =
+//                    CallDialogFragment.newInstance(contact.getContacts_name(),
+//                            contact.getContacts_phone_number());
+            CallDialogFragment callDialogFragment = CallDialogFragment.newInstance(
+                    contactsNamesList.get(getAdapterPosition()).getName(),
+                    contactsNamesList.get(getAdapterPosition()).getPhoneNumber());
             callDialogFragment.show(mActivity.getSupportFragmentManager(),"callDialogFragment");
         }
 
         @Override
         public boolean onLongClick(View view) {
-            Contact contact = getItem(getAdapterPosition());//get specific contact in RecyclerView
-            ContactsDetailDialogFragment contactsDetailDialogFragment =
-                    ContactsDetailDialogFragment.newInstance(true, contact.getId(), contact.getContacts_name(),
-                            contact.getContacts_phone_number(), topicId);
+            /**之前set text是设置没有排序的通讯录 所以顺序是不对的 现在需要用list进行设置*/
+            ContactsDetailDialogFragment contactsDetailDialogFragment = ContactsDetailDialogFragment.newInstance(
+                    true,
+                    contactsNamesList.get(getAdapterPosition()).getContactsId(),
+                    contactsNamesList.get(getAdapterPosition()).getName(),
+                    contactsNamesList.get(getAdapterPosition()).getPhoneNumber(),
+                    topicId);
             contactsDetailDialogFragment.show(mActivity.getSupportFragmentManager(),"contactsDetailDialogFragment");
             return true;//注意true与false区别
         }
