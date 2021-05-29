@@ -2,35 +2,28 @@ package com.example.ourdiary.contacts;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentResultListener;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
+
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ourdiary.R;
 import com.example.ourdiary.db.room.contact_database.Contact;
 import com.example.ourdiary.db.room.contact_database.ContactViewModel;
-import com.example.ourdiary.db.room.diary_database.Diary;
 import com.example.ourdiary.shared.gui.LetterComparator;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import net.sourceforge.pinyin4j.PinyinHelper;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,7 +31,7 @@ public class ContactsActivity extends AppCompatActivity implements
         LatterSortLayout.OnTouchingLetterChangedListener {
 
     /**get_id*/
-    private int topicId=1;
+    private final int topicId=1;
 
     /**UI*/
     private RelativeLayout RL_contacts_content;
@@ -52,7 +45,7 @@ public class ContactsActivity extends AppCompatActivity implements
     /**RecyclerView*/
     private RecyclerView recyclerView_contacts;
     private ContactsAdapter contactsAdapter;
-    private LinearLayoutManager layoutManager;
+    //private LinearLayoutManager layoutManager;
 
     /**room*/
     private ContactViewModel mContactViewModel;
@@ -69,12 +62,11 @@ public class ContactsActivity extends AppCompatActivity implements
         TV_contact_short_sort = findViewById(R.id.tv_contact_short_sort);
         TV_contact_short_sort.setBackgroundResource(R.color.color_gray);
 
-        STL_contacts = findViewById(R.id.lsl_contacts);
+        STL_contacts = (LatterSortLayout) findViewById(R.id.lsl_contacts);
         STL_contacts.setSortTextView(TV_contact_short_sort);
         STL_contacts.setOnTouchingLetterChangedListener(this);
 
         fab_contact_add = findViewById(R.id.fab_contact_add);
-
 
         contactsNamesList = new ArrayList<>();
 
@@ -167,6 +159,7 @@ public class ContactsActivity extends AppCompatActivity implements
             }
         });
 
+
         /**动态获取livedata通讯录总量， 不过并没有必要这么写*/
 //        mContactViewModel.getSpecificTopicIdContactCount(1).observe(this, new Observer<Integer>() {
 //            @Override
@@ -201,10 +194,50 @@ public class ContactsActivity extends AppCompatActivity implements
         return sortString;
     }
 
-    @Override
-    public void onTouchingLetterChanged(String s) {
+        /*动态获取livedata通讯录总量， 不过并没有必要这么写*/
+//        mContactViewModel.getSpecificTopicIdContactCount(1).observe(this, new Observer<Integer>() {
+//            @Override
+//            public void onChanged(Integer integer) { //integer就是对应topic id通讯录的总数
+////              Log.d("test", "now the total contacts number is " + String.valueOf(integer));
+//                contactsNamesList.clear();//每次数据改变，都要重新填充一次list列表，让新的数据加载进去
+//            }
+//        });
 
     }
+
+    /**对列表进行排序*/
+    private void sortContacts() {
+        for (ContactsEntity contactsEntity : contactsNamesList) {
+            String sortString = contactsEntity.getName().substring(0, 1).toUpperCase();
+            sortContactsCN(contactsEntity, sortString);
+        }
+        Collections.sort(contactsNamesList, new LetterComparator());
+    }
+
+    /**根据中文进行排序*/
+    private String sortContactsCN(ContactsEntity contactsEntity, String sortString) {
+        if (sortString.matches("[\\u4E00-\\u9FA5]")) {
+            String[] arr = PinyinHelper.toHanyuPinyinStringArray(sortString.trim().charAt(0));
+            sortString = arr[0].substring(0, 1).toUpperCase();
+        }
+        if (sortString.matches("[A-Z]")) {
+            contactsEntity.setSortLetters(sortString.toUpperCase());
+        } else {
+            contactsEntity.setSortLetters("#");
+        }
+        return sortString;
+    }
+
+
+    /**Click on the sidebar to jump to the corresponding word position*/
+    @Override
+    public void onTouchingLetterChanged(String s) {
+        int position = contactsAdapter.getPositionForSection(s.charAt(0));
+        if (position != -1) {
+            recyclerView_contacts.getLayoutManager().scrollToPosition(position);
+        }
+    }
+
 
     /**
      *Initialize RecyclerView and add the Room observer to get contacts
@@ -213,7 +246,7 @@ public class ContactsActivity extends AppCompatActivity implements
     */
     private void initTopicAdapter() {
         recyclerView_contacts = findViewById(R.id.rv_contacts);
-        final ContactsAdapter contactsAdapter = new ContactsAdapter(new ContactsAdapter.ContactDiff(),
+        contactsAdapter = new ContactsAdapter(new ContactsAdapter.ContactDiff(),
                 this, contactsNamesList, topicId);
         recyclerView_contacts.setAdapter(contactsAdapter);
         recyclerView_contacts.setLayoutManager(new LinearLayoutManager(this));

@@ -1,7 +1,6 @@
 package com.example.ourdiary.contacts;
 
-import android.os.Bundle;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ourdiary.R;
 import com.example.ourdiary.db.room.contact_database.Contact;
-import com.example.ourdiary.db.room.contact_database.ContactViewModel;
+
 
 
 import java.util.List;
@@ -25,11 +24,12 @@ import java.util.List;
 
 public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicViewHolder> {
 
-    private FragmentActivity mActivity;//这有什么用
+    private final FragmentActivity mActivity;//这有什么用
 
-    //是否需要？
-    //private ContactsDetailDialogFragment.ContactsDetailCallback callback;
-    private int topicId;
+    private final int topicId;
+
+    private final List<ContactsEntity> contactsNamesList;
+
 
     private List<ContactsEntity> contactsNamesList;
 
@@ -40,6 +40,7 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
         this.contactsNamesList = contactsNamesList;
         this.topicId = topicId;
     }
+
 
     @NonNull
     @Override
@@ -53,7 +54,7 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
     /**猜想需要载入所有通讯录再进行排序 不然弄不了*/
     @Override
     public void onBindViewHolder(@NonNull ContactsAdapter.TopicViewHolder holder, int position) {
-        Contact contact = getItem(position);
+//        Contact contact = getItem(position);
 
         if (showHeader(position)) {
             holder.getHeader().setVisibility(View.VISIBLE);
@@ -61,7 +62,7 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
         } else {
             holder.getHeader().setVisibility(View.GONE);
         }
-        /**之前set text是设置没有排序的通讯录 所以顺序是不对的 现在需要用list进行设置*/
+        /*之前set text是设置没有排序的通讯录 所以顺序是不对的 现在需要用list进行设置*/
 //        holder.getTVName().setText(contact.getContacts_name());//setText方法看跳转
 //        holder.getTVPhoneNumber().setText(contact.getContacts_phone_number());
         holder.getTVName().setText(contactsNamesList.get(position).getName());
@@ -89,18 +90,17 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
     }
 
 
-//    public int getPositionForSection(char section) {
-//        for (int i = 0; i < getItemCount(); i++) {
-//            String sortStr = contactsNamesList.get(i).getSortLetters();
-//            char firstChar = sortStr.toUpperCase().charAt(0);
-//            if (firstChar == section) {
-//                return i;
-//            }
-//        }
-//        return -1;
-//
-//    }
-
+    /**Click on the sidebar to jump to the corresponding word position*/
+    public int getPositionForSection(char section) {
+        for (int i = 0; i < getItemCount(); i++) {
+            String sortStr = contactsNamesList.get(i).getSortLetters();
+            char firstChar = sortStr.toUpperCase().charAt(0);
+            if (firstChar == section) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
 
     public static class ContactDiff extends DiffUtil.ItemCallback<Contact> {
@@ -120,13 +120,13 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
             View.OnClickListener, View.OnLongClickListener {
 
         //Header
-        private TextView TV_contacts_item_header;
+        private final TextView TV_contacts_item_header;
 
         //Item
-        private LinearLayout LL_contacts_item_contant;
-        private ImageView IV_contacts_photo;
-        private TextView TV_contacts_name;
-        private TextView TV_contacts_phone_number;
+        private final LinearLayout LL_contacts_item_contant;
+        private final ImageView IV_contacts_photo;
+        private final TextView TV_contacts_name;
+        private final TextView TV_contacts_phone_number;
         private int itemPosition;
 
         protected TopicViewHolder(View view ){
@@ -164,7 +164,7 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
 
         @Override
         public void onClick(View view) {
-            /**之前set text是设置没有排序的通讯录 所以顺序是不对的 现在需要用list进行设置*/
+            /*之前set text是设置没有排序的通讯录 所以顺序是不对的 现在需要用list进行设置*/
 //            Contact contact = getItem(getAdapterPosition());//get specific contact in RecyclerView
 //            CallDialogFragment callDialogFragment =
 //                    CallDialogFragment.newInstance(contact.getContacts_name(),
@@ -177,7 +177,7 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
 
         @Override
         public boolean onLongClick(View view) {
-            /**之前set text是设置没有排序的通讯录 所以顺序是不对的 现在需要用list进行设置*/
+            /*之前set text是设置没有排序的通讯录 所以顺序是不对的 现在需要用list进行设置*/
             ContactsDetailDialogFragment contactsDetailDialogFragment = ContactsDetailDialogFragment.newInstance(
                     true,
                     contactsNamesList.get(getAdapterPosition()).getContactsId(),
