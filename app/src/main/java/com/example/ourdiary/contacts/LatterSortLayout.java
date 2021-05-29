@@ -100,7 +100,8 @@ public class LatterSortLayout extends LinearLayout {
         return true;
     }
 
-    public void setOnTouchingLetterChangedListener(OnTouchingLetterChangedListener onTouchingLetterChangedListener) {
+    public void setOnTouchingLetterChangedListener(
+            OnTouchingLetterChangedListener onTouchingLetterChangedListener) {
         this.onTouchingLetterChangedListener = onTouchingLetterChangedListener;
     }
 }
