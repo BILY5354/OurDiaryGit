@@ -159,6 +159,41 @@ public class ContactsActivity extends AppCompatActivity implements
             }
         });
 
+
+        /**动态获取livedata通讯录总量， 不过并没有必要这么写*/
+//        mContactViewModel.getSpecificTopicIdContactCount(1).observe(this, new Observer<Integer>() {
+//            @Override
+//            public void onChanged(Integer integer) { //integer就是对应topic id通讯录的总数
+////              Log.d("test", "now the total contacts number is " + String.valueOf(integer));
+//                contactsNamesList.clear();//每次数据改变，都要重新填充一次list列表，让新的数据加载进去
+//            }
+//        });
+
+    }
+
+    /**对列表进行排序*/
+    private void sortContacts() {
+        for (ContactsEntity contactsEntity : contactsNamesList) {
+            String sortString = contactsEntity.getName().substring(0, 1).toUpperCase();
+            sortContactsCN(contactsEntity, sortString);
+        }
+        Collections.sort(contactsNamesList, new LetterComparator());
+    }
+
+    /**根据中文进行排序*/
+    private String sortContactsCN(ContactsEntity contactsEntity, String sortString) {
+        if (sortString.matches("[\\u4E00-\\u9FA5]")) {
+            String[] arr = PinyinHelper.toHanyuPinyinStringArray(sortString.trim().charAt(0));
+            sortString = arr[0].substring(0, 1).toUpperCase();
+        }
+        if (sortString.matches("[A-Z]")) {
+            contactsEntity.setSortLetters(sortString.toUpperCase());
+        } else {
+            contactsEntity.setSortLetters("#");
+        }
+        return sortString;
+    }
+
         /*动态获取livedata通讯录总量， 不过并没有必要这么写*/
 //        mContactViewModel.getSpecificTopicIdContactCount(1).observe(this, new Observer<Integer>() {
 //            @Override

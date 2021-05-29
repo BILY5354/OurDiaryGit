@@ -31,6 +31,8 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
     private final List<ContactsEntity> contactsNamesList;
 
 
+    private List<ContactsEntity> contactsNamesList;
+
     public ContactsAdapter(@NonNull DiffUtil.ItemCallback<Contact> diffContactCallback,
                            FragmentActivity activity, List<ContactsEntity> contactsNamesList, int topicId) {
         super(diffContactCallback);
