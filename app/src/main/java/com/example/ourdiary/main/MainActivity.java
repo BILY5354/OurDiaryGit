@@ -35,6 +35,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             transaction.commit();
         }
 
+        /**使标actionBar隐藏*/
+        if (getSupportActionBar() != null){
+            getSupportActionBar().hide();
+        }
+
         //界面初始化的内容（位于底部的三）
         iv_main_setting = findViewById(R.id.IV_main_setting);
         iv_main_search = findViewById(R.id.iv_main_search);

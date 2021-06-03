@@ -31,6 +31,11 @@ public class ContactRepository {
         return  mContactDao.getSpecificTopicIdContactCount(ref_topic_id);
     }
 
+    /**模糊匹配查询 前后加入 % 是模糊匹配，不然按照整一个字段进行查找*/
+    public LiveData<List<Contact>> findContactsWithPattern(int ref_topic_id, String pattern) {
+        return mContactDao.findContactsWithPattern(ref_topic_id,"%" + pattern + "%");
+    }
+
     void insert (Contact contact) {
         ContactRoomDatabase.databaseWriteExecutor.execute( () -> {
             mContactDao.insertContacts(contact);

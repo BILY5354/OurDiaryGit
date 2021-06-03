@@ -28,8 +28,9 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
 
     private final int topicId;
 
-    private final List<ContactsEntity> contactsNamesList;
+    private List<ContactsEntity> contactsNamesList;
 
+    private boolean showQueryListSign = false;
 
     public ContactsAdapter(@NonNull DiffUtil.ItemCallback<Contact> diffContactCallback,
                            FragmentActivity activity, List<ContactsEntity> contactsNamesList, int topicId) {
@@ -39,6 +40,14 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
         this.topicId = topicId;
     }
 
+    public void setShowQueryListSign(boolean showQueryListSign) {
+        this.showQueryListSign = showQueryListSign;
+    }
+
+    public void setAllContacts(List<ContactsEntity> allContacts) {
+        contactsNamesList.clear();
+        this.contactsNamesList = allContacts;
+    }
 
     @NonNull
     @Override
@@ -52,19 +61,23 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
     /**猜想需要载入所有通讯录再进行排序 不然弄不了*/
     @Override
     public void onBindViewHolder(@NonNull ContactsAdapter.TopicViewHolder holder, int position) {
-//        Contact contact = getItem(position);
 
-        if (showHeader(position)) {
-            holder.getHeader().setVisibility(View.VISIBLE);
-            holder.getHeader().setText(contactsNamesList.get(position).getSortLetters());
+        if (showQueryListSign) {
+            Contact contact = getItem(position);
+            holder.getTVName().setText(contact.getContacts_name());//setText方法看跳转
+            holder.getTVPhoneNumber().setText(contact.getContacts_phone_number());
+
         } else {
-            holder.getHeader().setVisibility(View.GONE);
+
+            if (showHeader(position)) {
+                holder.getHeader().setVisibility(View.VISIBLE);
+                holder.getHeader().setText(contactsNamesList.get(position).getSortLetters());
+            } else {
+                holder.getHeader().setVisibility(View.GONE);
+            }
+            holder.getTVName().setText(contactsNamesList.get(position).getName());
+            holder.getTVPhoneNumber().setText(contactsNamesList.get(position).getPhoneNumber());
         }
-        /*之前set text是设置没有排序的通讯录 所以顺序是不对的 现在需要用list进行设置*/
-//        holder.getTVName().setText(contact.getContacts_name());//setText方法看跳转
-//        holder.getTVPhoneNumber().setText(contact.getContacts_phone_number());
-        holder.getTVName().setText(contactsNamesList.get(position).getName());
-        holder.getTVPhoneNumber().setText(contactsNamesList.get(position).getPhoneNumber());
         holder.setItemPosition(position);
     }
 
@@ -105,12 +118,14 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
 
         @Override
         public boolean areItemsTheSame(@NonNull Contact oldItem, @NonNull Contact newItem) {
-            return oldItem == newItem;
+            return oldItem.getId() == newItem.getId();
         }
 
         @Override
         public boolean areContentsTheSame(@NonNull Contact oldItem, @NonNull Contact newItem) {
-            return oldItem.getContacts_name().equals(newItem.getContacts_name());
+            return (oldItem.getContacts_name().equals(newItem.getContacts_name()))
+                    && (oldItem.getContacts_phone_number().equals(newItem.getContacts_phone_number()))
+                    && (oldItem.getContacts_contacts_ref_topic_id() == newItem.getContacts_contacts_ref_topic_id());
         }
     }
 
