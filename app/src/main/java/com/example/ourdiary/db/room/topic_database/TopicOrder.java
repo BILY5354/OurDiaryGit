@@ -22,7 +22,7 @@ public class TopicOrder {
 
     @PrimaryKey(autoGenerate = true)
     private int orderId;
-    @ColumnInfo(name = "topic_order_ref_topic_id")
+    @ColumnInfo(name = "topic_order_ref_topic_id", index = true)
     private int topic_order_ref_topic_id;
     @ColumnInfo(name = "topic_order_order_in_parent")
     private int topic_order_order_in_parent;
