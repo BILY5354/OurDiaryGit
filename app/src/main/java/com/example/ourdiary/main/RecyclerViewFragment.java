@@ -1,4 +1,4 @@
-package com.example.ourdiary.main.recycleview;
+package com.example.ourdiary.main;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ourdiary.R;
-import com.example.ourdiary.main.MainActivity;
 
 
 public class RecyclerViewFragment extends Fragment {

@@ -1,4 +1,4 @@
-package com.example.ourdiary.main.recycleview;
+package com.example.ourdiary.main;
 
 import android.content.Intent;
 import android.util.Log;
@@ -81,12 +81,26 @@ public class MainPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         else {
             ((MemoViewHolder)holder).getTv_row_memo_item().setText(mDataSet[position]);
         }
+        /** Click the corresponding icon to jump the corresponding page. */
+        holder.itemView.setOnClickListener(view -> {
+            Log.d("test","click" + position);
+            jumpOthersPage(getItemViewType(position), position);
+        });
+        /*
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("test","click" + position);
                 jumpOthersPage(getItemViewType(position), position);
             }
+        });
+        */
+        /** Long click the each recyclerview item can go to the edit(detail) dialog fragment. */
+        holder.itemView.setOnLongClickListener(view -> {
+            TopicDetailDialogFragment createTopicDetailDialogFragment =
+                    TopicDetailDialogFragment.newInstance();
+            createTopicDetailDialogFragment.show(activity.getSupportFragmentManager(), "TopicDetailDialogFragment");
+            return true;    // caution the different between true and false
         });
     }
 
@@ -104,8 +118,8 @@ public class MainPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void jumpOthersPage(final int type, int pos) {
         switch (type) {
             case TYPE_CONTACTS:
-                Intent goContatsPageIntent = new Intent(activity, ContactsActivity.class);
-                activity.startActivity(goContatsPageIntent);
+                Intent goContactsPageIntent = new Intent(activity, ContactsActivity.class);
+                activity.startActivity(goContactsPageIntent);
                 break;
             case TYPE_DIARY:
                 Intent goDiaryPageIntent = new Intent(activity, DiaryActivity.class);
@@ -136,6 +150,8 @@ public class MainPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tv_row_contacts_item = itemView.findViewById(R.id.tv_row_contacts_item);
         }
 
+        public ImageView getIv_row_memo_item() {return  iv_row_contacts_item;}
+
         public TextView getTv_row_contacts_item() {
             return tv_row_contacts_item;
         }
@@ -158,6 +174,8 @@ public class MainPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tv_row_diary_item = itemView.findViewById(R.id.tv_row_diary_item);
         }
 
+        public ImageView getIv_row_memo_item() {return  iv_row_diary_item;}
+
         public TextView getTv_row_diary_item() {
             return tv_row_diary_item;
         }
@@ -179,6 +197,8 @@ public class MainPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             iv_row_memo_item = itemView.findViewById(R.id.iv_row_memo_item);
             tv_row_memo_item = itemView.findViewById(R.id.tv_row_memo_item);
         }
+
+        public ImageView getIv_row_memo_item() {return  iv_row_memo_item;}
 
         public TextView getTv_row_memo_item() {
             return tv_row_memo_item;

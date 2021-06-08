@@ -16,7 +16,7 @@
 //
 //import com.example.ourdiary.R;
 //import com.example.ourdiary.db.mydiary.DBManager;
-//import com.example.ourdiary.main.recycleview.MainPageAdapter;
+//import com.example.ourdiary.main.MainPageAdapter;
 //import com.example.ourdiary.shared.EditMode;
 //
 //import java.util.List;

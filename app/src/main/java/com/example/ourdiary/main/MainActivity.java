@@ -2,7 +2,6 @@ package com.example.ourdiary.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,8 +10,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ourdiary.R;
-import com.example.ourdiary.db.room.learning.WordListAdapter;
-import com.example.ourdiary.main.recycleview.RecyclerViewFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 

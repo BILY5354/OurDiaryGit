@@ -32,7 +32,6 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
 
     private boolean showQueryListSign = false;
 
-    private List<ContactsEntity> contactsNamesList;
 
     public ContactsAdapter(@NonNull DiffUtil.ItemCallback<Contact> diffContactCallback,
                            FragmentActivity activity, List<ContactsEntity> contactsNamesList, int topicId) {
@@ -42,6 +41,9 @@ public class ContactsAdapter extends ListAdapter<Contact,ContactsAdapter.TopicVi
         this.topicId = topicId;
     }
 
+    /**
+     * The setShowQueryListSign and SetAllContacts function are solved the bug Contact page, but failed.
+     * */
     public void setShowQueryListSign(boolean showQueryListSign) {
         this.showQueryListSign = showQueryListSign;
     }

@@ -63,7 +63,10 @@ public class MainSettingDialogFragment extends BottomSheetDialogFragment impleme
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.IV_main_setting_add_topic:
-                Log.d("MainSettingDFragment","成功点击第一个图标");
+                TopicDetailDialogFragment createTopicDetailDialogFragment =
+                        TopicDetailDialogFragment.newInstance();
+                createTopicDetailDialogFragment.show(activity.getSupportFragmentManager(), "TopicDetailDialogFragment");
+                dismiss();
                 break;
             case R.id.IV_main_setting_setting_page:
                 Log.d("MainSettingDFragment","成功点击第二个图标");
