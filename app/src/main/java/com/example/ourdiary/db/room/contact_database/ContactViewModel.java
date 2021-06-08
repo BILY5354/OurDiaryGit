@@ -27,6 +27,11 @@ public class ContactViewModel extends AndroidViewModel {
     public LiveData<Integer> getSpecificTopicIdContactCount(int ref_topic_id) {
         return contactRepository.getSpecificTopicIdContactCount(ref_topic_id); }
 
+    /**模糊匹配查询 前后加入 % 是模糊匹配，不然按照整一个字段进行查找*/
+    public LiveData<List<Contact>> findContactsWithPattern(int ref_topic_id, String pattern) {
+        return contactRepository.findContactsWithPattern(ref_topic_id, pattern);
+    }
+
     public void insert(Contact contact) { contactRepository.insert(contact); }
 
     public void deleteOne(Contact contact) { contactRepository.deleteOne(contact); }

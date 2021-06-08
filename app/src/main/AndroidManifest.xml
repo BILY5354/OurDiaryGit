@@ -23,14 +23,15 @@
         android:theme="@style/AppTheme">
 <!--        <activity android:name=".db.room.learning.NewWordActivity"></activity>-->
         <activity android:name=".other_activity.SettingActivity" />
-        <activity android:name=".contacts.ContactsActivity" />
+        <activity android:name=".contacts.ContactsActivity"
+            android:windowSoftInputMode="adjustPan"/>
 <!--        <activity android:name=".memo.MemoActivity" />-->
-        <activity android:name=".entries.DiaryActivity" />
-        <activity android:name=".main.MainActivity" >
-
+        <activity android:name=".entries.DiaryActivity"
+            android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".main.MainActivity"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter> <!-- 这个intent标签就是设置开始页面的 -->
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

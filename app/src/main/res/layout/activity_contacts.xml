@@ -35,7 +35,7 @@
                 android:textSize="20dp" />
         </RelativeLayout>
 
-
+        <!--> 使用options menu了
         <EditText
             android:id="@+id/EDT_main_contacts_search"
             android:layout_width="match_parent"
@@ -48,7 +48,9 @@
             android:drawableLeft="@drawable/iv_main_search"
             android:drawableTint="@color/color_black"
             android:textColor="@android:color/black" />
+       <-->
     </LinearLayout>
+
     <!--end top_bar -->
 
 
