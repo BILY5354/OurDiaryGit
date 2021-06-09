@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.RoomWarnings;
 import androidx.room.Update;
 
 import java.util.List;
@@ -21,7 +22,9 @@ public interface TopicOrderDao {
     @Delete
     void deleteTopicOrder(TopicOrder... topicOrders);
 
-    @Query("SELECT * FROM TopicEntry " +
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
+    @Query("SELECT * " +
+            "FROM TopicEntry " +
             "LEFT OUTER JOIN TopicOrder " +
             "ON TopicEntry.entryId = TopicOrder.topic_order_ref_topic_id " +
             "ORDER BY TopicOrder.topic_order_order_in_parent DESC")
