@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ourdiary.R;
+import com.example.ourdiary.db.room.topic_database.TopicEntry;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -46,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         iv_main_setting.setOnClickListener(this);
         iv_main_search.setOnClickListener(this);
         et_main_search.setOnClickListener(this);
-
 
 
 //        TopicEntry topicEntry = new TopicEntry("second", 1, null, null, null);

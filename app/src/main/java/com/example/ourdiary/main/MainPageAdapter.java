@@ -60,6 +60,11 @@ public class MainPageAdapter extends ListAdapter<TopicEntry, MainPageAdapter.Mai
     }
 
 
+    /**
+     *Previously, three VHs were used to display, but this is not necessary. As long as the IV and TV
+        are public, the corresponding icons can be displayed according to their types.
+     *@time 2021/6/14 19:20
+    */
     @Override
     public void onBindViewHolder(@NonNull MainPageViewHolder holder, final int position) {
         TopicEntry topicEntry = getItem(position);

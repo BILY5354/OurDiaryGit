@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ourdiary.R;
+import com.example.ourdiary.db.room.topic_database.TopicEntry;
 import com.example.ourdiary.db.room.topic_database.TopicViewModel;
 
 
@@ -28,10 +29,7 @@ public class MainPageRecyclerViewFragment extends Fragment {
     private MainActivity activity;
     private TopicViewModel mTopicViewModel;
 
-    public MainPageRecyclerViewFragment(MainActivity activity) {
-        this.activity = activity;
-
-    }
+    public MainPageRecyclerViewFragment(MainActivity activity) { this.activity = activity; }
 
     private enum LayoutManagerType {
         LINEAR_LAYOUT_MANAGER,
@@ -101,7 +99,6 @@ public class MainPageRecyclerViewFragment extends Fragment {
             }
         });
 
-
         //Observe the data
         mTopicViewModel.getAllTopicEntriesLive().observe(activity, topicEntries -> {
             mAdapter.submitList(topicEntries);
@@ -146,17 +143,5 @@ public class MainPageRecyclerViewFragment extends Fragment {
         super.onSaveInstanceState(savedInstanceState);
     }
 
-//    /**
-//     * Generates Strings for RecyclerView's adapter. This data would usually come
-//     * from a local content provider or remote server.
-//     */
-//    private void initDataset() {
-//        mDataset = new String[DATASET_COUNT];
-//        int sign = 0;
-//        for(int i = 0; i < DATASET_COUNT; i++) {
-//            if( i % 3 == 0) mDataset[i] = "This is Contacts # " + ++sign;
-//            else if(i % 3 == 1)  mDataset[i] = "This is Diary #" + sign;
-//            else if( i % 3 == 2) mDataset[i] = "This is Memo #" + sign;
-//        }
-//    }
+
 }
