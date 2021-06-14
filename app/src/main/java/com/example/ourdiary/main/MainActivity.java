@@ -2,14 +2,19 @@ package com.example.ourdiary.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ourdiary.R;
+import com.example.ourdiary.db.room.topic_database.TopicEntry;
+import com.example.ourdiary.db.room.topic_database.TopicOrder;
+import com.example.ourdiary.db.room.topic_database.TopicViewModel;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -17,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText et_main_search;
     private static String TAG = "MainActivity";
 
+    /** Room*/
+    private TopicViewModel mTopicViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         et_main_search.setOnClickListener(this);
 
 
+        mTopicViewModel = new ViewModelProvider(this).get(TopicViewModel.class);
+        TopicEntry topicEntry = new TopicEntry("first", 1, 0, null, null);
+        TopicOrder topicOrder = new TopicOrder(1,0);
+        mTopicViewModel.insertTopicEntry(topicEntry);
+        mTopicViewModel.insertTopicOrder(topicOrder);
+        Log.d("test", String.valueOf(mTopicViewModel.getAllTopicEntryAndOrder().getValue()));
     }
 
 

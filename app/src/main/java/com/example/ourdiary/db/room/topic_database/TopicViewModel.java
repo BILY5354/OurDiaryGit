@@ -18,7 +18,40 @@ public class TopicViewModel extends AndroidViewModel{
         topicRepository = new TopicRepository(application);
     }
 
-    public LiveData<List<TopicEntryAndOrder>> getAllTopicEntryAndOrder() {
-        return topicRepository.getAllTopicEntryAndOrder();
+
+    /** start TopicEntry */
+    public void insertTopicEntry(TopicEntry topicEntry) {
+        topicRepository.insertTopicEntry(topicEntry);
     }
+
+    public void deleteOneTopicEntry(TopicEntry topicEntry) {
+        topicRepository.deleteOneTopicEntry(topicEntry);
+    }
+
+    public void updateTopicEntry(TopicEntry topicEntry) {
+        topicRepository.updateTopicEntry(topicEntry);
+    }
+
+    public LiveData<List<TopicEntryAndOrder>> getAllTopicEntryAndOrder() {
+        return topicRepository.getTopicEntryAndOrder();
+    }
+    /** end TopicEntry */
+
+
+    /** start TopicOrder */
+    public void insertTopicOrder(TopicOrder topicOrder) {
+        topicRepository.insertTopicOrder(topicOrder);
+    }
+
+    public void deleteOneTopicOrder(TopicOrder topicOrder) {
+        topicRepository.deleteOneTopicOrder(topicOrder);
+    }
+
+    public void updateTopicOrder(TopicOrder topicOrder) {
+        topicRepository.updateTopicOrder(topicOrder);
+    }
+    /** end TopicOrder */
+
+
+
 }

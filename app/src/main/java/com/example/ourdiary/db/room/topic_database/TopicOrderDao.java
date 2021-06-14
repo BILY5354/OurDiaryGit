@@ -22,13 +22,13 @@ public interface TopicOrderDao {
     @Delete
     void deleteTopicOrder(TopicOrder... topicOrders);
 
-    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    @Query("SELECT * " +
-            "FROM TopicEntry " +
-            "LEFT OUTER JOIN TopicOrder " +
-            "ON TopicEntry.entryId = TopicOrder.topic_order_ref_topic_id " +
-            "ORDER BY TopicOrder.topic_order_order_in_parent DESC")
-    LiveData<List<TopicEntryAndOrder>> getAllTopicEntryAndOrder();//this is the function named getSelectTopic in myDiary
+//    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
+//    @Query("SELECT * " +
+//            "FROM TopicEntry " +
+//            "LEFT OUTER JOIN TopicOrder " +
+//            "ON TopicEntry.entryId = TopicOrder.topic_order_ref_topic_id " +
+//            "ORDER BY TopicOrder.topic_order_order_in_parent DESC")
+//    LiveData<List<TopicEntryAndOrder>> getAllTopicEntryAndOrder();//this is the function named getSelectTopic in myDiary
 
 
 }

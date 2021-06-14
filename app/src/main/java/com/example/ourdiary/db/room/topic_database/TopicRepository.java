@@ -16,34 +16,7 @@ public class TopicRepository {
         TopicRoomDatabase db = TopicRoomDatabase.getTopicRoomDatabase(application);
         mTopicEntryDao = db.topicEntryDao();
         mTopicOrderDao = db.topicOrderDao();
-
     }
-
-
-    /** start TopicOrder */
-    void insertTopicOrder (TopicOrder topicOrder) {
-        TopicRoomDatabase.databaseWriteExecutor.execute( () -> {
-            mTopicOrderDao.insertTopicOrder(topicOrder);
-        });
-    }
-
-    void updateTopicOrder (TopicOrder topicOrder) {
-        TopicRoomDatabase.databaseWriteExecutor.execute( () -> {
-            mTopicOrderDao.updateTopicOrder(topicOrder);
-        });
-    }
-
-    void deleteOneTopicOrder (TopicOrder topicOrder) {
-        TopicRoomDatabase.databaseWriteExecutor.execute( () -> {
-            mTopicOrderDao.deleteTopicOrder(topicOrder);
-        });
-    }
-
-    public LiveData<List<TopicEntryAndOrder>> getAllTopicEntryAndOrder() {
-        //this is the function named getSelectTopic in myDiary
-        return mTopicOrderDao.getAllTopicEntryAndOrder();
-    }
-    /** end TopicOrder */
 
 
     /** start TopicEntry */
@@ -62,6 +35,32 @@ public class TopicRepository {
     void deleteOneTopicEntry (TopicEntry topicEntry) {
         TopicRoomDatabase.databaseWriteExecutor.execute( () -> {
             mTopicEntryDao.deleteTopicEntry(topicEntry);
+        });
+    }
+
+    public LiveData<List<TopicEntryAndOrder>> getTopicEntryAndOrder() {
+        //this is the function named getSelectTopic in myDiary
+        return mTopicEntryDao.getTopicEntryAndOrder();
+    }
+    /** end TopicOrder */
+
+
+    /** start TopicOrder */
+    void insertTopicOrder (TopicOrder topicOrder) {
+        TopicRoomDatabase.databaseWriteExecutor.execute( () -> {
+            mTopicOrderDao.insertTopicOrder(topicOrder);
+        });
+    }
+
+    void updateTopicOrder (TopicOrder topicOrder) {
+        TopicRoomDatabase.databaseWriteExecutor.execute( () -> {
+            mTopicOrderDao.updateTopicOrder(topicOrder);
+        });
+    }
+
+    void deleteOneTopicOrder (TopicOrder topicOrder) {
+        TopicRoomDatabase.databaseWriteExecutor.execute( () -> {
+            mTopicOrderDao.deleteTopicOrder(topicOrder);
         });
     }
     /** end TopicOrder */

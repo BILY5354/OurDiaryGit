@@ -2,31 +2,25 @@ package com.example.ourdiary.db.room.topic_database;
 
 
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
+import androidx.room.Relation;
 
+import java.util.List;
+
+/**
+ * The TopicEntry and TopicEntry is one to many relationships. Because entry_id is the parent entity
+ *  that corresponds to two entities in TopicOrder which is called topic_order_ref_topic_id and
+ *  topic_order_order_in_parent.
+ * So, we need to define one-to-many relationships.
+ *@time 2021/6/14 1:55
+*/
 public class TopicEntryAndOrder {
 
-    public int entryId;
-
-    @ColumnInfo(name="topic_name")
-    public String topic_name;
-
-    @ColumnInfo(name="topic_type")
-    public int topic_type;
-
-    @ColumnInfo(name="topic_order")
-    public int topic_order;
-
-    @ColumnInfo(name="topic_subtitle")
-    public String topic_subtitle;
-
-    @ColumnInfo(name="topic_color")
-    public Long topic_color;
-
-    @ColumnInfo(name="topic_order_ref_topic_id")
-    public int topic_order_ref_topic_id;
-
-    @ColumnInfo(name="topic_order_order_in_parent")
-    public int topic_order_order_in_parent;
-
+    @Embedded public TopicEntry topicEntry;
+    @Relation(
+            parentColumn =  "entryId",
+            entityColumn = "topic_order_ref_topic_id"
+    )
+    public List<TopicOrder> topicOrders;
 
 }
