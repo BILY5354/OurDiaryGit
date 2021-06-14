@@ -2,39 +2,34 @@ package com.example.ourdiary.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ourdiary.R;
-import com.example.ourdiary.db.room.topic_database.TopicEntry;
-import com.example.ourdiary.db.room.topic_database.TopicOrder;
-import com.example.ourdiary.db.room.topic_database.TopicViewModel;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ImageView iv_main_setting,iv_main_search;
     private EditText et_main_search;
-    private static String TAG = "MainActivity";
 
-    /** Room*/
-    private TopicViewModel mTopicViewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         //显示日记，通讯录、Memo的rv的Fragment
         if(savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager()
                     .beginTransaction();
-            RecyclerViewFragment fragment = new RecyclerViewFragment(this);
+            MainPageRecyclerViewFragment fragment = new MainPageRecyclerViewFragment(this);
             transaction.replace(R.id.sample_content_fragment,fragment);
             transaction.commit();
         }
@@ -53,12 +48,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         et_main_search.setOnClickListener(this);
 
 
-        mTopicViewModel = new ViewModelProvider(this).get(TopicViewModel.class);
-        TopicEntry topicEntry = new TopicEntry("first", 1, 0, null, null);
-        TopicOrder topicOrder = new TopicOrder(1,0);
-        mTopicViewModel.insertTopicEntry(topicEntry);
-        mTopicViewModel.insertTopicOrder(topicOrder);
-        Log.d("test", String.valueOf(mTopicViewModel.getAllTopicEntryAndOrder().getValue()));
+
+//        TopicEntry topicEntry = new TopicEntry("second", 1, null, null, null);
+//        TopicOrder topicOrder = new TopicOrder(2,1);
+//        mTopicViewModel.insertTopicEntry(topicEntry);
+//        mTopicViewModel.insertTopicOrder(topicOrder);
+//        mTopicViewModel.getAllTopicEntriesLive().observe(this, new Observer<List<TopicEntry>>() {
+//            @Override
+//            public void onChanged(List<TopicEntry> topicEntries) {
+//                for (int i = 0; i < topicEntries.size(); i++) {
+//                    Log.d("test", topicEntries.get(i).getTopic_name());
+//                }
+//            }
+//        });
+//        mTopicViewModel.getAllTopicEntryAndOrder().observe(this, new Observer<List<TopicEntryAndOrder>>() {
+//            @Override
+//            public void onChanged(List<TopicEntryAndOrder> topicEntryAndOrders) {
+//                Log.d("test", String.valueOf(topicEntryAndOrders.size()));
+//                for (int i = 0; i < topicEntryAndOrders.size(); i++) {
+//                    Log.d("test","entry is:\t" + String.valueOf(topicEntryAndOrders.get(i).getTopicEntry()) +
+//                            "order is:\t" + topicEntryAndOrders.get(i).getTopicOrders());
+//                }
+//            }
+//        });
     }
 
 

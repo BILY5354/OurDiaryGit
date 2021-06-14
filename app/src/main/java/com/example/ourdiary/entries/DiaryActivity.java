@@ -37,6 +37,11 @@ public class DiaryActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary);
 
+        /**使标actionBar隐藏*/
+        if (getSupportActionBar() != null){
+            getSupportActionBar().hide();
+        }
+
         if(savedInstanceState != null) {
             currentPosition = savedInstanceState.getInt(KEY_CURRENT_POSITION,0);
             // Return here to prevent adding additional GridFragments when changing orientation.

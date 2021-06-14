@@ -60,7 +60,6 @@ public class ContactsActivity extends AppCompatActivity implements
     private List<ContactsEntity> contactsNamesList;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,8 +152,6 @@ public class ContactsActivity extends AppCompatActivity implements
 
                 contactsNamesList = sortContacts(contactsNamesList);
 
-
-
             }
         });
 
@@ -208,7 +205,7 @@ public class ContactsActivity extends AppCompatActivity implements
 
 
     /**
-     *Initialize RecyclerView and add the Room observer to get contacts and set the listener for fab
+     * Initialize RecyclerView and add the Room observer to get contacts and set the listener for fab
      *@author home
      *@time 2021/5/23 12:26
     */

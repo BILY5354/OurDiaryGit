@@ -22,6 +22,9 @@ public interface TopicEntryDao {
     @Delete
     void deleteTopicEntry(TopicEntry... topicEntries);
 
+    @Query("SELECT * FROM TopicEntry")
+    LiveData<List<TopicEntry>> getAllTopicEntriesLive();
+
     @Transaction
     @Query("SELECT * FROM TopicEntry")
     LiveData<List<TopicEntryAndOrder>> getTopicEntryAndOrder();

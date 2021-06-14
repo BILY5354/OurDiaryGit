@@ -15,13 +15,13 @@ public class TopicEntry {
     @ColumnInfo(name = "topic_type")
     private int topic_type;
     @ColumnInfo(name = "topic_order")
-    private int topic_order;
+    private String topic_order;
     @ColumnInfo(name = "topic_subtitle")
     private String topic_subtitle;
     @ColumnInfo(name = "topic_color")
     private Long topic_color;
 
-    public TopicEntry(String topic_name, int topic_type, int topic_order,
+    public TopicEntry(String topic_name, int topic_type, String topic_order,
                       String topic_subtitle, Long topic_color) {
         this.topic_name = topic_name;
         this.topic_type = topic_type;
@@ -54,11 +54,11 @@ public class TopicEntry {
         this.topic_type = topic_type;
     }
 
-    public int getTopic_order() {
+    public String getTopic_order() {
         return topic_order;
     }
 
-    public void setTopic_order(int topic_order) {
+    public void setTopic_order(String topic_order) {
         this.topic_order = topic_order;
     }
 

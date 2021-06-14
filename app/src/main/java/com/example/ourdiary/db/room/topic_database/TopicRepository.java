@@ -10,12 +10,13 @@ public class TopicRepository {
 
     private TopicOrderDao mTopicOrderDao;
     private TopicEntryDao mTopicEntryDao;
-    private LiveData<List<TopicEntryAndOrder>> mAllTopicEntryAndOrder;
+    private LiveData<List<TopicEntry>> mAllTopicEntriesLive;
 
     TopicRepository(Application application) {
         TopicRoomDatabase db = TopicRoomDatabase.getTopicRoomDatabase(application);
         mTopicEntryDao = db.topicEntryDao();
         mTopicOrderDao = db.topicOrderDao();
+        mAllTopicEntriesLive = mTopicEntryDao.getAllTopicEntriesLive();
     }
 
 
@@ -36,6 +37,10 @@ public class TopicRepository {
         TopicRoomDatabase.databaseWriteExecutor.execute( () -> {
             mTopicEntryDao.deleteTopicEntry(topicEntry);
         });
+    }
+
+    public LiveData<List<TopicEntry>> getAllTopicEntriesLive() {
+        return mAllTopicEntriesLive;
     }
 
     public LiveData<List<TopicEntryAndOrder>> getTopicEntryAndOrder() {

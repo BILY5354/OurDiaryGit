@@ -8,7 +8,11 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-
+/**
+ *
+ *@author home
+ *@time 2021/6/14 14:25
+*/
 public class TopicViewModel extends AndroidViewModel{
 
     private TopicRepository topicRepository;
@@ -30,6 +34,10 @@ public class TopicViewModel extends AndroidViewModel{
 
     public void updateTopicEntry(TopicEntry topicEntry) {
         topicRepository.updateTopicEntry(topicEntry);
+    }
+
+    public LiveData<List<TopicEntry>> getAllTopicEntriesLive() {
+        return topicRepository.getAllTopicEntriesLive();
     }
 
     public LiveData<List<TopicEntryAndOrder>> getAllTopicEntryAndOrder() {

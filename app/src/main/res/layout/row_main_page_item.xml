@@ -6,20 +6,19 @@
     android:layout_marginRight="16dp"
     android:layout_gravity="center_vertical">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/iv_row_contacts_item"
+            android:id="@+id/iv_row_main_page_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/iv_new_contacts" />
+            android:src="@drawable/iv_diary" />
 
         <TextView
-            android:id="@+id/tv_row_contacts_item"
-            android:layout_toRightOf="@+id/iv_row_contacts_item"
+            android:id="@+id/tv_row_main_page_item"
+            android:layout_toRightOf="@+id/iv_row_main_page_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/element_text"
@@ -27,6 +26,5 @@
             android:textColor="@color/color_black"/>
 
     </RelativeLayout>
-
 
 </FrameLayout>

@@ -13,11 +13,12 @@ import static androidx.room.ForeignKey.CASCADE;
  *@author home
  *@time 2021/6/8 17:27
 */
-@Entity(foreignKeys = @ForeignKey(
-        entity = TopicEntry.class,
-        parentColumns = "entryId",
-        childColumns = "topic_order_ref_topic_id",
-        onDelete = CASCADE))
+//@Entity(foreignKeys = @ForeignKey(
+//        entity = TopicEntry.class,
+//        parentColumns = "entryId",
+//        childColumns = "topic_order_ref_topic_id",
+//        onDelete = CASCADE))
+@Entity
 public class TopicOrder {
 
     @PrimaryKey(autoGenerate = true)

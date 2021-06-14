@@ -43,7 +43,7 @@ public abstract class TopicRoomDatabase extends RoomDatabase {
                 TopicEntryDao entryDao = INSTANCE.topicEntryDao();
                 TopicOrderDao orderDao = INSTANCE.topicOrderDao();
 
-                TopicEntry topicEntry = new TopicEntry("first", 1, 0, null, null);
+                TopicEntry topicEntry = new TopicEntry("first", 1, null, null, null);
                 TopicOrder topicOrder = new TopicOrder(1,0);
                 entryDao.insertTopicEntry(topicEntry);
                 orderDao.insertTopicOrder(topicOrder);

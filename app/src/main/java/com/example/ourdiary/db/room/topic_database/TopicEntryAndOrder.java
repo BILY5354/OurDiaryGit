@@ -23,4 +23,19 @@ public class TopicEntryAndOrder {
     )
     public List<TopicOrder> topicOrders;
 
+    public TopicEntry getTopicEntry() {
+        return topicEntry;
+    }
+
+    public void setTopicEntry(TopicEntry topicEntry) {
+        this.topicEntry = topicEntry;
+    }
+
+    public List<TopicOrder> getTopicOrders() {
+        return topicOrders;
+    }
+
+    public void setTopicOrders(List<TopicOrder> topicOrders) {
+        this.topicOrders = topicOrders;
+    }
 }

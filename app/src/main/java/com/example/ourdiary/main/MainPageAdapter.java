@@ -1,7 +1,7 @@
 package com.example.ourdiary.main;
 
 import android.content.Intent;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,52 +9,42 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ourdiary.R;
 import com.example.ourdiary.contacts.ContactsActivity;
+import com.example.ourdiary.db.room.topic_database.TopicEntry;
+import com.example.ourdiary.db.room.topic_database.TopicViewModel;
 import com.example.ourdiary.entries.DiaryActivity;
-import com.example.ourdiary.main.MainActivity;
 
-public class MainPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final String TAG = "CustomAdapter";
-    private String[] mDataSet;
-    private OnItemClickListener mListener;
-    private MainActivity activity;
+public class MainPageAdapter extends ListAdapter<TopicEntry, MainPageAdapter.MainPageViewHolder> {
+
+
+    private final MainActivity activity;
+    private final TopicViewModel mTopicViewModel;
 
     final int TYPE_CONTACTS = 0;
     final int TYPE_DIARY = 1;
     final int TYPE_MEMO = 2;
 
 
-    public MainPageAdapter(MainActivity activity, String[] dataset, OnItemClickListener listener) {
+    public MainPageAdapter(@NonNull DiffUtil.ItemCallback<TopicEntry> diffCallback, MainActivity activity,
+                           TopicViewModel mTopicViewModel) {
+        super(diffCallback);
         this.activity = activity;
-        this.mDataSet = dataset;
-        this.mListener = listener;
+        this.mTopicViewModel = mTopicViewModel;
     }
 
 
-    /**
-     * 0显示通讯率 1显示日记 3显示memo
-     *@author home
-     *@time 2021/3/28 10:17
-     */
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if(viewType == 0) {
-            return  new ContactsViewHolder(LayoutInflater.from
-                    (parent.getContext()).inflate(R.layout.row_contacts_item, parent, false));
-        }
-        else if(viewType == 1) {
-            return new DiaryViewHolder(LayoutInflater.from
-                    (parent.getContext()).inflate(R.layout.row_diary_item, parent, false));
-        }
-        else {
-            return new MemoViewHolder(LayoutInflater.from
-                    (parent.getContext()).inflate(R.layout.row_memo_item,parent,false));
-        }
+    public MainPageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+       return new MainPageViewHolder(LayoutInflater.from(parent.getContext())
+               .inflate(R.layout.row_main_page_item, parent, false));
+
     }
 
     /**
@@ -71,20 +61,26 @@ public class MainPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-        if(getItemViewType(position) == 0) {
-            ((ContactsViewHolder)holder).getTv_row_contacts_item().setText(mDataSet[position]);
+    public void onBindViewHolder(@NonNull MainPageViewHolder holder, final int position) {
+        TopicEntry topicEntry = getItem(position);
+
+        //Log.d("test","id is:\t" + topicEntry.getEntryId() + "\tnow in the adapter:\t" + String.valueOf(topicEntry.getTopic_name()));
+        if(topicEntry.getTopic_type() == 0) {
+            holder.getIv_row_memo_item().setImageResource(R.drawable.iv_new_contacts);
+            holder.getTv_row_memo_item().setText(topicEntry.getTopic_name());
         }
-        else if(getItemViewType(position) == 1) {
-            ((DiaryViewHolder)holder).getTv_row_diary_item().setText(mDataSet[position]);
+        else if(topicEntry.getTopic_type() == 1) {
+            holder.getIv_row_memo_item().setImageResource(R.drawable.iv_new_diary);
+            holder.getTv_row_memo_item().setText(topicEntry.getTopic_name());
         }
-        else {
-            ((MemoViewHolder)holder).getTv_row_memo_item().setText(mDataSet[position]);
+        else if(topicEntry.getTopic_type() == 2){
+            holder.getIv_row_memo_item().setImageResource(R.drawable.iv_tag);
+            holder.getTv_row_memo_item().setText(topicEntry.getTopic_name());
         }
-        /** Click the corresponding icon to jump the corresponding page. */
+        //** Click the corresponding icon to jump the corresponding page.
         holder.itemView.setOnClickListener(view -> {
-            Log.d("test","click" + position);
-            jumpOthersPage(getItemViewType(position), position);
+            //Log.d("test","click" + position);
+            jumpOthersPage(getItemViewType(topicEntry.getTopic_type()));
         });
         /*
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +91,7 @@ public class MainPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             }
         });
         */
-        /** Long click the each recyclerview item can go to the edit(detail) dialog fragment. */
+        // Long click the each recyclerview item can go to the edit(detail) dialog fragment.
         holder.itemView.setOnLongClickListener(view -> {
             TopicDetailDialogFragment createTopicDetailDialogFragment =
                     TopicDetailDialogFragment.newInstance();
@@ -104,9 +100,17 @@ public class MainPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         });
     }
 
-    @Override
-    public int getItemCount() {
-        return mDataSet.length;
+    public static class TopicEntryDiff extends DiffUtil.ItemCallback<TopicEntry> {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull TopicEntry oldItem, @NonNull TopicEntry newItem) {
+            return oldItem.getEntryId() == newItem.getEntryId();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull TopicEntry oldItem, @NonNull TopicEntry newItem) {
+            return oldItem.getTopic_name().equals(newItem.getTopic_name());
+        }
     }
 
     /**
@@ -115,7 +119,7 @@ public class MainPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      *@time 2021/3/28 15:57
      *@param type pos位置
     */
-    public void jumpOthersPage(final int type, int pos) {
+    public void jumpOthersPage(final int type) {
         switch (type) {
             case TYPE_CONTACTS:
                 Intent goContactsPageIntent = new Intent(activity, ContactsActivity.class);
@@ -133,84 +137,31 @@ public class MainPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    class ContactsViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView iv_row_contacts_item;
-        private TextView tv_row_contacts_item;
+    public static class MainPageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
-        public ContactsViewHolder(@NonNull View itemView) {
+        private final ImageView iv_row_item;
+        private final TextView tv_row_item;
+
+        public MainPageViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.d(TAG,"Contacts Element " + getAdapterPosition() + "clicker.");
-                }
-            });
-            iv_row_contacts_item = itemView.findViewById(R.id.iv_row_contacts_item);
-            tv_row_contacts_item = itemView.findViewById(R.id.tv_row_contacts_item);
+            iv_row_item = itemView.findViewById(R.id.iv_row_main_page_item);
+            tv_row_item = itemView.findViewById(R.id.tv_row_main_page_item);
         }
 
-        public ImageView getIv_row_memo_item() {return  iv_row_contacts_item;}
+        public ImageView getIv_row_memo_item() { return  iv_row_item;}
 
-        public TextView getTv_row_contacts_item() {
-            return tv_row_contacts_item;
-        }
-    }
+        public TextView getTv_row_memo_item() { return tv_row_item; }
 
-    class DiaryViewHolder extends RecyclerView.ViewHolder {
+        @Override
+        public void onClick(View view) {
 
-        private ImageView iv_row_diary_item;
-        private TextView tv_row_diary_item;
-
-        public DiaryViewHolder(@NonNull View itemView) {
-            super(itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.d(TAG,"Diary Element " + getAdapterPosition() + "clicker.");
-                }
-            });
-            iv_row_diary_item = itemView.findViewById(R.id.iv_row_diary_item);
-            tv_row_diary_item = itemView.findViewById(R.id.tv_row_diary_item);
         }
 
-        public ImageView getIv_row_memo_item() {return  iv_row_diary_item;}
-
-        public TextView getTv_row_diary_item() {
-            return tv_row_diary_item;
+        @Override
+        public boolean onLongClick(View view) {
+            return false;
         }
     }
 
-    class MemoViewHolder extends RecyclerView.ViewHolder {
-
-        private ImageView iv_row_memo_item;
-        private TextView tv_row_memo_item;
-
-        public MemoViewHolder(@NonNull View itemView) {
-            super(itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.d(TAG,"Memo Element " + getAdapterPosition() + "clicker.");
-                }
-            });
-            iv_row_memo_item = itemView.findViewById(R.id.iv_row_memo_item);
-            tv_row_memo_item = itemView.findViewById(R.id.tv_row_memo_item);
-        }
-
-        public ImageView getIv_row_memo_item() {return  iv_row_memo_item;}
-
-        public TextView getTv_row_memo_item() {
-            return tv_row_memo_item;
-        }
-    }
-
-    /**
-     *自己写的 短按监听
-     *@author home
-     *@time 2021/3/4 20:43
-     */
-    public interface OnItemClickListener {
-        void onClick(int pos);
-    }
 }
