@@ -1,7 +1,7 @@
 package com.example.ourdiary.main;
 
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +11,14 @@ import android.widget.RadioButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ourdiary.R;
+
 import com.example.ourdiary.db.room.topic_database.TopicEntry;
 import com.example.ourdiary.db.room.topic_database.TopicViewModel;
 
@@ -28,6 +30,8 @@ public class MainPageRecyclerViewFragment extends Fragment {
     private static final int SPAN_COUNT = 2;
     private MainActivity activity;
     private TopicViewModel mTopicViewModel;
+    private int result_specific_topic_nu, result_specific_topic_type;
+    private String result_title;
 
     public MainPageRecyclerViewFragment(MainActivity activity) { this.activity = activity; }
 
@@ -49,8 +53,31 @@ public class MainPageRecyclerViewFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //add the specific item(contact diary memo)
+        getParentFragmentManager().setFragmentResultListener("topic_detail_dia_fg_add", this, (requestKey, bundle) -> {
+
+            result_title = bundle.getString("topic_detail_dia_fg_add_title");
+            result_specific_topic_type = bundle.getInt("topic_detail_dia_fg_add_type");
+            TopicEntry topicEntry = new TopicEntry(result_title, result_specific_topic_type,
+                    null, null, null);
+            mTopicViewModel.insertTopicEntry(topicEntry);
+        });
+
+        //update the specific item(contact diary memo)
+        getParentFragmentManager().setFragmentResultListener("topic_detail_dia_fg_update", this, (requestKey, bundle) -> {
+
+            result_specific_topic_nu = bundle.getInt("topic_detail_dia_fg_update_id");
+            result_title = bundle.getString("topic_detail_dia_fg_update_title");
+            result_specific_topic_type = bundle.getInt("topic_detail_dia_fg_update_type");
+            TopicEntry topicEntry = new TopicEntry(result_title, result_specific_topic_type,
+                    null, null, null);
+            topicEntry.setEntryId(result_specific_topic_nu);
+            mTopicViewModel.updateTopicEntry(topicEntry);
+        });
+
 
     }
+
 
     /***/
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,19 +85,26 @@ public class MainPageRecyclerViewFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.recycler_view_frag,container,false);
         rootView.setTag(TAG);
-//        initDataset();
         return rootView;
     }
+
 
     /***/
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //start init
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;//这一行代码决定先显示单列还是双列
         mTopicViewModel = new ViewModelProvider(this).get(TopicViewModel.class);
+
+        mLinearLayoutRadioButton = view.findViewById(R.id.lineat_layout_rb);
+        mGridLayoutRadioButton = view.findViewById(R.id.grid_layout_rb);
+
+        mAdapter = new MainPageAdapter(new MainPageAdapter.TopicEntryDiff(), activity, mTopicViewModel);
+        mRecyclerView.setAdapter(mAdapter);
 
         if (savedInstanceState != null) {
             //用于保存layout类型（显示单列还是双列）
@@ -79,11 +113,8 @@ public class MainPageRecyclerViewFragment extends Fragment {
         }
 
         setRecyclerViewLayoutManage(mCurrentLayoutManagerType);
+        //end init
 
-        mAdapter = new MainPageAdapter(new MainPageAdapter.TopicEntryDiff(), activity, mTopicViewModel);
-        mRecyclerView.setAdapter(mAdapter);
-
-        mLinearLayoutRadioButton = view.findViewById(R.id.lineat_layout_rb);
         mLinearLayoutRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,7 +122,6 @@ public class MainPageRecyclerViewFragment extends Fragment {
             }
         });
 
-        mGridLayoutRadioButton = view.findViewById(R.id.grid_layout_rb);
         mGridLayoutRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,6 +134,7 @@ public class MainPageRecyclerViewFragment extends Fragment {
             mAdapter.submitList(topicEntries);
         });
     }
+
 
     /**
      *Change the RecyclerView's LayoutManage to display in single or dual columns.

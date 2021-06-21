@@ -20,19 +20,13 @@ public class Diary {
     private String diary_Title;
     @ColumnInfo(name = "diary_content")
     private String diary_Content;
+    @ColumnInfo(name = "diaries_contacts_ref_topic_id")
+    private int diaries_contacts_ref_topic_id;
 
-
-    public Diary(@NonNull String diary_Title, String diary_Content) {
+    public Diary(String diary_Title, String diary_Content, int diaries_contacts_ref_topic_id) {
         this.diary_Title = diary_Title;
         this.diary_Content = diary_Content;
-    }
-
-    public void setDiary_Title(String diary_Title) {
-        this.diary_Title = diary_Title;
-    }
-
-    public void setDiary_Content(String diary_Content) {
-        this.diary_Content = diary_Content;
+        this.diaries_contacts_ref_topic_id = diaries_contacts_ref_topic_id;
     }
 
     public void setId(int id) {
@@ -51,7 +45,23 @@ public class Diary {
         return diary_Title;
     }
 
+    public void setDiary_Title(String diary_Title) {
+        this.diary_Title = diary_Title;
+    }
+
     public String getDiary_Content() {
         return diary_Content;
+    }
+
+    public void setDiary_Content(String diary_Content) {
+        this.diary_Content = diary_Content;
+    }
+
+    public int getDiaries_contacts_ref_topic_id() {
+        return diaries_contacts_ref_topic_id;
+    }
+
+    public void setDiaries_contacts_ref_topic_id(int diaries_contacts_ref_topic_id) {
+        this.diaries_contacts_ref_topic_id = diaries_contacts_ref_topic_id;
     }
 }

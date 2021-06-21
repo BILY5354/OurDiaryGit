@@ -68,13 +68,12 @@
             </LinearLayout>
             <-->
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -85,32 +84,55 @@
                     android:background="@drawable/spinner_bg"
                     android:visibility="visible" />
             </LinearLayout>
-
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:gravity="center">
 
-            <Button
-                android:id="@+id/But_topic_detail_cancel"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginTop="16dp">
 
-                android:text="@string/dialog_button_cancel"
-                android:textAllCaps="false" />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:backgroundTint="@color/light_blue"
+                    android:id="@+id/fab_fg_topic_detail_dia_fra_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/fab_fg_topic_detail_dia_fra_update"
+                    android:layout_marginRight="60dp"
+                    android:tint="@color/color_black"
+                    android:src="@drawable/iv_back"
+                    android:layout_centerVertical="true" />
 
-            <Button
-                android:id="@+id/But_topic_detail_ok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/dialog_button_ok"
-                android:textAllCaps="false" />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:layout_centerHorizontal="true"
+                    android:backgroundTint="@color/light_green"
+                    android:id="@+id/fab_fg_topic_detail_dia_fra_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/iv_update"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="10dp"/>
 
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_fg_topic_detail_dia_fra_delete_one"
+                    android:layout_toRightOf="@+id/fab_fg_topic_detail_dia_fra_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60dp"
+                    android:backgroundTint="@color/light_red"
+                    android:src="@drawable/iv_delete_one"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
         </LinearLayout>
+
+
     </LinearLayout>
 </RelativeLayout>

@@ -2,6 +2,7 @@ package com.example.ourdiary.main;
 
 import android.content.Intent;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,18 +45,17 @@ public class MainPageAdapter extends ListAdapter<TopicEntry, MainPageAdapter.Mai
     public MainPageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
        return new MainPageViewHolder(LayoutInflater.from(parent.getContext())
                .inflate(R.layout.row_main_page_item, parent, false));
-
     }
+
 
     /**
      *知道现在按下什么图标，
-     *@author home
      *@time 2021/3/28 22:37
     */
     @Override
-    public int getItemViewType(int position) {
-        if(position % 3 == 0) return TYPE_CONTACTS;
-        else if(position % 3 == 1) return TYPE_DIARY;
+    public int getItemViewType(int getTopic_type) {
+        if(getTopic_type % 3 == 0) return TYPE_CONTACTS;
+        else if(getTopic_type % 3 == 1) return TYPE_DIARY;
         else return TYPE_MEMO;
     }
 
@@ -85,7 +85,7 @@ public class MainPageAdapter extends ListAdapter<TopicEntry, MainPageAdapter.Mai
         //** Click the corresponding icon to jump the corresponding page.
         holder.itemView.setOnClickListener(view -> {
             //Log.d("test","click" + position);
-            jumpOthersPage(getItemViewType(topicEntry.getTopic_type()));
+            jumpOthersPage(getItemViewType(topicEntry.getTopic_type()), position);
         });
         /*
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -97,9 +97,10 @@ public class MainPageAdapter extends ListAdapter<TopicEntry, MainPageAdapter.Mai
         });
         */
         // Long click the each recyclerview item can go to the edit(detail) dialog fragment.
-        holder.itemView.setOnLongClickListener(view -> {
+        holder.itemView.setOnLongClickListener(viewLong -> {
             TopicDetailDialogFragment createTopicDetailDialogFragment =
-                    TopicDetailDialogFragment.newInstance();
+                    TopicDetailDialogFragment.newInstance(true, topicEntry.getEntryId(),
+                            topicEntry.getTopic_name(), topicEntry.getTopic_type(), -1);
             createTopicDetailDialogFragment.show(activity.getSupportFragmentManager(), "TopicDetailDialogFragment");
             return true;    // caution the different between true and false
         });
@@ -124,17 +125,24 @@ public class MainPageAdapter extends ListAdapter<TopicEntry, MainPageAdapter.Mai
      *@time 2021/3/28 15:57
      *@param type pos位置
     */
-    public void jumpOthersPage(final int type) {
+    public void jumpOthersPage(final int type, final int position) {
         switch (type) {
             case TYPE_CONTACTS:
+                Log.d("test", "You have clicked the\t" + position + "\tContact");
+                Log.d("test", "You have clicked the\t" + getItem(position).getEntryId() + "\tContact");
                 Intent goContactsPageIntent = new Intent(activity, ContactsActivity.class);
+                goContactsPageIntent.putExtra("topicId", getItem(position).getEntryId());
+                goContactsPageIntent.putExtra("contactTitle", getItem(position).getTopic_name());
                 activity.startActivity(goContactsPageIntent);
                 break;
             case TYPE_DIARY:
                 Intent goDiaryPageIntent = new Intent(activity, DiaryActivity.class);
+                goDiaryPageIntent.putExtra("topicId", getItem(position).getEntryId());
+                goDiaryPageIntent.putExtra("diaryTitle", getItem(position).getTopic_name());
                 activity.startActivity(goDiaryPageIntent);
                 break;
-//            case TYPE_MEMO:
+            case TYPE_MEMO:
+                Log.d("test", "You have clicked the\t" + getItemCount() + "\tMemo");
 //                Intent goMemoPageIntent = new Intent(activity, MemoActivity.class);
 //                goMemoPageIntent.putExtra("topicId", pos);//判断时第几个按下
 //                activity.startActivity(goMemoPageIntent);
@@ -159,13 +167,11 @@ public class MainPageAdapter extends ListAdapter<TopicEntry, MainPageAdapter.Mai
         public TextView getTv_row_memo_item() { return tv_row_item; }
 
         @Override
-        public void onClick(View view) {
-
-        }
+        public void onClick(View view) { }
 
         @Override
         public boolean onLongClick(View view) {
-            return false;
+            return true;
         }
     }
 

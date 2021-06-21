@@ -51,7 +51,7 @@ public class ContactsDetailDialogFragment extends DialogFragment {
     private boolean isEditMode = false;
 
     /**
-     *注意此方法中的 fragment.setArguments(args)语句
+     * 注意此方法中的 fragment.setArguments(args)语句
      * newInstance is used in ContactsActivity and ContactsAdapter
      *@author home
      *@time 2021/4/24 11:36
@@ -64,7 +64,7 @@ public class ContactsDetailDialogFragment extends DialogFragment {
         args.putInt("contactsId", contactsId);
         args.putString("contactsName", contactsName);
         args.putString("contactsPhoneNumber", contactsPhoneNumber);
-        args.putLong("topicId", topicId);
+        args.putInt("topicId", topicId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -99,7 +99,7 @@ public class ContactsDetailDialogFragment extends DialogFragment {
         fab_delete_one = view.findViewById(R.id.fab_fg_contact_detail_delete_one);
 
 
-        /**get contacts name and photo number from INSTANCE, and set them*/
+        /** get contacts name and photo number from INSTANCE, and set them. */
         isEditMode = getArguments().getBoolean("edit_state",false);
         contactsId = getArguments().getInt("contactsId", 1);
         contactsName = getArguments().getString("contactsName", "");
@@ -107,7 +107,7 @@ public class ContactsDetailDialogFragment extends DialogFragment {
         et_contacts_detail_name.setText(contactsName);
         et_contacts_detail_phone_number.setText(contactsPhoneNumber);
 
-        /**if is added button clicked, the ContactsDetailDialog will not show the delete fab*/
+        /** if is added button clicked, the ContactsDetailDialog will not show the delete fab*/
         if (isEditMode) {
             fab_delete_one.setVisibility(view.VISIBLE);
 

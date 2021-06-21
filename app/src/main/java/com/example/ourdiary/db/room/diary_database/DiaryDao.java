@@ -33,4 +33,8 @@ public interface DiaryDao {
     @Query("SELECT * FROM diary_table WHERE id=:diary_id")
     LiveData<Diary>getSpecificDiariesLive(int diary_id) ;//得到特定的日记
 
+    /* Get specific diaries according to the topic id. */
+    @Query("SELECT * FROM diary_table WHERE diaries_contacts_ref_topic_id=:ref_topic_id")
+    LiveData<List<Diary>> getSpecificTopicIdDiary(int ref_topic_id);
+
 }

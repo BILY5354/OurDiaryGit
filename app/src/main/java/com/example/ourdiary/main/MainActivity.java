@@ -14,16 +14,15 @@ import com.example.ourdiary.db.room.topic_database.TopicEntry;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+
     private ImageView iv_main_setting,iv_main_search;
     private EditText et_main_search;
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
 
         //显示日记，通讯录、Memo的rv的Fragment
@@ -49,28 +48,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         et_main_search.setOnClickListener(this);
 
 
-//        TopicEntry topicEntry = new TopicEntry("second", 1, null, null, null);
-//        TopicOrder topicOrder = new TopicOrder(2,1);
-//        mTopicViewModel.insertTopicEntry(topicEntry);
-//        mTopicViewModel.insertTopicOrder(topicOrder);
-//        mTopicViewModel.getAllTopicEntriesLive().observe(this, new Observer<List<TopicEntry>>() {
-//            @Override
-//            public void onChanged(List<TopicEntry> topicEntries) {
-//                for (int i = 0; i < topicEntries.size(); i++) {
-//                    Log.d("test", topicEntries.get(i).getTopic_name());
-//                }
-//            }
-//        });
-//        mTopicViewModel.getAllTopicEntryAndOrder().observe(this, new Observer<List<TopicEntryAndOrder>>() {
-//            @Override
-//            public void onChanged(List<TopicEntryAndOrder> topicEntryAndOrders) {
-//                Log.d("test", String.valueOf(topicEntryAndOrders.size()));
-//                for (int i = 0; i < topicEntryAndOrders.size(); i++) {
-//                    Log.d("test","entry is:\t" + String.valueOf(topicEntryAndOrders.get(i).getTopicEntry()) +
-//                            "order is:\t" + topicEntryAndOrders.get(i).getTopicOrders());
-//                }
-//            }
-//        });
     }
 
 

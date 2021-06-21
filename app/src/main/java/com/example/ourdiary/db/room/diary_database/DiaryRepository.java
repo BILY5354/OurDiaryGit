@@ -44,6 +44,10 @@ class DiaryRepository {
         return allDiariesLive;
     }
 
+    public LiveData<List<Diary>> getSpecificTopicIdDiary(int ref_topic_id) {
+        return diaryDao.getSpecificTopicIdDiary(ref_topic_id);
+    }
+
     static class InsertAsyncTask extends AsyncTask<Diary, Void, Void> {
         private DiaryDao diaryDao;
 

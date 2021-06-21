@@ -22,6 +22,7 @@ import com.example.ourdiary.db.room.diary_database.DiaryViewModel;
 import com.example.ourdiary.entries.DiaryActivity;
 import com.example.ourdiary.entries.write_page.dialog_fragment.DWDelAllDiaFragment;
 import com.example.ourdiary.entries.write_page.dialog_fragment.DiaryWriteInputFragment;
+import com.example.ourdiary.main.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
@@ -32,6 +33,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 */
 public class DiaryWriteFragment extends Fragment {
 
+
+    /**get_id*/
+    private int topicId;
     private DiaryActivity activity;
 
     /***UI**/
@@ -44,8 +48,9 @@ public class DiaryWriteFragment extends Fragment {
     //Room
     private DiaryViewModel mDiaryViewModel;
 
-    public DiaryWriteFragment(DiaryActivity activity) {
+    public DiaryWriteFragment(DiaryActivity activity, int topicId) {
         this.activity = activity;
+        this.topicId = topicId;
     }
 
     public void onCreate(Bundle savedInstanceState) {
@@ -58,7 +63,7 @@ public class DiaryWriteFragment extends Fragment {
 
                 result_title = bundle.getString("bundle_title");
                 result_content = bundle.getString("bundle_content");
-                Diary diary = new Diary(result_title,result_content);
+                Diary diary = new Diary(result_title,result_content, topicId);
                 mDiaryViewModel.insertDiaries(diary);
 
                 /*测试从另一fra获取值用
@@ -74,7 +79,7 @@ public class DiaryWriteFragment extends Fragment {
                 result_title = bundle.getString("bundle_update_title");
                 result_content = bundle.getString("bundle_update_content");
                 Log.d("test","\nupdate return:" + result_specific_diary_nu + result_title +result_content);
-                Diary diary = new Diary(result_title,result_content);
+                Diary diary = new Diary(result_title,result_content, topicId);
                 diary.setId(result_specific_diary_nu);
                 mDiaryViewModel.updateDiaries(diary);
             }
@@ -85,35 +90,28 @@ public class DiaryWriteFragment extends Fragment {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
                 result_delete_one = bundle.getInt("delete_nu");
-                Diary diary = new Diary("delete title","delete content");
+                Diary diary = new Diary("delete title","delete content", topicId);
                 diary.setId(result_delete_one);
                 mDiaryViewModel.deleteDiary(diary);
             }
         });
 
         //del all diary
-        getParentFragmentManager().setFragmentResultListener("delete_all", this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                result_sign_del = bundle.getInt("sign_del");
-                if (result_sign_del == 1) {
-                    mDiaryViewModel.deleteAllDiaries();
-                }
+        getParentFragmentManager().setFragmentResultListener("delete_all", this, (requestKey, bundle) -> {
+            result_sign_del = bundle.getInt("sign_del");
+            if (result_sign_del == 1) {
+                mDiaryViewModel.deleteAllDiaries();
             }
         });
-
     }
 
-    /**
-     *
-     *@author home
-     *@time 2021/3/20 0:05
-     */
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fg_diary_write,container,false);
         return rootView;
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -129,7 +127,6 @@ public class DiaryWriteFragment extends Fragment {
 
         //查询特定日记
 
-
         //删除全部
         fab_delete_all.setOnClickListener(view_delete_all -> {
             DWDelAllDiaFragment dwDelAllDiaFragment = new DWDelAllDiaFragment();
@@ -138,11 +135,12 @@ public class DiaryWriteFragment extends Fragment {
 
         //Room 当新日记 或修改了日记 此fragment会更新
         RecyclerView rv_diary = view.findViewById(R.id.rv_diary_write_view);
-        final  EntriesAdapter adapter_diary = new EntriesAdapter(new EntriesAdapter.DiaryDiff(), activity,this);
+        final  EntriesAdapter adapter_diary = new EntriesAdapter(new EntriesAdapter.DiaryDiff(),
+                activity,this);
         rv_diary.setAdapter(adapter_diary);
         rv_diary.setLayoutManager(new LinearLayoutManager(activity));
         mDiaryViewModel = new ViewModelProvider(activity).get(DiaryViewModel.class);
-        mDiaryViewModel.getAllDiariesLive().observe(activity, diaries -> {
+        mDiaryViewModel.getSpecificTopicIdDiary(topicId).observe(activity, diaries -> {
             adapter_diary.submitList(diaries);
         });
     }
