@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -58,9 +59,13 @@ public class MainPageRecyclerViewFragment extends Fragment {
 
             result_title = bundle.getString("topic_detail_dia_fg_add_title");
             result_specific_topic_type = bundle.getInt("topic_detail_dia_fg_add_type");
-            TopicEntry topicEntry = new TopicEntry(result_title, result_specific_topic_type,
-                    null, null, null);
-            mTopicViewModel.insertTopicEntry(topicEntry);
+            if (result_specific_topic_type >= 0 && result_specific_topic_type <= 2) {
+                TopicEntry topicEntry = new TopicEntry(result_title, result_specific_topic_type,
+                        null, null, null);
+                mTopicViewModel.insertTopicEntry(topicEntry);
+            } else {
+                Toast.makeText(getContext(), "Add new item failed!", Toast.LENGTH_SHORT).show();
+            }
         });
 
         //update the specific item(contact diary memo)
@@ -75,6 +80,15 @@ public class MainPageRecyclerViewFragment extends Fragment {
             mTopicViewModel.updateTopicEntry(topicEntry);
         });
 
+        //delete one the specific item
+        getParentFragmentManager().setFragmentResultListener("topic_detail_dia_fg_delete_one", this, ((requestKey, bundle) -> {
+
+            result_specific_topic_nu = bundle.getInt("topic_detail_dia_fg_delete_one_id");
+            TopicEntry topicEntry = new TopicEntry("delete topic", -1,
+                    null, null, null);
+            topicEntry.setEntryId(result_specific_topic_nu);
+            mTopicViewModel.deleteOneTopicEntry(topicEntry);
+        }));
 
     }
 
