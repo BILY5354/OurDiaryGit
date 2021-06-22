@@ -85,19 +85,17 @@ public class TopicDetailDialogFragment extends DialogFragment {
         fab_fg_topic_detail_dia_fra_update = rootView.findViewById(R.id.fab_fg_topic_detail_dia_fra_update);
         fab_fg_topic_detail_dia_fra_delete_one = rootView.findViewById(R.id.fab_fg_topic_detail_dia_fra_delete_one);
 
-        SP_topic_detail_type = rootView.findViewById(R.id.SP_topic_detail_type);
-
-        if (isEditMode) {
+        if (isEditMode) {   //When Edit mode, don not use Spinner.
             SP_topic_detail_type.setVisibility(View.INVISIBLE);
             EDT_topic_detail_title.setText(title);
         } else {
+            SP_topic_detail_type = rootView.findViewById(R.id.SP_topic_detail_type);
             SP_topic_detail_type.setVisibility(View.VISIBLE);
             initTopicTypeSpinner();
         }
-
-        initTopicTypeSpinner();
         //end init
 
+        //back main page
         fab_fg_topic_detail_dia_fra_back.setOnClickListener(back -> {
             dismiss();
         });
@@ -107,18 +105,25 @@ public class TopicDetailDialogFragment extends DialogFragment {
             Bundle result = new Bundle();
 
             if (isEditMode) { //if is edit mode, update it,  else, add the new one
-                result.putInt("topic_detail_dia_fg_update_id", topicId);
-                result.putString("topic_detail_dia_fg_update_title", EDT_topic_detail_title.getText().toString());
-                result.putInt("topic_detail_dia_fg_update_type", topicType);
-                getParentFragmentManager().setFragmentResult("topic_detail_dia_fg_update", result);
-                Toast.makeText(getContext(), "更新成功^-^", Toast.LENGTH_SHORT).show();
+                if (EDT_topic_detail_title.getText().toString().length() > 0) {
+                    result.putInt("topic_detail_dia_fg_update_id", topicId);
+                    result.putString("topic_detail_dia_fg_update_title", EDT_topic_detail_title.getText().toString());
+                    result.putInt("topic_detail_dia_fg_update_type", topicType);
+                    getParentFragmentManager().setFragmentResult("topic_detail_dia_fg_update", result);
+                    Toast.makeText(getContext(), "更新成功^-^", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Topic name is empty!", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                result.putString("topic_detail_dia_fg_add_title", EDT_topic_detail_title.getText().toString());
-                result.putInt("topic_detail_dia_fg_add_type", topicType);
-                getParentFragmentManager().setFragmentResult("topic_detail_dia_fg_add", result);
-                Toast.makeText(getContext(), "添加成功^-^", Toast.LENGTH_SHORT).show();
+                if (EDT_topic_detail_title.getText().toString().length() > 0) {
+                    result.putString("topic_detail_dia_fg_add_title", EDT_topic_detail_title.getText().toString());
+                    result.putInt("topic_detail_dia_fg_add_type", SP_topic_detail_type.getSelectedItemPosition());
+                    getParentFragmentManager().setFragmentResult("topic_detail_dia_fg_add", result);
+                    Toast.makeText(getContext(), "添加成功^-^", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Topic name is empty!", Toast.LENGTH_SHORT).show();
+                }
             }
-
             dismiss();
         });
 

@@ -23,8 +23,8 @@ import com.example.ourdiary.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
- *获取activity的topicid是本类中构造函数ContactsDetailDialogFragment（在ContactsActivity获取）用intent获取
- *本fragment获取topicid是也是本类中构造函数用bundle获取，关键代码是setArguments
+ * 获取activity的topicid是本类中构造函数ContactsDetailDialogFragment（在ContactsActivity获取）用intent获取
+ * 本fragment获取topicid是也是本类中构造函数用bundle获取，关键代码是setArguments
  * 所有的电话号码都会保存到同一个表中，这个表同时也保存topid，根据topicid来取不同的通讯录信息
  * @author home
  *@time 2021/4/24 13:44
