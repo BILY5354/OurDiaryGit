@@ -24,7 +24,7 @@ public class MemoActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//
+//   创建
     }
 
 
