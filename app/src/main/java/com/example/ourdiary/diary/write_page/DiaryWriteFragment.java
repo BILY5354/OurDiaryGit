@@ -1,4 +1,4 @@
-package com.example.ourdiary.entries.write_page;
+package com.example.ourdiary.diary.write_page;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -19,10 +19,9 @@ import com.example.ourdiary.R;
 
 import com.example.ourdiary.db.room.diary_database.Diary;
 import com.example.ourdiary.db.room.diary_database.DiaryViewModel;
-import com.example.ourdiary.entries.DiaryActivity;
-import com.example.ourdiary.entries.write_page.dialog_fragment.DWDelAllDiaFragment;
-import com.example.ourdiary.entries.write_page.dialog_fragment.DiaryWriteInputFragment;
-import com.example.ourdiary.main.MainActivity;
+import com.example.ourdiary.diary.DiaryActivity;
+import com.example.ourdiary.diary.write_page.dialog_fragment.DWDelAllDiaFragment;
+import com.example.ourdiary.diary.write_page.dialog_fragment.DiaryWriteInputFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 

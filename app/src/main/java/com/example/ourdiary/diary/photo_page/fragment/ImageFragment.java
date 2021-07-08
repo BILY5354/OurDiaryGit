@@ -1,4 +1,4 @@
-package com.example.ourdiary.entries.photo_page.fragment;
+package com.example.ourdiary.diary.photo_page.fragment;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;

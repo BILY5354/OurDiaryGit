@@ -1,4 +1,4 @@
-package com.example.ourdiary.entries.entries_page;
+package com.example.ourdiary.diary.entries_page;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,8 +14,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.ourdiary.R;
 
-import static com.example.ourdiary.entries.entries_page.ColorData.COLOR_DATA;
-import static com.example.ourdiary.entries.entries_page.ImageData.IMAGE_DATA;
+import static com.example.ourdiary.diary.entries_page.ColorData.COLOR_DATA;
+import static com.example.ourdiary.diary.entries_page.ImageData.IMAGE_DATA;
 
 //这个类的实例是一个单独的片段
 //对象在我们的集合。

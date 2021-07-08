@@ -1,6 +1,6 @@
-package com.example.ourdiary.entries.photo_page.adapter;
+package com.example.ourdiary.diary.photo_page.adapter;
 
-import static com.example.ourdiary.entries.photo_page.adapter.ImageData.IMAGE_DRAWABLES;
+import static com.example.ourdiary.diary.photo_page.adapter.ImageData.IMAGE_DRAWABLES;
 
 import android.graphics.drawable.Drawable;
 import android.transition.TransitionSet;
@@ -21,8 +21,8 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.ourdiary.R;
-import com.example.ourdiary.entries.DiaryActivity;
-import com.example.ourdiary.entries.photo_page.fragment.ImagePagerFragment;
+import com.example.ourdiary.diary.DiaryActivity;
+import com.example.ourdiary.diary.photo_page.fragment.ImagePagerFragment;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 

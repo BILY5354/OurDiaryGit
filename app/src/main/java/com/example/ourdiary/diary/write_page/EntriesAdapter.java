@@ -1,4 +1,4 @@
-package com.example.ourdiary.entries.write_page;
+package com.example.ourdiary.diary.write_page;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ourdiary.R;
 import com.example.ourdiary.db.room.diary_database.Diary;
-import com.example.ourdiary.entries.DiaryActivity;
-import com.example.ourdiary.entries.write_page.dialog_fragment.DWUpdDiaFragment;
-import com.example.ourdiary.entries.write_page.dialog_fragment.DWViewDiaFragment;
+import com.example.ourdiary.diary.DiaryActivity;
+import com.example.ourdiary.diary.write_page.dialog_fragment.DWUpdDiaFragment;
+import com.example.ourdiary.diary.write_page.dialog_fragment.DWViewDiaFragment;
 import com.example.ourdiary.shared.EditMode;
 
 /**

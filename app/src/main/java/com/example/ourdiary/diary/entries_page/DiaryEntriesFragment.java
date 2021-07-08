@@ -1,7 +1,6 @@
-package com.example.ourdiary.entries.entries_page;
+package com.example.ourdiary.diary.entries_page;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 
 import com.example.ourdiary.R;
-import com.example.ourdiary.entries.DiaryActivity;
+import com.example.ourdiary.diary.DiaryActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 

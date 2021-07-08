@@ -1,4 +1,4 @@
-package com.example.ourdiary.entries.write_page.dialog_fragment;
+package com.example.ourdiary.diary.write_page.dialog_fragment;
 
 import android.app.Dialog;
 import android.os.Bundle;

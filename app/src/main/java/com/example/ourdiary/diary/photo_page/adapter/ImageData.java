@@ -1,4 +1,4 @@
-package com.example.ourdiary.entries.photo_page.adapter;
+package com.example.ourdiary.diary.photo_page.adapter;
 
 import androidx.annotation.DrawableRes;
 

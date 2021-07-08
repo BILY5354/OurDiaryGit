@@ -1,12 +1,12 @@
-package com.example.ourdiary.entries.photo_page.adapter;
+package com.example.ourdiary.diary.photo_page.adapter;
 
-import static com.example.ourdiary.entries.photo_page.adapter.ImageData.IMAGE_DRAWABLES;
+import static com.example.ourdiary.diary.photo_page.adapter.ImageData.IMAGE_DRAWABLES;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.ourdiary.entries.photo_page.fragment.ImageFragment;
+import com.example.ourdiary.diary.photo_page.fragment.ImageFragment;
 
 public class ImagePagerAdapter extends FragmentStatePagerAdapter {
 

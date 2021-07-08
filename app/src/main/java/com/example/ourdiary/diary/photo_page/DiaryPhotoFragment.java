@@ -1,4 +1,4 @@
-package com.example.ourdiary.entries.photo_page;
+package com.example.ourdiary.diary.photo_page;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.ourdiary.R;
-import com.example.ourdiary.entries.DiaryActivity;
+import com.example.ourdiary.diary.DiaryActivity;
 
 public class DiaryPhotoFragment extends Fragment {
 

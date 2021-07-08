@@ -1,4 +1,4 @@
-package com.example.ourdiary.entries;
+package com.example.ourdiary.diary;
 
 
 import androidx.annotation.NonNull;
@@ -15,13 +15,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.ourdiary.R;
-import com.example.ourdiary.db.room.diary_database.DiaryViewModel;
-import com.example.ourdiary.entries.entries_page.DiaryEntriesFragment;
-import com.example.ourdiary.entries.photo_page.fragment.PhotoGridFragment;
-import com.example.ourdiary.entries.write_page.DiaryWriteFragment;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.ourdiary.diary.entries_page.DiaryEntriesFragment;
+import com.example.ourdiary.diary.photo_page.fragment.PhotoGridFragment;
+import com.example.ourdiary.diary.write_page.DiaryWriteFragment;
 
 
 public class DiaryActivity extends AppCompatActivity implements View.OnClickListener{

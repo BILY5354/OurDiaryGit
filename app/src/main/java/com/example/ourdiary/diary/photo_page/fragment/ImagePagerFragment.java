@@ -1,4 +1,4 @@
-package com.example.ourdiary.entries.photo_page.fragment;
+package com.example.ourdiary.diary.photo_page.fragment;
 
 import android.os.Bundle;
 import android.transition.Transition;
@@ -14,8 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.ourdiary.R;
-import com.example.ourdiary.entries.DiaryActivity;
-import com.example.ourdiary.entries.photo_page.adapter.ImagePagerAdapter;
+import com.example.ourdiary.diary.DiaryActivity;
+import com.example.ourdiary.diary.photo_page.adapter.ImagePagerAdapter;
 
 import java.util.List;
 import java.util.Map;

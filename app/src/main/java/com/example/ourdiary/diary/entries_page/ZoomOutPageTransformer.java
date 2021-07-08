@@ -1,4 +1,4 @@
-package com.example.ourdiary.entries.entries_page;
+package com.example.ourdiary.diary.entries_page;
 
 import android.view.View;
 

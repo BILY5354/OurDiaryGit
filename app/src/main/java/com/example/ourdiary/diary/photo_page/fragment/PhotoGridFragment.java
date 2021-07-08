@@ -1,4 +1,4 @@
-package com.example.ourdiary.entries.photo_page.fragment;
+package com.example.ourdiary.diary.photo_page.fragment;
 
 import android.os.Bundle;
 import android.transition.TransitionInflater;
@@ -13,8 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ourdiary.R;
-import com.example.ourdiary.entries.DiaryActivity;
-import com.example.ourdiary.entries.photo_page.adapter.DiaryPhotoGridAdapter;
+import com.example.ourdiary.diary.DiaryActivity;
+import com.example.ourdiary.diary.photo_page.adapter.DiaryPhotoGridAdapter;
 
 import java.util.List;
 import java.util.Map;

@@ -1,24 +1,18 @@
-package com.example.ourdiary.entries.write_page.dialog_fragment;
+package com.example.ourdiary.diary.write_page.dialog_fragment;
 
 import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentResultListener;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ourdiary.R;
-import com.example.ourdiary.db.room.diary_database.Diary;
-import com.example.ourdiary.db.room.diary_database.DiaryViewModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  *长按其中一篇进入浏览或点击页面
