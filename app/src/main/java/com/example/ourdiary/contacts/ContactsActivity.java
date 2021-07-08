@@ -37,7 +37,7 @@ public class ContactsActivity extends AppCompatActivity implements
         LatterSortLayout.OnTouchingLetterChangedListener{
 
     /**get_id*/
-    private final int topicId=1;
+    private int topicId;
 
     /**UI*/
     private RelativeLayout RL_contacts_content;
@@ -60,7 +60,6 @@ public class ContactsActivity extends AppCompatActivity implements
     private List<ContactsEntity> contactsNamesList;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,13 +77,18 @@ public class ContactsActivity extends AppCompatActivity implements
 
         contactsNamesList = new ArrayList<>();
 
-        /** We need add the set Title function used by Intent.*/
+        /* We need to get the Title and set then transited by Intent. */
         TV_contacts_title = findViewById(R.id.TV_contacts_title);
-        String diaryTitle = getIntent().getStringExtra("diaryTitle");
+        String diaryTitle = getIntent().getStringExtra("contactTitle");
         if (diaryTitle == null) {
             diaryTitle = "Contacts";
         }
         TV_contacts_title.setText(diaryTitle);
+        /* TopicId too. */
+        topicId = getIntent().getIntExtra("topicId", -1);
+        if (topicId == -1) {
+            finish();
+        }
 
         initTopicAdapter();//初始化recyclerview和新增的fab按钮
         loadContacts();//载入所有的contacts到list中，并完成排序功能
@@ -137,7 +141,7 @@ public class ContactsActivity extends AppCompatActivity implements
     */
     private void loadContacts() {
 
-        mContactViewModel.getSpecificContacts(1).observe(this, new Observer<List<Contact>>() {
+        mContactViewModel.getSpecificContacts(topicId).observe(this, new Observer<List<Contact>>() {
             @Override
             public void onChanged(List<Contact> contacts) {
 
@@ -153,45 +157,8 @@ public class ContactsActivity extends AppCompatActivity implements
 
                 contactsNamesList = sortContacts(contactsNamesList);
 
-
-
             }
         });
-
-
-        /**动态获取livedata通讯录总量， 不过并没有必要这么写*/
-//        mContactViewModel.getSpecificTopicIdContactCount(1).observe(this, new Observer<Integer>() {
-//            @Override
-//            public void onChanged(Integer integer) { //integer就是对应topic id通讯录的总数
-////              Log.d("test", "now the total contacts number is " + String.valueOf(integer));
-//                contactsNamesList.clear();//每次数据改变，都要重新填充一次list列表，让新的数据加载进去
-//            }
-//        });
-
-    }
-
-    /**对列表进行排序*/
-    private void sortContacts() {
-        for (ContactsEntity contactsEntity : contactsNamesList) {
-            String sortString = contactsEntity.getName().substring(0, 1).toUpperCase();
-            sortContactsCN(contactsEntity, sortString);
-        }
-        Collections.sort(contactsNamesList, new LetterComparator());
-    }
-
-    /**根据中文进行排序*/
-    private String sortContactsCN(ContactsEntity contactsEntity, String sortString) {
-        if (sortString.matches("[\\u4E00-\\u9FA5]")) {
-            String[] arr = PinyinHelper.toHanyuPinyinStringArray(sortString.trim().charAt(0));
-            sortString = arr[0].substring(0, 1).toUpperCase();
-        }
-        if (sortString.matches("[A-Z]")) {
-            contactsEntity.setSortLetters(sortString.toUpperCase());
-        } else {
-            contactsEntity.setSortLetters("#");
-        }
-        return sortString;
-    }
 
         /*动态获取livedata通讯录总量， 不过并没有必要这么写*/
 //        mContactViewModel.getSpecificTopicIdContactCount(1).observe(this, new Observer<Integer>() {
@@ -243,7 +210,7 @@ public class ContactsActivity extends AppCompatActivity implements
 
 
     /**
-     *Initialize RecyclerView and add the Room observer to get contacts and set the listener for fab
+     * Initialize RecyclerView and add the Room observer to get contacts and set the listener for fab
      *@author home
      *@time 2021/5/23 12:26
     */
@@ -258,7 +225,7 @@ public class ContactsActivity extends AppCompatActivity implements
         recyclerView_contacts.setHasFixedSize(true);
 
         mContactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
-        mContactViewModel.getSpecificContacts(1).observe(this, contacts -> {
+        mContactViewModel.getSpecificContacts(topicId).observe(this, contacts -> {
 
             contactsAdapter.submitList(contacts);
 
@@ -268,7 +235,8 @@ public class ContactsActivity extends AppCompatActivity implements
         fab_contact_add.setOnClickListener(add_contact -> {
             // contactsId is -1 because it will create new contact not get specific contact
             ContactsDetailDialogFragment contactsDetailDialogFragment =
-                    ContactsDetailDialogFragment.newInstance(false,-1,"", "", topicId);
+                    ContactsDetailDialogFragment.newInstance(false,-1,
+                            "", "", topicId);
             contactsDetailDialogFragment.show(getSupportFragmentManager(), "contactsDetailDialogFragment");
         });
 
@@ -288,7 +256,7 @@ public class ContactsActivity extends AppCompatActivity implements
                         String result_name, result_phone_number;
                         result_name = bundle.getString("contacts_detail_fg_add_name");
                         result_phone_number = bundle.getString("contacts_detail_fg_add_phone_number");
-                        Contact contact = new Contact(result_name, result_phone_number, 1);
+                        Contact contact = new Contact(result_name, result_phone_number, topicId);
                         mContactViewModel.insert(contact);
                     }
                 });
@@ -302,7 +270,7 @@ public class ContactsActivity extends AppCompatActivity implements
                         String result_name, result_phone_number;
                         result_name = bundle.getString("contacts_detail_fg_update_name");
                         result_phone_number = bundle.getString("contacts_detail_fg_update_phone_number");
-                        Contact contact = new Contact(result_name, result_phone_number, 1);
+                        Contact contact = new Contact(result_name, result_phone_number, topicId);
                         contact.setId(result_id);
                         mContactViewModel.update(contact);
                     }
@@ -315,7 +283,7 @@ public class ContactsActivity extends AppCompatActivity implements
                     public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
                         int result_id = bundle.getInt("contacts_detail_fg_delete_one_id");
                         Contact contact = new Contact("delete_contact_name",
-                                "delete_contact_phone_number", 1);
+                                "delete_contact_phone_number", topicId);
                         contact.setId(result_id);
                         mContactViewModel.deleteOne(contact);
                     }

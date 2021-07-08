@@ -15,6 +15,11 @@
     <string name="contacts_call_phone_permission_content">Need permission to call phone</string>
     <string name="contacts_call_phone_no_call_function">Your device can\'t call phone</string>
 
+    <!--Topic detail-->
+    <string name="topic_detail_name">Topic name</string>
+    <string name="topic_detail_text_color">Text color</string>
+    <string name="topic_dialog_delete_title">Delete</string>
+    <string name="topic_dialog_delete_content">Do you want to delete %1$s?</string>
 
     <!--Memo-->
     <string name="memo_item_add">Add</string>

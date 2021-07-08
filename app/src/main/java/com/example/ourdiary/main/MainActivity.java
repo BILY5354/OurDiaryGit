@@ -2,7 +2,6 @@ package com.example.ourdiary.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,14 +10,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ourdiary.R;
-import com.example.ourdiary.db.room.learning.WordListAdapter;
-import com.example.ourdiary.main.recycleview.RecyclerViewFragment;
+import com.example.ourdiary.db.room.topic_database.TopicEntry;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+
     private ImageView iv_main_setting,iv_main_search;
     private EditText et_main_search;
-    private static String TAG = "MainActivity";
 
 
     @Override
@@ -26,11 +24,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //显示日记，通讯录、Memo的rv的Fragment
         if(savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager()
                     .beginTransaction();
-            RecyclerViewFragment fragment = new RecyclerViewFragment(this);
+            MainPageRecyclerViewFragment fragment = new MainPageRecyclerViewFragment(this);
             transaction.replace(R.id.sample_content_fragment,fragment);
             transaction.commit();
         }

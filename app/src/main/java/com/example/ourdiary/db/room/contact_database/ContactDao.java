@@ -6,6 +6,8 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+import com.example.ourdiary.db.room.contact_database.Contact;
+
 
 import java.util.List;
 
@@ -38,5 +40,13 @@ public interface ContactDao {
     /** 模糊匹配查询 */
     @Query("SELECT * FROM contacts_table WHERE contacts_contacts_ref_topic_id = :ref_topic_id AND contacts_name LIKE :pattern ORDER BY ID ASC")
     LiveData<List<Contact>> findContactsWithPattern(int ref_topic_id, String pattern);
+
+
+//    @Query("SELECT * " +
+//            "FROM contacts_table " +
+//            "LEFT OUTER JOIN diary_table " +
+//            "ON contacts_table.id = diary_table.id" +
+//            " ORDER BY contacts_contacts_ref_topic_id")
+//    LiveData<List<Contact>> find();
 
 }

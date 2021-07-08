@@ -1,4 +1,4 @@
-package com.example.ourdiary.main.recycleview;
+package com.example.ourdiary.main.unused_code;
 
 import android.util.Log;
 import android.view.LayoutInflater;

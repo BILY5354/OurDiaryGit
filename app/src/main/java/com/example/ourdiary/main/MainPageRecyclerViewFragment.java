@@ -1,43 +1,48 @@
-package com.example.ourdiary.main.recycleview;
+package com.example.ourdiary.main;
 
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ourdiary.R;
-import com.example.ourdiary.main.MainActivity;
+
+import com.example.ourdiary.db.room.topic_database.TopicEntry;
+import com.example.ourdiary.db.room.topic_database.TopicViewModel;
 
 
-public class RecyclerViewFragment extends Fragment {
+public class MainPageRecyclerViewFragment extends Fragment {
 
-    private static final String TAG = "RecyclerViewFragment";
+    private static final String TAG = "MainPageRecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
-    private static final int DATASET_COUNT = 9;//显示 个textview
     private MainActivity activity;
+    private TopicViewModel mTopicViewModel;
+    private int result_specific_topic_nu, result_specific_topic_type;
+    private String result_title;
 
-    public RecyclerViewFragment(MainActivity activity) {
-        this.activity = activity;
-    }
+    public MainPageRecyclerViewFragment(MainActivity activity) { this.activity = activity; }
 
     private enum LayoutManagerType {
         LINEAR_LAYOUT_MANAGER,
         GRID_LAYOUT_MANAGER,
-
     }
 
 
     protected LayoutManagerType mCurrentLayoutManagerType;
-
     protected RadioButton mLinearLayoutRadioButton;
     protected RadioButton mGridLayoutRadioButton;
 
@@ -49,57 +54,81 @@ public class RecyclerViewFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Initialize dataset, this data would usually come from a local content provider or
-        // remote server.
-        initDataset();
+        //add the specific item(contact diary memo)
+        getParentFragmentManager().setFragmentResultListener("topic_detail_dia_fg_add", this, (requestKey, bundle) -> {
+
+            result_title = bundle.getString("topic_detail_dia_fg_add_title");
+            result_specific_topic_type = bundle.getInt("topic_detail_dia_fg_add_type");
+            if (result_specific_topic_type >= 0 && result_specific_topic_type <= 2) {
+                TopicEntry topicEntry = new TopicEntry(result_title, result_specific_topic_type,
+                        null, null, null);
+                mTopicViewModel.insertTopicEntry(topicEntry);
+            } else {
+                Toast.makeText(getContext(), "Add new item failed!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //update the specific item(contact diary memo)
+        getParentFragmentManager().setFragmentResultListener("topic_detail_dia_fg_update", this, (requestKey, bundle) -> {
+
+            result_specific_topic_nu = bundle.getInt("topic_detail_dia_fg_update_id");
+            result_title = bundle.getString("topic_detail_dia_fg_update_title");
+            result_specific_topic_type = bundle.getInt("topic_detail_dia_fg_update_type");
+            TopicEntry topicEntry = new TopicEntry(result_title, result_specific_topic_type,
+                    null, null, null);
+            topicEntry.setEntryId(result_specific_topic_nu);
+            mTopicViewModel.updateTopicEntry(topicEntry);
+        });
+
+        //delete one the specific item
+        getParentFragmentManager().setFragmentResultListener("topic_detail_dia_fg_delete_one", this, ((requestKey, bundle) -> {
+
+            result_specific_topic_nu = bundle.getInt("topic_detail_dia_fg_delete_one_id");
+            TopicEntry topicEntry = new TopicEntry("delete topic", -1,
+                    null, null, null);
+            topicEntry.setEntryId(result_specific_topic_nu);
+            mTopicViewModel.deleteOneTopicEntry(topicEntry);
+        }));
+
     }
 
-    /**
-     *
-     *@author home
-     *@time 2021/3/20 0:05
-    */
+
+    /***/
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.recycler_view_frag,container,false);
         rootView.setTag(TAG);
+        return rootView;
+    }
 
-        mRecyclerView = rootView.findViewById(R.id.recyclerView);
 
+    /***/
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        //start init
+        mRecyclerView = view.findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;//这一行代码决定先显示单列还是双列
+        mTopicViewModel = new ViewModelProvider(this).get(TopicViewModel.class);
+
+        mLinearLayoutRadioButton = view.findViewById(R.id.lineat_layout_rb);
+        mGridLayoutRadioButton = view.findViewById(R.id.grid_layout_rb);
+
+        mAdapter = new MainPageAdapter(new MainPageAdapter.TopicEntryDiff(), activity, mTopicViewModel);
+        mRecyclerView.setAdapter(mAdapter);
 
         if (savedInstanceState != null) {
             //用于保存layout类型（显示单列还是双列）
             mCurrentLayoutManagerType = (LayoutManagerType) savedInstanceState
                     .getSerializable(KEY_LAYOUT_MANAGER);
         }
+
         setRecyclerViewLayoutManage(mCurrentLayoutManagerType);
+        //end init
 
-        //设置newAdapter和点击事件
-        /*
-        mAdapter = new CustomAdapter(mDataset, new CustomAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(int pos) {
-                Log.d(TAG,"短按了" + pos);
-            }
-        }, new CustomAdapter.OnItemLongClickListener() {
-            @Override
-            public void onLongClick(int pos) {
-                Log.d(TAG,"长按了" + pos);
-            }
-        }); //要整60个,以及设置短长按的监听
-        */
-        mAdapter = new MainPageAdapter(activity, mDataset, new MainPageAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(int pos) {
-                Log.d(TAG,"短按了" + pos);
-            }
-        });
-        //end设置newAdapter和点击事件
-        mRecyclerView.setAdapter(mAdapter);
-
-        mLinearLayoutRadioButton = rootView.findViewById(R.id.lineat_layout_rb);
         mLinearLayoutRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +136,6 @@ public class RecyclerViewFragment extends Fragment {
             }
         });
 
-        mGridLayoutRadioButton = rootView.findViewById(R.id.grid_layout_rb);
         mGridLayoutRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,13 +143,15 @@ public class RecyclerViewFragment extends Fragment {
             }
         });
 
-        return rootView;
+        //Observe the data
+        mTopicViewModel.getAllTopicEntriesLive().observe(activity, topicEntries -> {
+            mAdapter.submitList(topicEntries);
+        });
     }
 
+
     /**
-     *设置RecyclerView的LayputManage 如果后续想切换显示风格可以在这函数添加
-     * 官方给的代码是切换单列还是双列显示
-     *@author home
+     *Change the RecyclerView's LayoutManage to display in single or dual columns.
      *@time 2021/3/20 0:03
     */
     public void setRecyclerViewLayoutManage(LayoutManagerType layoutManagerType) {
@@ -158,17 +188,5 @@ public class RecyclerViewFragment extends Fragment {
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    /**
-     * Generates Strings for RecyclerView's adapter. This data would usually come
-     * from a local content provider or remote server.
-     */
-    private void initDataset() {
-        mDataset = new String[DATASET_COUNT];
-        int sign = 0;
-        for(int i = 0; i < DATASET_COUNT; i++) {
-            if( i % 3 == 0) mDataset[i] = "This is Contacts # " + ++sign;
-            else if(i % 3 == 1)  mDataset[i] = "This is Diary #" + sign;
-            else if( i % 3 == 2) mDataset[i] = "This is Memo #" + sign;
-        }
-    }
+
 }

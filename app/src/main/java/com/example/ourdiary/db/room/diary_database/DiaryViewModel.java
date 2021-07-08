@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.zip.DeflaterInputStream;
 
 
 public class DiaryViewModel extends AndroidViewModel {
@@ -23,6 +24,10 @@ public class DiaryViewModel extends AndroidViewModel {
 
     public LiveData<List<Diary>> getAllDiariesLive() {
         return diaryRepository.getAllDiariesLive();
+    }
+
+    public LiveData<List<Diary>> getSpecificTopicIdDiary(int ref_topic_id) {
+        return diaryRepository.getSpecificTopicIdDiary(ref_topic_id);
     }
 
     public void insertDiaries(Diary... diaries) {
