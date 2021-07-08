@@ -19,6 +19,7 @@ import com.example.ourdiary.contacts.ContactsActivity;
 import com.example.ourdiary.db.room.topic_database.TopicEntry;
 import com.example.ourdiary.db.room.topic_database.TopicViewModel;
 import com.example.ourdiary.entries.DiaryActivity;
+import com.example.ourdiary.memo.MemoActivity;
 
 
 public class MainPageAdapter extends ListAdapter<TopicEntry, MainPageAdapter.MainPageViewHolder> {
@@ -142,11 +143,12 @@ public class MainPageAdapter extends ListAdapter<TopicEntry, MainPageAdapter.Mai
                 activity.startActivity(goDiaryPageIntent);
                 break;
             case TYPE_MEMO:
-                Log.d("test", "You have clicked the\t" + getItemCount() + "\tMemo");
-//                Intent goMemoPageIntent = new Intent(activity, MemoActivity.class);
-//                goMemoPageIntent.putExtra("topicId", pos);//判断时第几个按下
-//                activity.startActivity(goMemoPageIntent);
-//                break;
+                //Log.d("test", "You have clicked the\t" + getItemCount() + "\tMemo");
+                Intent goMemoPageIntent = new Intent(activity, MemoActivity.class);
+                goMemoPageIntent.putExtra("topicId", getItem(position).getEntryId());//判断时第几个按下
+                goMemoPageIntent.putExtra("memoTitle", getItem(position).getTopic_name());
+                activity.startActivity(goMemoPageIntent);
+                break;
         }
     }
 
