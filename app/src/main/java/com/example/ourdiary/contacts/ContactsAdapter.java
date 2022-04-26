@@ -1,4 +1,4 @@
-package com.example.ourdiary.contacts_page;
+package com.example.ourdiary.contacts;
 
 
 import android.view.LayoutInflater;

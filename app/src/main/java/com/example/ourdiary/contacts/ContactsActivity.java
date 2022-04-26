@@ -1,4 +1,4 @@
-package com.example.ourdiary.contacts_page;
+package com.example.ourdiary.contacts;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

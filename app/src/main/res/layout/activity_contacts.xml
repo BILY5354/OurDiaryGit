@@ -60,7 +60,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/LL_contacts_topbar_content">
 
-        <com.example.ourdiary.contacts_page.LatterSortLayout
+        <com.example.ourdiary.contacts.LatterSortLayout
             android:id="@+id/lsl_contacts"
             android:layout_width="30dp"
             android:layout_height="match_parent"

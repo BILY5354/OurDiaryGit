@@ -1,4 +1,4 @@
-package com.example.ourdiary.memo_page;
+package com.example.ourdiary.memo;
 
 public class MemoEntity {
     private long memoId;

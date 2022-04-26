@@ -1,4 +1,4 @@
-package com.example.ourdiary.contacts_page;
+package com.example.ourdiary.contacts;
 
 /**
  *将long的contacts_ Id改成了int的

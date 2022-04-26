@@ -1,4 +1,4 @@
-package com.example.ourdiary.memo_page;
+package com.example.ourdiary.memo;
 
 import android.app.Dialog;
 import android.content.Context;

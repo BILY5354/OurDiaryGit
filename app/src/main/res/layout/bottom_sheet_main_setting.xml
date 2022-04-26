@@ -18,37 +18,37 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/IV_main_setting_add_topic"
+                android:id="@+id/IV_main_setting_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/iv_main_setting_add_topic"
+                android:src="@drawable/ic_main_setting_add_topic"
                  />
 
             <ImageView
-                android:id="@+id/IV_main_setting_setting_page"
+                android:id="@+id/IV_main_setting_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
-                android:src="@drawable/iv_main_setting_setting_page"/>
+                android:src="@drawable/ic_main_setting_setting_page"/>
 
             <ImageView
-                android:id="@+id/IV_main_setting_setting_security"
+                android:id="@+id/IV_main_setting_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
-                android:src="@drawable/iv_main_setting_setting_security"
+                android:src="@drawable/ic_main_setting_login"
                 app:tint="@color/color_White"/>
 
             <ImageView
-                android:id="@+id/IV_main_setting_backup"
+                android:id="@+id/IV_main_setting_syn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
-                android:src="@drawable/iv_main_setting_backup"/>
+                android:src="@drawable/ic_main_setting_syn"/>
 
             <ImageView
                 android:id="@+id/IV_main_setting_about"
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
-                android:src="@drawable/iv_main_setting_about"/>
+                android:src="@drawable/ic_main_setting_about"/>
 
         </LinearLayout>
 

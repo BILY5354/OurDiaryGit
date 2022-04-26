@@ -1,4 +1,4 @@
-package com.example.ourdiary.memo_page;
+package com.example.ourdiary.memo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
