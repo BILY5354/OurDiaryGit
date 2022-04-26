@@ -22,11 +22,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 <!--        <activity android:name=".db.room.learning.NewWordActivity"></activity>-->
-        <activity android:name=".other_activity.SettingActivity" />
-        <activity android:name=".contacts.ContactsActivity"
+        <activity android:name=".setting.SettingActivity" />
+        <activity android:name=".contacts_page.ContactsActivity"
             android:windowSoftInputMode="adjustPan"/>
 <!--        <activity android:name=".memo.MemoActivity" />-->
-        <activity android:name=".diary.DiaryActivity"
+        <activity android:name=".diary_page.DiaryActivity"
             android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".main.MainActivity"
             android:windowSoftInputMode="adjustNothing">

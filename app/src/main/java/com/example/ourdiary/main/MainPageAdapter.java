@@ -15,11 +15,11 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ourdiary.R;
-import com.example.ourdiary.contacts.ContactsActivity;
+import com.example.ourdiary.contacts_page.ContactsActivity;
 import com.example.ourdiary.db.room.topic_database.TopicEntry;
 import com.example.ourdiary.db.room.topic_database.TopicViewModel;
-import com.example.ourdiary.diary.DiaryActivity;
-import com.example.ourdiary.memo.MemoActivity;
+import com.example.ourdiary.diary_page.DiaryActivity;
+import com.example.ourdiary.memo_page.MemoActivity;
 
 
 public class MainPageAdapter extends ListAdapter<TopicEntry, MainPageAdapter.MainPageViewHolder> {

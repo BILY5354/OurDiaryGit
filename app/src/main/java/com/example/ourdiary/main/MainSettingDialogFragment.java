@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 
 
 import com.example.ourdiary.R;
-import com.example.ourdiary.other_activity.SettingActivity;
+import com.example.ourdiary.setting.SettingActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class MainSettingDialogFragment extends BottomSheetDialogFragment implements View.OnClickListener{

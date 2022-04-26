@@ -82,7 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/spinner_bg"
-                    android:visibility="invisible" />
+                    android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
 
@@ -91,13 +91,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:gravity="center">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
+                android:layout_margin="10dp">
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:backgroundTint="@color/light_blue"

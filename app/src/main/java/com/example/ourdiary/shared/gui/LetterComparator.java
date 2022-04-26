@@ -1,6 +1,6 @@
 package com.example.ourdiary.shared.gui;
 
-import com.example.ourdiary.contacts.ContactsEntity;
+import com.example.ourdiary.contacts_page.ContactsEntity;
 
 import java.util.Comparator;
 

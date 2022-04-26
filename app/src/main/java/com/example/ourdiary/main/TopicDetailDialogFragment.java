@@ -78,7 +78,7 @@ public class TopicDetailDialogFragment extends DialogFragment {
         fab_fg_topic_detail_dia_fra_delete_one = rootView.findViewById(R.id.fab_fg_topic_detail_dia_fra_delete_one);
 
         if (isEditMode) {   //When Edit mode, don not use Spinner.
-//            SP_topic_detail_type.setVisibility(View.INVISIBLE);
+//            SP_topic_detail_type.setVisibility(View.GONE);
             EDT_topic_detail_title.setText(title);
         } else {
             fab_fg_topic_detail_dia_fra_delete_one.setVisibility(View.INVISIBLE);
