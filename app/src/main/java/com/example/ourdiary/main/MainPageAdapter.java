@@ -18,7 +18,7 @@ import com.example.ourdiary.R;
 import com.example.ourdiary.contacts.ContactsActivity;
 import com.example.ourdiary.db.room.topic_database.TopicEntry;
 import com.example.ourdiary.db.room.topic_database.TopicViewModel;
-import com.example.ourdiary.entries.DiaryActivity;
+import com.example.ourdiary.diary_page.DiaryActivity;
 import com.example.ourdiary.memo.MemoActivity;
 
 

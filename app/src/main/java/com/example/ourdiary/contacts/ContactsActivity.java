@@ -3,7 +3,6 @@ package com.example.ourdiary.contacts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentResultListener;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,9 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -279,16 +275,15 @@ public class ContactsActivity extends AppCompatActivity implements
         //delete one
         getSupportFragmentManager().setFragmentResultListener("contacts_detail_fg_delete_one",
                 this, new FragmentResultListener() {
-                    @Override
-                    public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                        int result_id = bundle.getInt("contacts_detail_fg_delete_one_id");
-                        Contact contact = new Contact("delete_contact_name",
-                                "delete_contact_phone_number", topicId);
-                        contact.setId(result_id);
-                        mContactViewModel.deleteOne(contact);
-                    }
-                });
-
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
+                int result_id = bundle.getInt("contacts_detail_fg_delete_one_id");
+                Contact contact = new Contact("delete_contact_name",
+                        "delete_contact_phone_number", topicId);
+                contact.setId(result_id);
+                mContactViewModel.deleteOne(contact);
+            }
+        });
     }
     
 
