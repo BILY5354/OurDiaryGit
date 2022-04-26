@@ -32,6 +32,21 @@ public class LoginRepository {
         return user != null;
     }
 
+    //获取用户别名 MING
+    public String getIntro() {
+        return user.getIntro();
+    }
+
+    //获取用户名（邮箱）
+    public String getUsername() {
+        return user.getUsername();
+    }
+
+    //获取用户图像
+    public String getAvatar() {
+        return user.getAvatar();
+    }
+
     public void logout() {
         user = null;
         dataSource.logout();

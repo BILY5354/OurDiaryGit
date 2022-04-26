@@ -36,9 +36,10 @@ public class LoginViewModel extends ViewModel {
 
         if (result instanceof Result.Success) {
             LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
+            //如果登录成功了 设置用户名
             loginResult.setValue(new LoginResult(new LoggedInUserView(data.getIntro())));
         } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
+            loginResult.setValue(new LoginResult(R.string.ch_login_failed));
         }
     }
 

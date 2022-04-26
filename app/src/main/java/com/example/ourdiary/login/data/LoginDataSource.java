@@ -26,7 +26,7 @@ public class LoginDataSource {
             LoggedInUser loggedUser = new LoggedInUser();
             Log.d("test",loggedUser.toString());
             loginMyBlog(username, password, loggedUser);
-            Thread.sleep(2000);
+            Thread.sleep(1600);//等待2秒与服务器通信
             Log.d("test",loggedUser.toString());
             if (loggedUser.isLogStatue()) {
                 Log.d("test","在if语句中判断登录成功");
@@ -76,6 +76,9 @@ public class LoginDataSource {
                         JSONObject dataObject = JSONObject.parseObject(jsonObject.getString("data"));
                         userAuth.setId(dataObject.getInteger("id"));
                         userAuth.setIntro(dataObject.getString("intro"));
+                        userAuth.setNickname(dataObject.getString("nickname"));
+                        userAuth.setAvatar(dataObject.getString("avatar"));
+                        userAuth.setUsername(dataObject.getString("username"));
                         userAuth.setLogStatue(true);
                         Log.d("test", "登录成功"+userAuth);
                     }else if (code.equals("51000")){
