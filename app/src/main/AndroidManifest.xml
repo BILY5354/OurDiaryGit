@@ -16,6 +16,7 @@
         android:required="false" />
 
     <application
+        android:name=".LoginStatue"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -24,7 +25,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".login.ui.login.LoginActivity"
+            android:name=".remote.ui.login.LoginActivity"
             android:label="@string/title_activity_login"></activity>
         <!-- <activity android:name=".db.room.learning.NewWordActivity"></activity> -->
         <activity android:name=".setting.SettingActivity" />

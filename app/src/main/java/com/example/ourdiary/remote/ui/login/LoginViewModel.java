@@ -1,15 +1,16 @@
-package com.example.ourdiary.login.ui.login;
+package com.example.ourdiary.remote.ui.login;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import android.content.Intent;
 import android.util.Patterns;
 
 import com.example.ourdiary.R;
-import com.example.ourdiary.login.data.LoginRepository;
-import com.example.ourdiary.login.data.Result;
-import com.example.ourdiary.login.data.model.LoggedInUser;
+import com.example.ourdiary.remote.data.LoginRepository;
+import com.example.ourdiary.remote.data.Result;
+import com.example.ourdiary.remote.data.model.LoggedInUser;
 
 
 public class LoginViewModel extends ViewModel {
@@ -38,6 +39,8 @@ public class LoginViewModel extends ViewModel {
             LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
             //如果登录成功了 设置用户名
             loginResult.setValue(new LoginResult(new LoggedInUserView(data.getIntro())));
+            //并且异步请求
+            //Result<Articles>
         } else {
             loginResult.setValue(new LoginResult(R.string.ch_login_failed));
         }

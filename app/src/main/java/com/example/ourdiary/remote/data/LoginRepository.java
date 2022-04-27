@@ -1,6 +1,6 @@
-package com.example.ourdiary.login.data;
+package com.example.ourdiary.remote.data;
 
-import com.example.ourdiary.login.data.model.LoggedInUser;
+import com.example.ourdiary.remote.data.model.LoggedInUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and

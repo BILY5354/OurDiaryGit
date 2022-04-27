@@ -1,4 +1,4 @@
-package com.example.ourdiary.login.data.model;
+package com.example.ourdiary.remote.data.model;
 
 import java.util.Set;
 
@@ -46,57 +46,56 @@ public class LoggedInUser {
         this.logStatue = logStatue;
     }
 
-
     public Integer getId() {
         return id;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public String getIntro() {
-        return intro;
-    }
-
-    public Set getArticleLikeSet() {
-        return articleLikeSet;
-    }
-
-    public boolean isLogStatue() {
-        return logStatue;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getIntro() {
+        return intro;
     }
 
     public void setIntro(String intro) {
         this.intro = intro;
     }
 
+    public Set getArticleLikeSet() {
+        return articleLikeSet;
+    }
+
     public void setArticleLikeSet(Set articleLikeSet) {
         this.articleLikeSet = articleLikeSet;
+    }
+
+    public boolean isLogStatue() {
+        return logStatue;
     }
 
     public void setLogStatue(boolean logStatue) {

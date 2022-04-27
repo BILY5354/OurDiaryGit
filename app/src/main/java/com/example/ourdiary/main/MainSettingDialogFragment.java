@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 
 
 import com.example.ourdiary.R;
-import com.example.ourdiary.login.ui.login.LoginActivity;
+import com.example.ourdiary.remote.ui.login.LoginActivity;
 import com.example.ourdiary.setting.SettingActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 

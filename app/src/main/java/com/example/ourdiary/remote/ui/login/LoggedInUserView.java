@@ -1,4 +1,4 @@
-package com.example.ourdiary.login.ui.login;
+package com.example.ourdiary.remote.ui.login;
 
 /**
  * Class exposing authenticated user details to the UI.

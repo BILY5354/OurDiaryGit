@@ -1,4 +1,4 @@
-package com.example.ourdiary.login.ui.login;
+package com.example.ourdiary.remote.ui.login;
 
 import androidx.annotation.Nullable;
 

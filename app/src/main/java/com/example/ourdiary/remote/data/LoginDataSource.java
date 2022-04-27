@@ -1,10 +1,9 @@
-package com.example.ourdiary.login.data;
+package com.example.ourdiary.remote.data;
 
 import android.util.Log;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.example.ourdiary.login.data.model.LoggedInUser;
+import com.example.ourdiary.remote.data.model.LoggedInUser;
 
 
 import java.io.IOException;
@@ -24,15 +23,15 @@ public class LoginDataSource {
         try {
             // TODO: handle loggedInUser authentication
             LoggedInUser loggedUser = new LoggedInUser();
-            Log.d("test",loggedUser.toString());
+            /*Log.d("test", loggedUser.toString());*/
             loginMyBlog(username, password, loggedUser);
             Thread.sleep(1600);//等待2秒与服务器通信
-            Log.d("test",loggedUser.toString());
+            /*Log.d("test", loggedUser.toString());*/
             if (loggedUser.isLogStatue()) {
-                Log.d("test","在if语句中判断登录成功");
+                /*Log.d("test", "在if语句中判断登录成功");*/
                 return new Result.Success<>(loggedUser);
             } else {
-                Log.d("test","在if语句中失败");
+                /*Log.d("test", "在if语句中失败");*/
                 return new Result.Failed("用户名密码错误");
             }
         } catch (Exception e) {
@@ -71,7 +70,7 @@ public class LoginDataSource {
                     JSONObject jsonObject = JSONObject
                             .parseObject(responseData);//获取返回的结果变成json对象
                     String code = jsonObject.getString("code");
-                    if (code.equals("20000")){
+                    if (code.equals("20000")) {
                         //解析json数据
                         JSONObject dataObject = JSONObject.parseObject(jsonObject.getString("data"));
                         userAuth.setId(dataObject.getInteger("id"));
@@ -80,8 +79,8 @@ public class LoginDataSource {
                         userAuth.setAvatar(dataObject.getString("avatar"));
                         userAuth.setUsername(dataObject.getString("username"));
                         userAuth.setLogStatue(true);
-                        Log.d("test", "登录成功"+userAuth);
-                    }else if (code.equals("51000")){
+                        Log.d("test", "登录成功" + userAuth);
+                    } else if (code.equals("51000")) {
                         Log.d("test", "用户名或密码不正确");
                         userAuth.setLogStatue(false);
                     }

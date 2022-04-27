@@ -1,11 +1,11 @@
-package com.example.ourdiary.login.ui.login;
+package com.example.ourdiary.remote.ui.login;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
 
-import com.example.ourdiary.login.data.LoginDataSource;
-import com.example.ourdiary.login.data.LoginRepository;
+import com.example.ourdiary.remote.data.LoginDataSource;
+import com.example.ourdiary.remote.data.LoginRepository;
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.
