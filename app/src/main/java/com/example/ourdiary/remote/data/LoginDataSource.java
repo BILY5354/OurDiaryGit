@@ -33,7 +33,7 @@ public class LoginDataSource {
             LoggedInUser loggedUser = new LoggedInUser();
             /*Log.d("test", loggedUser.toString());*/
             loginMyBlog(username, password, loggedUser);
-            Thread.sleep(800);//等待2秒与服务器通信
+            Thread.sleep(1000);//等待2秒与服务器通信
             /*Log.d("test", loggedUser.toString());*/
             if (loggedUser.isLogStatue()) {
                 /*Log.d("test", "在if语句中判断登录成功");*/

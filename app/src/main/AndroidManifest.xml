@@ -23,7 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".contact.ContactActivity"></activity>
+        <activity android:name=".photo.PhotoActivity"></activity>
+        <activity android:name=".write.WriteActivity" />
+        <activity android:name=".contact.ContactActivity" />
         <activity
             android:name=".remote.ui.login.LoginActivity"
             android:label="@string/title_activity_login"
