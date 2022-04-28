@@ -38,11 +38,10 @@
 
             <ImageView
                 android:id="@+id/IV_contacts_photo"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/iv_contacts"
-                app:tint="@color/color_gray" />
+                android:src="@drawable/ic_me" />
 
             <TextView
                 android:id="@+id/TV_contacts_name"
@@ -61,9 +60,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:gravity="right"
+            android:gravity="left"
             android:maxLines="1"
+            android:layout_marginLeft="42dp"
             android:ellipsize="end"
             android:textColor="@color/color_gray"
             android:textSize="20dp" />

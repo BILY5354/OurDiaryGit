@@ -1,3 +1,4 @@
+/*
 package com.example.ourdiary.contacts;
 
 import androidx.annotation.NonNull;
@@ -18,8 +19,6 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.ourdiary.R;
-import com.example.ourdiary.db.room.contact_database.Contact;
-import com.example.ourdiary.db.room.contact_database.ContactViewModel;
 import com.example.ourdiary.shared.gui.LetterComparator;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -32,10 +31,14 @@ import java.util.List;
 public class ContactsActivity extends AppCompatActivity implements
         LatterSortLayout.OnTouchingLetterChangedListener{
 
-    /**get_id*/
+    */
+/**get_id*//*
+
     private int topicId;
 
-    /**UI*/
+    */
+/**UI*//*
+
     private RelativeLayout RL_contacts_content;
     private TextView TV_contacts_title;
     private EditText EDT_main_contacts_search;
@@ -44,13 +47,21 @@ public class ContactsActivity extends AppCompatActivity implements
     private TextView TV_contact_short_sort;
     FloatingActionButton fab_contact_add;
 
-    /** RecyclerView*/
+    */
+/** RecyclerView*//*
+
     private RecyclerView recyclerView_contacts;
     private ContactsAdapter contactsAdapter;
     //private LinearLayoutManager layoutManager;
 
-    /** Room*/
-    private ContactViewModel mContactViewModel;
+  */
+/*  *//*
+*/
+/** Room*//*
+*/
+/*
+    private ContactViewModel mContactViewModel;*//*
+
 
     //Contacts list from DB
     private List<ContactsEntity> contactsNamesList;
@@ -59,7 +70,7 @@ public class ContactsActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contacts);
+        //setContentView(R.layout.activity_contacts);
         setTitle("通讯录");
 
         TV_contact_short_sort = findViewById(R.id.tv_contact_short_sort);
@@ -73,14 +84,18 @@ public class ContactsActivity extends AppCompatActivity implements
 
         contactsNamesList = new ArrayList<>();
 
-        /* We need to get the Title and set then transited by Intent. */
+        */
+/* We need to get the Title and set then transited by Intent. *//*
+
         TV_contacts_title = findViewById(R.id.TV_contacts_title);
         String diaryTitle = getIntent().getStringExtra("contactTitle");
         if (diaryTitle == null) {
             diaryTitle = "Contacts";
         }
         TV_contacts_title.setText(diaryTitle);
-        /* TopicId too. */
+        */
+/* TopicId too. *//*
+
         topicId = getIntent().getIntExtra("topicId", -1);
         if (topicId == -1) {
             finish();
@@ -92,11 +107,13 @@ public class ContactsActivity extends AppCompatActivity implements
 
     }
 
-    /**
+    */
+/**
      * Display the options menu，We also need reload Contacts list when use search function. If it
      *  not be reloaded, it will only show a certain number of contacts, which will be determined by
      *  the results of the fuzzy query. But the contacts name are wrong.
-     * */
+     * *//*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -113,7 +130,8 @@ public class ContactsActivity extends AppCompatActivity implements
             public boolean onQueryTextChange(String s) {
                 String pattern = s.trim();//去掉两边的空格
 
-                mContactViewModel.findContactsWithPattern(1, pattern).observe(ContactsActivity.this, new Observer<List<Contact>>() {
+               */
+/* mContactViewModel.findContactsWithPattern(1, pattern).observe(ContactsActivity.this, new Observer<List<Contact>>() {
                     @Override
                     public void onChanged(List<Contact> contacts) {
 
@@ -121,7 +139,8 @@ public class ContactsActivity extends AppCompatActivity implements
                         contactsAdapter.submitList(contacts);
                         contactsAdapter.notifyDataSetChanged();
                     }
-                });
+                });*//*
+
 
                 return true;
             }
@@ -130,14 +149,17 @@ public class ContactsActivity extends AppCompatActivity implements
         return true;
     }
 
-    /**
+    */
+/**
      * We need to add the Contacts data to list that the data can be sorted.
      * We can use sizeof() function to know how many data in the list.
      * Because we can't sort in the database but we want listed the sorted contacts.
-    */
+    *//*
+
     private void loadContacts() {
 
-        mContactViewModel.getSpecificContacts(topicId).observe(this, new Observer<List<Contact>>() {
+       */
+/* mContactViewModel.getSpecificContacts(topicId).observe(this, new Observer<List<Contact>>() {
             @Override
             public void onChanged(List<Contact> contacts) {
 
@@ -153,10 +175,13 @@ public class ContactsActivity extends AppCompatActivity implements
 
                 contactsNamesList = sortContacts(contactsNamesList);
 
-            }
+            }*//*
+
         });
 
-        /*动态获取livedata通讯录总量， 不过并没有必要这么写*/
+        */
+/*动态获取livedata通讯录总量， 不过并没有必要这么写*//*
+
 //        mContactViewModel.getSpecificTopicIdContactCount(1).observe(this, new Observer<Integer>() {
 //            @Override
 //            public void onChanged(Integer integer) { //integer就是对应topic id通讯录的总数
@@ -167,7 +192,9 @@ public class ContactsActivity extends AppCompatActivity implements
 
     }
 
-    /**对列表进行排序*/
+    */
+/**对列表进行排序*//*
+
     private List<ContactsEntity> sortContacts(List<ContactsEntity> sortContactsEntity) {
 
         for (ContactsEntity contactsEntity : sortContactsEntity) {
@@ -178,7 +205,9 @@ public class ContactsActivity extends AppCompatActivity implements
         return sortContactsEntity;
     }
 
-    /** Set the SortLetters in List in order to Chinese.*/
+    */
+/** Set the SortLetters in List in order to Chinese.*//*
+
     private String sortContactsCN(ContactsEntity contactsEntity, String sortString) {
 
         if (sortString.matches("[\\u4E00-\\u9FA5]")) {
@@ -194,7 +223,9 @@ public class ContactsActivity extends AppCompatActivity implements
     }
 
 
-    /** Click on the sidebar to jump to the corresponding word position*/
+    */
+/** Click on the sidebar to jump to the corresponding word position*//*
+
     @Override
     public void onTouchingLetterChanged(String s) {
 
@@ -205,14 +236,17 @@ public class ContactsActivity extends AppCompatActivity implements
     }
 
 
-    /**
+    */
+/**
      * Initialize RecyclerView and add the Room observer to get contacts and set the listener for fab
      *@author home
      *@time 2021/5/23 12:26
-    */
+    *//*
+
     private void initTopicAdapter() {
 
-        recyclerView_contacts = findViewById(R.id.rv_contacts);
+       */
+/* //recyclerView_contacts = findViewById(R.id.rv_contacts);
         contactsAdapter = new ContactsAdapter(new ContactsAdapter.ContactDiff(),
                 this, contactsNamesList, topicId);
 
@@ -235,19 +269,23 @@ public class ContactsActivity extends AppCompatActivity implements
                             "", "", topicId);
             contactsDetailDialogFragment.show(getSupportFragmentManager(), "contactsDetailDialogFragment");
         });
+*//*
 
     }
 
-    /**
+    */
+/**
      * use getSupportFragmentManager() to make communication between Activity and Fragment.
      * all database operation will be done in this Activity, Fragment just transmit the value (Contact) here
-     */
+     *//*
+
     private void receiveResultsWithFra() {
 
         //add one
         getSupportFragmentManager().setFragmentResultListener("contacts_detail_fg_add",
                 this, new FragmentResultListener() {
-                    @Override
+                   */
+/* @Override
                     public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
                         String result_name, result_phone_number;
                         result_name = bundle.getString("contacts_detail_fg_add_name");
@@ -256,9 +294,11 @@ public class ContactsActivity extends AppCompatActivity implements
                         mContactViewModel.insert(contact);
                     }
                 });
+*//*
 
         //update one
-        getSupportFragmentManager().setFragmentResultListener("contacts_detail_fg_update",
+       */
+/* getSupportFragmentManager().setFragmentResultListener("contacts_detail_fg_update",
                 this, new FragmentResultListener() {
                     @Override
                     public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
@@ -287,4 +327,4 @@ public class ContactsActivity extends AppCompatActivity implements
     }
     
 
-}
+}*/

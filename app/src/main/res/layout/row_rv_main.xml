@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_gravity="center_vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/IV_row_rv_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_blog" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/TV_row_rv_main_title"
+            android:layout_toRightOf="@+id/IV_row_rv_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/element_text"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/color_black"/>
+
+        <TextView
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/TV_row_rv_main_intro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AUTHOR"
+            android:textColor="@color/color_black"/>
+
+    </RelativeLayout>
+
+</FrameLayout>
