@@ -11,16 +11,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.ourdiary.ArticleData;
 import com.example.ourdiary.R;
 import com.example.ourdiary.contact.ContactActivity;
-import com.example.ourdiary.contacts.ContactsActivity;
-import com.example.ourdiary.db.room.contact_database.Contact;
 import com.example.ourdiary.remote.data.LoginDataSource;
 import com.example.ourdiary.remote.data.LoginRepository;
 import com.example.ourdiary.remote.data.model.Article;
 import com.example.ourdiary.remote.data.model.LoggedInUser;
-import com.example.ourdiary.setting.SettingActivity;
 
 import java.util.List;
 
@@ -111,8 +107,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         RecyclerView rv = findViewById(R.id.RV_main);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(layoutManager);
-        MainAdapter newMainAdapter = new MainAdapter(loggedInUser, articleList);
-        rv.setAdapter(newMainAdapter);
+        MainAdapter mainAdapter = new MainAdapter(loggedInUser, articleList);
+        rv.setAdapter(mainAdapter);
     }
 
 }

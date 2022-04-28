@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.example.ourdiary.ArticleData;
 import com.example.ourdiary.remote.data.model.Article;
 import com.example.ourdiary.remote.data.model.LoggedInUser;
 import com.example.ourdiary.remote.data.model.Tag;
