@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 
@@ -22,8 +23,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class MainSettingDialogFragment extends BottomSheetDialogFragment implements View.OnClickListener{
 
-    private RelativeLayout RL_main_setting_dialog;
-    private ImageView IV_main_setting_add,IV_main_setting_setting,
+    private LinearLayout LL_main_setting_dialog;
+    private ImageView IV_main_setting_memo,IV_main_setting_setting,
             IV_main_setting_login,IV_main_setting_syn,IV_main_setting_about;
 
     private MainActivity activity;
@@ -44,10 +45,10 @@ public class MainSettingDialogFragment extends BottomSheetDialogFragment impleme
         this.getDialog().setCanceledOnTouchOutside(true);
         View rootView = inflater.inflate(R.layout.bottom_sheet_main_setting,container);
 
-        RL_main_setting_dialog = rootView.findViewById(R.id.RL_main_setting_dialog);
-        RL_main_setting_dialog.setBackgroundResource(R.color.light_blue);
-        IV_main_setting_add = rootView.findViewById(R.id.IV_main_setting_add);
-        IV_main_setting_add.setOnClickListener(this);
+        LL_main_setting_dialog = rootView.findViewById(R.id.LL_main_setting_dialog);
+        LL_main_setting_dialog.setBackgroundResource(R.color.light_blue);
+        IV_main_setting_memo = rootView.findViewById(R.id.IV_main_setting_memo);
+        IV_main_setting_memo.setOnClickListener(this);
         IV_main_setting_setting = rootView.findViewById(R.id.IV_main_setting_setting);
         IV_main_setting_setting.setOnClickListener(this);
         IV_main_setting_login = rootView.findViewById(R.id.IV_main_setting_login);
@@ -63,12 +64,12 @@ public class MainSettingDialogFragment extends BottomSheetDialogFragment impleme
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.IV_main_setting_add:
-                TopicDetailDialogFragment createTopicDetailDialogFragment =
+            case R.id.IV_main_setting_memo:
+                /*TopicDetailDialogFragment createTopicDetailDialogFragment =
                         TopicDetailDialogFragment.newInstance(false, -1, "",
                                 -1, -1);
                 createTopicDetailDialogFragment.show(activity.getSupportFragmentManager(), "TopicDetailDialogFragment");
-                dismiss();
+                dismiss();*/
                 break;
             case R.id.IV_main_setting_setting:
                 Intent intentSetting = new Intent(activity, SettingActivity.class);

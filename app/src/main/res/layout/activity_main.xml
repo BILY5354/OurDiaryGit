@@ -131,85 +131,78 @@
         android:layout_height="0px"
         android:layout_weight="1">
 
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <RadioGroup
-                android:id="@+id/RG_main"
-                android:layout_toLeftOf="@+id/IV_main_setting"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_toLeftOf="@+id/IV_main_setting">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <ImageView
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/ic_write"
+                    android:layout_marginLeft="16dp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/IV_main_blog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
+                <TextView
+                    android:textSize="18sp"
+                    android:layout_centerVertical="true"
+                    android:text="写博客"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/IV_main_blog"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true">
                     <ImageView
-                        android:layout_alignParentLeft="true"
-                        android:src="@drawable/ic_write"
-                        android:layout_marginLeft="16dp"
+                        android:src="@drawable/ic_contact"
                         android:layout_centerVertical="true"
-                        android:id="@+id/IV_main_blog"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:textSize="18sp"
-                        android:layout_centerVertical="true"
-                        android:text="写博客"
+                        android:layout_toLeftOf="@+id/TV_main_memo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/IV_main_blog"/>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_centerHorizontal="true">
-                        <ImageView
-                            android:src="@drawable/ic_memo"
+                        android:id="@+id/IV_main_contact"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TextView
                             android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@+id/TV_main_memo"
+                            android:id="@+id/TV_main_memo"
+                            android:textSize="18sp"
+                            android:text="通讯录"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/IV_main_memo"/>
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <TextView
-                                android:layout_centerVertical="true"
-                                android:id="@+id/TV_main_memo"
-                                android:textSize="18sp"
-                                android:text="备忘录"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
-                        </RelativeLayout>
-                    </LinearLayout>
+                            android:layout_height="wrap_content" />
+                    </RelativeLayout>
+                </LinearLayout>
 
-                    <ImageView
-                        android:src="@drawable/ic_photo"
-                        android:layout_toLeftOf="@+id/TV_main_photo"
-                        android:layout_centerVertical="true"
-                        android:id="@+id/IV_main_photo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="相册"/>
+                <ImageView
+                    android:src="@drawable/ic_photo"
+                    android:layout_toLeftOf="@+id/TV_main_photo"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/IV_main_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="相册"/>
 
-                    <TextView
-                        android:id="@+id/TV_main_photo"
-                        android:textSize="18sp"
-                        android:layout_marginRight="18dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="相册"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </RelativeLayout>
-            </RadioGroup>
-
+                <TextView
+                    android:id="@+id/TV_main_photo"
+                    android:textSize="18sp"
+                    android:layout_marginRight="18dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="相册"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
 
             <ImageView
                 android:id="@+id/IV_main_setting"

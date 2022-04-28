@@ -4,24 +4,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ourdiary.ArticleData;
 import com.example.ourdiary.R;
+import com.example.ourdiary.contact.ContactActivity;
+import com.example.ourdiary.contacts.ContactsActivity;
+import com.example.ourdiary.db.room.contact_database.Contact;
 import com.example.ourdiary.remote.data.LoginDataSource;
 import com.example.ourdiary.remote.data.LoginRepository;
 import com.example.ourdiary.remote.data.model.Article;
 import com.example.ourdiary.remote.data.model.LoggedInUser;
+import com.example.ourdiary.setting.SettingActivity;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView TV_main_statue, TV_main_intro, TV_main_username;
-    private ImageView IV_main_setting, IV_main_network;
+    private ImageView IV_main_setting, IV_main_network,IV_main_contact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +77,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 MainSettingDialogFragment mainSettingDialogFragment = new MainSettingDialogFragment(this);
                 mainSettingDialogFragment.show(getSupportFragmentManager(), "mainSettingDialogFragment");
                 break;
+            case R.id.IV_main_contact:
+                Log.d("test","通讯录被按下");
+                Intent intent = new Intent(MainActivity.this, ContactActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 
@@ -81,6 +92,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TV_main_username = findViewById(R.id.TV_main_username);
         IV_main_setting = findViewById(R.id.IV_main_setting);
         IV_main_network = findViewById(R.id.IV_main_network);
+        IV_main_contact = findViewById(R.id.IV_main_contact);
+        IV_main_contact.setOnClickListener(this);
         IV_main_setting.setOnClickListener(this);
     }
 

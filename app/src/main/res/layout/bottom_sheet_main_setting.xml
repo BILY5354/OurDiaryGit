@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/RL_main_setting_dialog"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LL_main_setting_dialog"
     android:layout_width="match_parent"
     android:layout_height="70dp"
-    android:background="@color/light_blue">
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/color_gray" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="70dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_gravity="center">
 
 
             <ImageView
                 android:id="@+id/IV_main_setting_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_toLeftOf="@+id/IV_main_setting_memo"
+                android:layout_marginRight="40dp"
                 android:src="@drawable/ic_main_setting_setting_page"/>
 
             <ImageView
-                android:id="@+id/IV_main_setting_contact"
+                android:id="@+id/IV_main_setting_memo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:src="@drawable/ic_contact"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/ic_memo"
+                android:layout_toLeftOf="@+id/IV_main_setting_login"
                 />
 
 
@@ -39,28 +42,28 @@
                 android:id="@+id/IV_main_setting_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
+                android:layout_centerHorizontal="true"
                 android:src="@drawable/ic_main_setting_login" />
 
             <ImageView
+                android:layout_toRightOf="@+id/IV_main_setting_login"
                 android:id="@+id/IV_main_setting_syn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="40dp"
                 android:src="@drawable/ic_main_setting_syn"/>
 
             <ImageView
+                android:layout_toRightOf="@+id/IV_main_setting_syn"
                 android:id="@+id/IV_main_setting_about"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="40dp"
                 android:src="@drawable/ic_main_setting_about"/>
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </ScrollView>
 
-</RelativeLayout>
+
+</LinearLayout>

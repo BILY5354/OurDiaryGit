@@ -24,10 +24,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".contact.ContactActivity"></activity>
         <activity
             android:name=".remote.ui.login.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
-        <!-- <activity android:name=".db.room.learning.NewWordActivity"></activity> -->
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".setting.SettingActivity" />
         <activity
             android:name=".contacts.ContactsActivity"
