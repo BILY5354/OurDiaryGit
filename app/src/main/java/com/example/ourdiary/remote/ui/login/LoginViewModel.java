@@ -10,9 +10,14 @@ import android.util.Patterns;
 import com.example.ourdiary.R;
 import com.example.ourdiary.remote.data.LoginRepository;
 import com.example.ourdiary.remote.data.Result;
+import com.example.ourdiary.remote.data.model.Article;
 import com.example.ourdiary.remote.data.model.LoggedInUser;
 
+import java.util.List;
 
+/**
+ * 登录成功除了取还会取文章的数据
+ * */
 public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
@@ -39,12 +44,13 @@ public class LoginViewModel extends ViewModel {
             LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
             //如果登录成功了 设置用户名
             loginResult.setValue(new LoginResult(new LoggedInUserView(data.getIntro())));
-            //并且异步请求
-            //Result<Articles>
+
         } else {
             loginResult.setValue(new LoginResult(R.string.ch_login_failed));
         }
     }
+
+    /**明天参照login写法将getArticleList*/
 
     public void loginDataChanged(String username, String password) {
         if (!isUserNameValid(username)) {

@@ -1,23 +1,24 @@
 package com.example.ourdiary.main;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.ourdiary.ArticleData;
 import com.example.ourdiary.R;
 import com.example.ourdiary.remote.data.LoginDataSource;
 import com.example.ourdiary.remote.data.LoginRepository;
-import com.example.ourdiary.remote.ui.login.LoginViewModel;
+import com.example.ourdiary.remote.data.model.Article;
+import com.example.ourdiary.remote.data.model.LoggedInUser;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
 
     private TextView TV_main_statue, TV_main_intro, TV_main_username;
     private ImageView IV_main_setting, IV_main_network;
@@ -27,23 +28,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //显示日记，通讯录、Memo的rv的Fragment
-        if (savedInstanceState == null) {
-            FragmentTransaction transaction = getSupportFragmentManager()
-                    .beginTransaction();
-            MainPageRecyclerViewFragment fragment = new MainPageRecyclerViewFragment(this);
-            transaction.replace(R.id.sample_content_fragment, fragment);
-            transaction.commit();
-        }
-
         /**使标actionBar隐藏*/
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-
         //初始化界面元素
         init();
-
     }
 
     //登录操作后重新加载页面
@@ -59,6 +49,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             loginSuc();
             TV_main_intro.setText("用户名：" + loginInstance.getIntro());
             TV_main_username.setText("邮箱：" + loginInstance.getUsername());
+
+            //获取文章列表
+            List<Article> articleList = (List<Article>) loginInstance.getArticleList().toList();
+            //加载recycle view
+            loadRV(loginInstance.getLoggedInUser(), articleList);
         }
 
     }
@@ -76,13 +71,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 MainSettingDialogFragment mainSettingDialogFragment = new MainSettingDialogFragment(this);
                 mainSettingDialogFragment.show(getSupportFragmentManager(), "mainSettingDialogFragment");
                 break;
-            /*case R.id.IV_main_search:
-                Toast.makeText(MainActivity.this, "Coming soon! ", Toast.LENGTH_SHORT).show();
-
-                break;
-            case R.id.ET_main_search:
-                Toast.makeText(MainActivity.this, "Coming soon!! ", Toast.LENGTH_SHORT).show();
-                break;*/
         }
     }
 
@@ -94,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         IV_main_setting = findViewById(R.id.IV_main_setting);
         IV_main_network = findViewById(R.id.IV_main_network);
         IV_main_setting.setOnClickListener(this);
-
     }
 
     //登录成功页面顶部栏更新
@@ -105,5 +92,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         IV_main_network.setImageResource(R.drawable.ic_main_online);
     }
 
+    //登录成功后加载recycle view
+    private void loadRV(LoggedInUser loggedInUser, List<Article> articleList) {
+        //RecycleView
+        RecyclerView rv = findViewById(R.id.RV_main);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        rv.setLayoutManager(layoutManager);
+        MainAdapter newMainAdapter = new MainAdapter(loggedInUser, articleList);
+        rv.setAdapter(newMainAdapter);
+    }
 
 }

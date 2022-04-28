@@ -1,5 +1,7 @@
 package com.example.ourdiary.remote.data;
 
+import java.util.List;
+
 /**
  * A generic class that holds a result success w/ data or an error exception.
  */
@@ -18,6 +20,17 @@ public class Result<T> {
             return "Error[exception=" + error.getError().toString() + "]";
         }
         return "";
+    }
+
+    /**获取文章列表
+     * 到时候向下转型即可*/
+    public Object toList() {
+        if (this instanceof Result.Success) {
+            Result.Success success = (Result.Success) this;
+            return success.getData();
+        } else {
+            return null;
+        }
     }
 
     // Success sub-class
