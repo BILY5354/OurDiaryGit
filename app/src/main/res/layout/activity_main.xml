@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
 
@@ -80,7 +78,7 @@
                     android:id="@+id/IV_main_network"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_main_offline"
+                    android:src="@drawable/ic_offline"
                     android:layout_marginRight="20dp"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"/>
@@ -211,7 +209,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="16dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_main_more" />
+                android:src="@drawable/ic_more" />
 
         </RelativeLayout>
     </ViewAnimator>

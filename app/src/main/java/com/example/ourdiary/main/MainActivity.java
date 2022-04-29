@@ -25,7 +25,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView TV_main_statue, TV_main_intro, TV_main_username;
-    private ImageView IV_main_setting, IV_main_network,IV_main_contact, IV_main_write,IV_main_photo;
+    private ImageView IV_main_setting, IV_main_network, IV_main_contact, IV_main_write, IV_main_photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mainSettingDialogFragment.show(getSupportFragmentManager(), "mainSettingDialogFragment");
                 break;
             case R.id.IV_main_contact:
-                Log.d("test","通讯录被按下");
+                Log.d("test", "通讯录被按下");
                 intent = new Intent(MainActivity.this, ContactActivity.class);
                 startActivity(intent);
                 break;
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TV_main_statue.setVisibility(View.INVISIBLE);
         TV_main_intro.setVisibility(View.VISIBLE);
         TV_main_username.setVisibility(View.VISIBLE);
-        IV_main_network.setImageResource(R.drawable.ic_main_online);
+        IV_main_network.setImageResource(R.drawable.ic_online);
     }
 
     //登录成功后加载recycle view
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         RecyclerView rv = findViewById(R.id.RV_main);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(layoutManager);
-        MainAdapter mainAdapter = new MainAdapter(loggedInUser, articleList);
+        MainAdapter mainAdapter = new MainAdapter(MainActivity.this, loggedInUser, articleList);
         rv.setAdapter(mainAdapter);
     }
 
