@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ViewAnimator
+            android:id="@+id/va_top"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Welcome to MyBlog, enjoy!"
+                        android:textAllCaps="false"
+                        android:textColor="@color/color_black"
+                        android:textSize="16sp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/IV_write_avatar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_boy"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"/>
+
+                    <TextView
+                        android:id="@+id/TV_write_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="文章标题"
+                        android:textSize="20sp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true" />
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_online"
+                        android:layout_marginRight="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+        </ViewAnimator>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/color_gray" />
+
+
+        <ViewAnimator
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/TV_write_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="6dp"/>
+
+            </ScrollView>
+
+
+        </ViewAnimator>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/color_gray" />
+
+
+        <ViewAnimator
+            android:id="@+id/va_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:backgroundTint="@color/azure_blue"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:id="@+id/FAB_write_add"
+                    android:layout_centerVertical="true"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:tint="@color/color_black"
+                    android:src="@drawable/ic_add" />
+
+            </RelativeLayout>
+        </ViewAnimator>
+    </LinearLayout>
+
+
+</RelativeLayout>

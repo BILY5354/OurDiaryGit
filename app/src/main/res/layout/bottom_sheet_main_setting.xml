@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/IV_main_setting_memo"
                 android:layout_marginRight="40dp"
-                android:src="@drawable/ic_main_setting_setting_page"/>
+                android:src="@drawable/ic_setting"/>
 
             <ImageView
                 android:id="@+id/IV_main_setting_memo"
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/ic_main_setting_login" />
+                android:src="@drawable/ic_login" />
 
             <ImageView
                 android:layout_toRightOf="@+id/IV_main_setting_login"
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
-                android:src="@drawable/ic_main_setting_syn"/>
+                android:src="@drawable/ic_syn"/>
 
             <ImageView
                 android:layout_toRightOf="@+id/IV_main_setting_syn"

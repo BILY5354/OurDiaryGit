@@ -21,11 +21,11 @@ import com.example.ourdiary.remote.ui.login.LoginActivity;
 import com.example.ourdiary.setting.SettingActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-public class MainSettingDialogFragment extends BottomSheetDialogFragment implements View.OnClickListener{
+public class MainSettingDialogFragment extends BottomSheetDialogFragment implements View.OnClickListener {
 
     private LinearLayout LL_main_setting_dialog;
-    private ImageView IV_main_setting_memo,IV_main_setting_setting,
-            IV_main_setting_login,IV_main_setting_syn,IV_main_setting_about;
+    private ImageView IV_main_setting_memo, IV_main_setting_setting,
+            IV_main_setting_login, IV_main_setting_syn, IV_main_setting_about;
 
     private MainActivity activity;
 
@@ -43,7 +43,7 @@ public class MainSettingDialogFragment extends BottomSheetDialogFragment impleme
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         this.getDialog().setCanceledOnTouchOutside(true);
-        View rootView = inflater.inflate(R.layout.bottom_sheet_main_setting,container);
+        View rootView = inflater.inflate(R.layout.bottom_sheet_main_setting, container);
 
         LL_main_setting_dialog = rootView.findViewById(R.id.LL_main_setting_dialog);
         LL_main_setting_dialog.setBackgroundResource(R.color.light_blue);
@@ -74,15 +74,15 @@ public class MainSettingDialogFragment extends BottomSheetDialogFragment impleme
             case R.id.IV_main_setting_setting:
                 Intent intentSetting = new Intent(activity, SettingActivity.class);
                 activity.startActivity(intentSetting);
-                Log.d("MainSettingDFragment","成功点击第二个图标");
+                Log.d("MainSettingDFragment", "成功点击第二个图标");
                 break;
             case R.id.IV_main_setting_login:
-                Log.d("MainSettingDFragment","成功点击第三个图标");
+                Log.d("MainSettingDFragment", "成功点击第三个图标");
                 Intent intentLogin = new Intent(activity, LoginActivity.class);
                 activity.startActivity(intentLogin);
                 break;
             case R.id.IV_main_setting_syn:
-                Log.d("MainSettingDFragment","成功点击第四个图标");
+                Log.d("MainSettingDFragment", "成功点击第四个图标");
                 break;
             case R.id.IV_main_setting_about:
 //                Log.d("MainSettingDFragment","成功点击第五个图标");
